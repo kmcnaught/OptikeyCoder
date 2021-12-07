@@ -170,7 +170,7 @@ namespace JuliusSweetland.OptiKey.Services
                         if (!string.IsNullOrWhiteSpace(line)
                             && line.Trim().Length > 1)
                         {
-                            AddEntryToDictionary(line.Trim(), loadedFromDictionaryFile: true, usageCount: 0);
+                            AddEntryToDictionary(line.Trim(), appendToFile: false, usageCount: 0);
                         }
                     }
                 }
@@ -363,16 +363,16 @@ namespace JuliusSweetland.OptiKey.Services
 
         public void AddNewEntryToDictionary(string entry)
         {
-            AddEntryToDictionary(entry, loadedFromDictionaryFile: false, usageCount: 1);
+            AddEntryToDictionary(entry, appendToFile: true, usageCount: 1);
         }
 
-        private void AddEntryToDictionary(string entry, bool loadedFromDictionaryFile, int usageCount = 0)
+        private void AddEntryToDictionary(string entry, bool appendToFile, int usageCount = 0)
         {
             if (entries != null
                 && !string.IsNullOrWhiteSpace(entry))
             {
                 //Add to in-memory (hashed) dictionary (and then save to custom dictionary file if new entry entered by user)
-                var hash = entry.NormaliseAndRemoveRepeatingCharactersAndHandlePhrases(log: !loadedFromDictionaryFile);
+                var hash = entry.NormaliseAndRemoveRepeatingCharactersAndHandlePhrases(log: appendToFile);
                 if (!string.IsNullOrWhiteSpace(hash))
                 {
                     var newEntryWithUsageCount = new DictionaryEntry(entry, usageCount);
@@ -380,7 +380,7 @@ namespace JuliusSweetland.OptiKey.Services
                     //Also add to entries for auto complete
                     managedSuggestions.AddEntry(entry, newEntryWithUsageCount, hash);
 
-                    if (!loadedFromDictionaryFile)
+                    if (appendToFile)
                     {
                         Log.DebugFormat("Adding new (not loaded from dictionary file) entry '{0}' to in-memory dictionary with hash '{1}'", entry, hash);
 
