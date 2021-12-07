@@ -126,7 +126,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
                 //Add new entries
                 foreach(var addedEntry in Entries.Where(e => e.Added).Select(e => e.Entry))
                 {
-                    dictionaryService.AddNewEntryToDictionary(addedEntry);
+                    dictionaryService.AddNewEntryToSavedDictionary(addedEntry);
                 }
                 
                 //Remove deleted entries

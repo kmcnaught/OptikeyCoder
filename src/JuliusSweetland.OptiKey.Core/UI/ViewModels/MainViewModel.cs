@@ -559,7 +559,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     prompt,
                     () =>
                     {
-                        dictionaryService.AddNewEntryToDictionary(candidate);
+                        dictionaryService.AddNewEntryToSavedDictionary(candidate);
                         inputService.RequestSuspend();
 
                         RaiseToastNotification(Resources.ADDED, string.Format(Resources.ENTRY_ADDED_TO_DICTIONARY, candidate),

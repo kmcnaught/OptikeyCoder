@@ -15,7 +15,7 @@ namespace JuliusSweetland.OptiKey.Services
         bool ExistsInDictionary(string entryToFind);
         IEnumerable<DictionaryEntry> GetAllEntries();
         IEnumerable<string> GetSuggestions(string root, bool nextWord);
-        void AddNewEntryToDictionary(string entry);
+        void AddNewEntryToSavedDictionary(string entry);
         void RemoveEntryFromDictionary(string entry);
         void IncrementEntryUsageCount(string entry);
         void DecrementEntryUsageCount(string entry);

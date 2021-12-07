@@ -361,7 +361,7 @@ namespace JuliusSweetland.OptiKey.Services
 
         #region Add New/Existing Entry to Dictionary
 
-        public void AddNewEntryToDictionary(string entry)
+        public void AddNewEntryToSavedDictionary(string entry)
         {
             AddEntryToDictionary(entry, appendToFile: true, usageCount: 1);
         }
