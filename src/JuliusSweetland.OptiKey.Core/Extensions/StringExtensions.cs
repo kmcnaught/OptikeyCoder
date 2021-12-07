@@ -101,7 +101,11 @@ namespace JuliusSweetland.OptiKey.Extensions
         {
             if (string.IsNullOrWhiteSpace(text)) return null;
 
-            var words = text.Split(' ', '\t', '\n', ',')
+            // TODO: Make this user customisable?
+            // ideally logic here should be shared with CleanupPossibleDictionaryEntry
+            char[] separators = { ' ', '\t', '\n', ',', '.', ':', ';', '{', '}', '(', ')', '[', ']', '*', '/', '+', '-' };
+
+            var words = text.Split(separators)
                 .Select(s => s.CleanupPossibleDictionaryEntry())
                 .Where(sanitisedMatch => sanitisedMatch != null)
                 .ToList();
@@ -116,6 +120,11 @@ namespace JuliusSweetland.OptiKey.Extensions
             return extracts.Any() ? extracts : null;
         }
 
+        private static bool IsValidWordChar(char character)
+        {
+            return char.IsLetterOrDigit(character) || character.Equals('_') || character.Equals('$');
+        }
+
         public static string CleanupPossibleDictionaryEntry(this string word)
         {
             if (!string.IsNullOrWhiteSpace(word)
@@ -124,7 +133,7 @@ namespace JuliusSweetland.OptiKey.Extensions
                 word = word.Trim();
 
                 while (word.Length > 1
-                    && !char.IsLetterOrDigit(word.Last()))
+                    && !IsValidWordChar(word.Last()))
                 {
                     word = word.Substring(0, word.Length - 1);
                 }
