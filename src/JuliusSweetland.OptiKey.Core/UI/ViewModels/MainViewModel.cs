@@ -491,19 +491,26 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             }
         }
 
-        private void AddTextToDictionary()
+        private void AddTextToDictionary(bool lastWordOnly, bool saveToFile)
         {
-            Log.Info("AddTextToDictionary called.");
+            Log.Info("KMCN AddTextToDictionary called.");
 
-            var possibleEntries = keyboardOutputService.Text.ExtractWordsAndLines();
+            var possibleWords = keyboardOutputService.Text.ExtractWords();
+            var possibleLines = keyboardOutputService.Text.ExtractLines();
 
-            if (possibleEntries != null)
+            List<string> possibleEntries = new List<string>();
+            if (lastWordOnly && possibleWords.Count > 0)
+                possibleEntries = new List<string>() { possibleWords.Last() };
+            else
+                possibleEntries = possibleWords.Concat(possibleLines).Distinct().ToList();
+
+            if (possibleEntries.Any())
             {
                 var candidates = possibleEntries.Where(pe => !dictionaryService.ExistsInDictionary(pe)).ToList();
 
                 if (candidates.Any())
                 {
-                    PromptToAddCandidatesToDictionary(candidates, Keyboard);
+                    PromptToAddCandidatesToDictionary(candidates, Keyboard, saveToFile);
                 }
                 else
                 {
@@ -522,7 +529,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             }
         }
 
-        private void PromptToAddCandidatesToDictionary(List<string> candidates, IKeyboard originalKeyboard)
+        private void PromptToAddCandidatesToDictionary(List<string> candidates, IKeyboard originalKeyboard, bool saveToFile)
         {
             if (candidates.Any())
             {
@@ -552,14 +559,21 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 }
 
                 Action nextAction = candidates.Count > 1
-                        ? (Action)(() => PromptToAddCandidatesToDictionary(candidates.Skip(1).ToList(), originalKeyboard))
+                        ? (Action)(() => PromptToAddCandidatesToDictionary(candidates.Skip(1).ToList(), originalKeyboard, saveToFile))
                         : (Action)(() => Keyboard = originalKeyboard);
 
                 Keyboard = new YesNoQuestion(
                     prompt,
                     () =>
                     {
-                        dictionaryService.AddNewEntryToSavedDictionary(candidate);
+                        if (saveToFile)
+                        {
+                            dictionaryService.AddNewEntryToSavedDictionary(candidate);
+                        }
+                        else
+                        {
+                            dictionaryService.AddNewEntryToCachedDictionary(candidate);
+                        }
                         inputService.RequestSuspend();
 
                         RaiseToastNotification(Resources.ADDED, string.Format(Resources.ENTRY_ADDED_TO_DICTIONARY, candidate),

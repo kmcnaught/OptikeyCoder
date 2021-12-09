@@ -105,19 +105,39 @@ namespace JuliusSweetland.OptiKey.Extensions
             // ideally logic here should be shared with CleanupPossibleDictionaryEntry
             char[] separators = { ' ', '\t', '\n', ',', '.', ':', ';', '{', '}', '(', ')', '[', ']', '*', '/', '+', '-' };
 
+            var words = text.ExtractWords();
+            var lines = text.ExtractLines();
+            
+            var extracts = words.Concat(lines).Distinct().ToList();
+            return extracts.Any() ? extracts : null;
+        }
+
+        public static List<string> ExtractWords(this string text)
+        {
+            if (string.IsNullOrWhiteSpace(text)) return new List<string>();
+
+            // TODO: Make this user customisable?
+            // ideally logic here should be shared with CleanupPossibleDictionaryEntry
+            char[] separators = { ' ', '\t', '\n', ',', '.', ':', ';', '{', '}', '(', ')', '[', ']', '*', '/', '+', '-' };
+
             var words = text.Split(separators)
                 .Select(s => s.CleanupPossibleDictionaryEntry())
                 .Where(sanitisedMatch => sanitisedMatch != null)
                 .ToList();
 
+            return words;
+        }
+
+        public static List<string> ExtractLines(this string text)
+        {
+            if (string.IsNullOrWhiteSpace(text)) return new List<string>();
+
             var lines = text.Split('\n')
                             .Select(line => line.CleanupPossibleDictionaryEntry())
                             .Where(sanitisedMatch => sanitisedMatch != null)
-                            .ToList();
+                            .ToList();            
 
-            var extracts = words.Concat(lines).Distinct().ToList();
-
-            return extracts.Any() ? extracts : null;
+            return lines;
         }
 
         private static bool IsValidWordChar(char character)

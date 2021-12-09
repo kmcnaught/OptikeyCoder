@@ -4,6 +4,8 @@ namespace JuliusSweetland.OptiKey.Enums
     public enum FunctionKeys
     {
         AddToDictionary,
+	AddLastWordToDictionaryFile,
+        AddLastWordToDictionaryCache,
         Alpha1Keyboard,
         Alpha2Keyboard,
         Alpha3Keyboard,

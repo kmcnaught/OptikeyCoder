@@ -665,6 +665,14 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     AddTextToDictionary();
                     break;
 
+		case FunctionKeys.AddLastWordToDictionaryCache:
+                    AddTextToDictionary(lastWordOnly: true, saveToFile: false);
+                    break;
+
+                case FunctionKeys.AddLastWordToDictionaryFile:
+                    AddTextToDictionary(lastWordOnly: true, saveToFile: true);
+                    break;
+
                 case FunctionKeys.Alpha1Keyboard:
                     if (Settings.Default.EnableCommuniKateKeyboardLayout)
                     {
