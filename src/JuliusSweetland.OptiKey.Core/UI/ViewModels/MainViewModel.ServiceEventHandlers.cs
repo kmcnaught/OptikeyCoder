@@ -673,6 +673,10 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     AddTextToDictionary(lastWordOnly: true, saveToFile: true);
                     break;
 
+                case FunctionKeys.AddWordsFromClipboard:
+                    AddClipboardToDictionary(lastWordOnly: true, saveToFile: true);
+                    break;
+
                 case FunctionKeys.Alpha1Keyboard:
                     if (Settings.Default.EnableCommuniKateKeyboardLayout)
                     {

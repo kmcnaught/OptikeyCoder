@@ -491,18 +491,8 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             }
         }
 
-        private void AddTextToDictionary(bool lastWordOnly, bool saveToFile)
+        private void AddWordsToDictionary(List<string> possibleEntries, bool saveToFile)
         {
-
-            var possibleWords = keyboardOutputService.Text.ExtractWords();
-            var possibleLines = keyboardOutputService.Text.ExtractLines();
-
-            List<string> possibleEntries = new List<string>();
-            if (lastWordOnly && possibleWords.Count > 0)
-                possibleEntries = new List<string>() { possibleWords.Last() };
-            else
-                possibleEntries = possibleWords.Concat(possibleLines).Distinct().ToList();
-
             if (possibleEntries.Any())
             {
                 var candidates = possibleEntries.Where(pe => !dictionaryService.ExistsInDictionary(pe)).ToList();
@@ -526,6 +516,29 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 Log.InfoFormat("No possible words or phrases found in output service's Text: '{0}'.", keyboardOutputService.Text);
                 audioService.PlaySound(Settings.Default.InfoSoundFile, Settings.Default.InfoSoundVolume);
             }
+        }
+
+        private void AddTextToDictionary(bool lastWordOnly, bool saveToFile)
+        {
+
+            var possibleWords = keyboardOutputService.Text.ExtractWords();
+            var possibleLines = keyboardOutputService.Text.ExtractLines();
+
+            List<string> possibleEntries = new List<string>();
+            if (lastWordOnly && possibleWords.Count > 0)
+                possibleEntries = new List<string>() { possibleWords.Last() };
+            else
+                possibleEntries = possibleWords.Concat(possibleLines).Distinct().ToList();
+
+            AddWordsToDictionary(possibleEntries, saveToFile);
+
+        }
+
+        private void AddClipboardToDictionary(bool lastWordOnly, bool saveToFile=false)
+        {
+            string clipboard = Clipboard.GetText();
+            var possibleWords = clipboard.ExtractWords();
+            AddWordsToDictionary(possibleWords, saveToFile);            
         }
 
         private void PromptToAddCandidatesToDictionary(List<string> candidates, IKeyboard originalKeyboard, bool saveToFile)

@@ -6,6 +6,7 @@ namespace JuliusSweetland.OptiKey.Enums
         AddToDictionary,
 	    AddLastWordToDictionaryFile,
         AddLastWordToDictionaryCache,
+        AddWordsFromClipboard,
         Alpha1Keyboard,
         Alpha2Keyboard,
         Alpha3Keyboard,
