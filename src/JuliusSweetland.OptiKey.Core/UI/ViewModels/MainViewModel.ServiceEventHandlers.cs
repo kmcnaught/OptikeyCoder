@@ -662,10 +662,10 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             switch (singleKeyValue.FunctionKey.Value)
             {
                 case FunctionKeys.AddToDictionary:
-                    AddTextToDictionary();
+                    AddTextToDictionary(lastWordOnly: false, saveToFile: true);
                     break;
 
-		case FunctionKeys.AddLastWordToDictionaryCache:
+		        case FunctionKeys.AddLastWordToDictionaryCache:
                     AddTextToDictionary(lastWordOnly: true, saveToFile: false);
                     break;
 

@@ -493,7 +493,6 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
 
         private void AddTextToDictionary(bool lastWordOnly, bool saveToFile)
         {
-            Log.Info("KMCN AddTextToDictionary called.");
 
             var possibleWords = keyboardOutputService.Text.ExtractWords();
             var possibleLines = keyboardOutputService.Text.ExtractLines();
