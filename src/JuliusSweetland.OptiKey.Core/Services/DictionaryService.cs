@@ -45,8 +45,6 @@ namespace JuliusSweetland.OptiKey.Services
         #region On closing events callback
         public void OnAppClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            // Save entries to user file when leaving the app.
-            this.SaveUserDictionaryToFile();
         }
         #endregion
 
