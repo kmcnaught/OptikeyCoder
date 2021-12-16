@@ -361,7 +361,7 @@ namespace JuliusSweetland.OptiKey.Services
 
         public void AddNewEntryToCachedDictionary(string entry)
         {
-            AddEntryToDictionary(entry, appendToFile: false, usageCount: 1);
+            AddEntryToDictionary(entry, appendToFile: false, usageCount: Settings.Default.TempDictionaryWordUsageCount);
         }
 
         public void AddNewEntryToSavedDictionary(string entry)
