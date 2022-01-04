@@ -11,7 +11,7 @@
     <ROW Property="CTRLS" Value="2"/>
     <ROW Property="Manufacturer" Value="K McNaught"/>
     <ROW Property="ProductCode" Value="1025:{E18C2BEF-0CFF-44FC-A959-5FD4A27A2FC5} 1026:{2DE411E6-66EF-404B-89B7-9D4224DD524E} 1027:{588B8838-D4B4-49E4-B8A2-E3E421CE6032} 1028:{ABB50CAC-6974-4DA4-B6C6-37D81210393F} 1029:{DD1A10B2-BCFC-4AE2-85A3-D7E8231102B0} 1030:{365D01E3-9730-44A5-B1D0-CB6FE259451E} 1031:{D6AF5CF6-B0BB-498A-A6A0-AFEF875A0CFB} 1032:{C7A1D587-5DB3-49F8-AEB8-8ECC2FAA6B40} 1033:{B7E4D848-D362-47CA-8BA4-0BF30F0BCFE9} 1035:{0954DF87-71D8-42B9-8732-B611D7A9A6EB} 1036:{EAF50F48-F568-41CE-BBF5-408E1E716759} 1037:{90AC4436-4F9A-4969-8098-09A0682292F7} 1038:{3BC58C4B-1A03-4A26-8A58-95D175C76267} 1039:{6AC7A8F7-3AC0-4F70-A28B-F27537E552B6} 1040:{CC65BD99-5709-4B42-8D66-FF0E55BABC70} 1041:{B7C9303B-ABF9-4C66-A1BE-D35091E3010D} 1042:{E4A18B05-9468-4DCE-BB83-44C0ABB25493} 1043:{24E63101-E62B-4183-BAFB-8DA538407EA6} 1044:{F106D639-5964-439F-8D75-391E8E252136} 1045:{9BC04C69-1322-46CD-BFD2-D8C5B5E22AE1} 1046:{C81477FF-C5E9-469E-8080-B1D78AB3E712} 1049:{6BCA8047-A34A-4A50-B6C9-7BC3EAC18077} 1050:{04529D83-A1F7-4BE1-917C-A68D63B5794B} 1051:{51981A77-C294-4626-87FE-5F0AC9C5CAEA} 1052:{8267A6C1-B500-4E93-AADE-55B647AB4E0E} 1053:{2C044422-D35B-43F4-BEFF-893AEE3B1B35} 1055:{139A3210-B9B2-46EE-8866-34409B83A31A} 1057:{9842BC6C-0139-4452-B91A-9B7F9E8B628B} 1058:{2E2B99DB-75D1-431A-BC4C-7206F31F0E8D} 1060:{10F363CF-FE3F-4D57-BE9B-D0BF5BE15585} 1065:{1E585D93-9A34-44F1-92CB-9446C527FB23} 1087:{F04F0EDF-D719-40B8-8182-55CF7779277A} 2052:{8D079002-745A-40B3-9991-F8EAD0C44DDA} 2057:{CE7C644E-414F-4164-8F33-2E0C8A698CFE} 2068:{E22F444C-825E-4025-80BA-B0E48C06CF59} 2070:{EC61AE50-27BC-40C8-9848-A7FE9A78F104} 2074:{3B4FE735-F813-4A09-800A-7B9FCDD27DB4} 3082:{2F79E8FD-FA13-43EF-8A31-3FA294895818} 3098:{823AFFA4-957F-4FCA-86E1-D9B89D4200C6} " Type="16"/>
-    <ROW Property="ProductLanguage" Value="1025"/>
+    <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="Optikey Coder"/>
     <ROW Property="ProductVersion" Value="3.1.2" Type="32"/>
     <ROW Property="RUNAPPLICATION" Value="1" Type="4"/>
@@ -810,9 +810,9 @@
     <ROW Registry="Version" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Version" Value="[ProductVersion]" Component_="ProductInformation"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiShortsComponent">
-    <ROW Shortcut="OptikeyPro" Directory_="SHORTCUTDIR" Name="OPTIKE~2|Optikey Pro" Component_="OptikeyPro.exe" Target="[#OptikeyPro.exe]" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="Release_Dir"/>
-    <ROW Shortcut="OptikeyPro_1" Directory_="DesktopFolder" Name="OPTIKE~2|Optikey Pro" Component_="OptikeyPro.exe" Target="[#OptikeyPro.exe]" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="Release_Dir"/>
-    <ROW Shortcut="OptikeyPro_2" Directory_="Optikey_Dir" Name="OPTIKE~1|OptikeyPro" Component_="OptikeyPro.exe" Target="[#OptikeyPro.exe]" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="Release_Dir"/>
+    <ROW Shortcut="OptikeyPro" Directory_="SHORTCUTDIR" Name="OPTIKE~1|Optikey Coder" Component_="OptikeyPro.exe" Target="[#OptikeyPro.exe]" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="Release_Dir"/>
+    <ROW Shortcut="OptikeyPro_1" Directory_="DesktopFolder" Name="OPTIKE~1|Optikey Coder" Component_="OptikeyPro.exe" Target="[#OptikeyPro.exe]" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="Release_Dir"/>
+    <ROW Shortcut="OptikeyPro_2" Directory_="Optikey_Dir" Name="OPTIKE~1|Optikey Coder" Component_="OptikeyPro.exe" Target="[#OptikeyPro.exe]" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="Release_Dir"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiThemeComponent">
     <ATTRIBUTE name="UsedTheme" value="classic"/>
