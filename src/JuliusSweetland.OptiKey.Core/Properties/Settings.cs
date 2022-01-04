@@ -123,7 +123,7 @@ namespace JuliusSweetland.OptiKey.Properties {
 
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("MousePosition")]
+        [global::System.Configuration.DefaultSettingValueAttribute("TobiiPcEyeGo")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
         public global::JuliusSweetland.OptiKey.Enums.PointsSources PointsSource {
             get {
@@ -1120,7 +1120,7 @@ namespace JuliusSweetland.OptiKey.Properties {
 
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Top")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Bottom")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
         public global::JuliusSweetland.OptiKey.Enums.DockEdges MainWindowDockPosition {
             get {
@@ -1289,7 +1289,7 @@ namespace JuliusSweetland.OptiKey.Properties {
 
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Alpha")]
+        [global::System.Configuration.DefaultSettingValueAttribute("DynamicKeyboard")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
         public virtual global::JuliusSweetland.OptiKey.Enums.Keyboards StartupKeyboard {
             get {
