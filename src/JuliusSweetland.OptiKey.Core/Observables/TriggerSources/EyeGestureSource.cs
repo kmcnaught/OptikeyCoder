@@ -69,6 +69,13 @@ namespace JuliusSweetland.OptiKey.Observables.TriggerSources
                         .Buffer(2, 1) //Sliding buffer of 2 (last & current) that moves by 1 value at a time
                         .Subscribe(tps =>
                         {
+                            if (!Settings.Default.EyeGesturesEnabled) { return; }
+
+                            if (gestureList == null && String.IsNullOrEmpty(Settings.Default.EyeGestureString))
+                            {
+                                return;
+                            }
+
                             var checkPoint = tps.Last().Value.Point;
                             moveDelta = (2 * moveDelta + (checkPoint - tps.First().Value.Point).Length) / 3;
 
