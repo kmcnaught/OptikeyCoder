@@ -144,6 +144,102 @@ namespace JuliusSweetland.OptiKey.Properties {
 
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("false")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public bool KeySelectionTriggerGamepadAllowRepeats
+        {
+            get
+            {
+                return ((bool)(this["KeySelectionTriggerGamepadAllowRepeats"]));
+            }
+            set
+            {
+                this["KeySelectionTriggerGamepadAllowRepeats"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("400")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public int KeySelectionTriggerGamepadFirstRepeatMilliseconds
+        {
+            get
+            {
+                return ((int)(this["KeySelectionTriggerGamepadFirstRepeatMilliseconds"]));
+            }
+            set
+            {
+                this["KeySelectionTriggerGamepadFirstRepeatMilliseconds"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("200")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public int KeySelectionTriggerGamepadNextRepeatMilliseconds
+        {
+            get
+            {
+                return ((int)(this["KeySelectionTriggerGamepadNextRepeatMilliseconds"]));
+            }
+            set
+            {
+                this["KeySelectionTriggerGamepadNextRepeatMilliseconds"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("false")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public bool PointSelectionTriggerGamepadAllowRepeats
+        {
+            get
+            {
+                return ((bool)(this["PointSelectionTriggerGamepadAllowRepeats"]));
+            }
+            set
+            {
+                this["PointSelectionTriggerGamepadAllowRepeats"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("400")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public int PointSelectionTriggerGamepadFirstRepeatMilliseconds
+        {
+            get
+            {
+                return ((int)(this["PointSelectionTriggerGamepadFirstRepeatMilliseconds"]));
+            }
+            set
+            {
+                this["PointSelectionTriggerGamepadFirstRepeatMilliseconds"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("200")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public int PointSelectionTriggerGamepadNextRepeatMilliseconds
+        {
+            get
+            {
+                return ((int)(this["PointSelectionTriggerGamepadNextRepeatMilliseconds"]));
+            }
+            set
+            {
+                this["PointSelectionTriggerGamepadNextRepeatMilliseconds"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("NextHigh")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
         public global::JuliusSweetland.OptiKey.Enums.TriggerStopSignals MultiKeySelectionTriggerStopSignal {
