@@ -28,13 +28,18 @@ namespace JuliusSweetland.OptiKey.Observables.TriggerSources
 
         public DirectInputButtonDownUpSource(
             Guid controllerGuid,
-            int triggerButtonIdx,
-            IPointSource pointSource)
+            int triggerButtonIdx,            
+            bool allowRepeats,
+            int firstRepeatMs,
+            int nextRepeatMs,
+            IPointSource pointSource
+            )
         {
             this.triggerButtonIdx = triggerButtonIdx;
             this.pointSource = pointSource;
 
             directInputListener = new DirectInputListener(controllerGuid);
+            directInputListener.AllowRepeats(allowRepeats, firstRepeatMs, nextRepeatMs);
         }
 
         #endregion
@@ -64,12 +69,12 @@ namespace JuliusSweetland.OptiKey.Observables.TriggerSources
                             h => directInputListener.ButtonDown += h,
                             h => directInputListener.ButtonDown -= h)
                         .Do(ep => {
-                            Log.InfoFormat("gamepad button {0} UP", ep.EventArgs.button);
+                            Log.InfoFormat("gamepad button {0} UP", ep.EventArgs.buttonEvent.button);
                         })
                         .Where(ep => {
-                            return (ep.EventArgs.button == triggerButtonIdx);
+                            return (ep.EventArgs.buttonEvent.button == triggerButtonIdx);
                          })
-                        .Select(_ => true)
+                        .Select(ep => ep.EventArgs.buttonEvent)
                         .Do(_ => Log.DebugFormat("Trigger key down detected ({0})", triggerButtonIdx));
 
                     var keyUps = Observable.FromEventPattern<DirectInputButtonUpEventHandler, DirectInputButtonEventArgs>(
@@ -77,23 +82,44 @@ namespace JuliusSweetland.OptiKey.Observables.TriggerSources
                             h => directInputListener.ButtonUp += h,
                             h => directInputListener.ButtonUp -= h)
                         .Do(ep => {
-                            Log.InfoFormat("gamepad button {0} UP", ep.EventArgs.button);
+                            Log.InfoFormat("gamepad button {0} UP", ep.EventArgs.buttonEvent.button);
                         })
                         .Where(ep => {
-                            return (ep.EventArgs.button == triggerButtonIdx);
+                            return (ep.EventArgs.buttonEvent.button == triggerButtonIdx);
                         })
-                        .Select(_ => false)
+                        .Select(ep => ep.EventArgs.buttonEvent)
                         .Do(_ => Log.DebugFormat("Trigger key up detected ({0})", triggerButtonIdx));
 
-                    sequence = keyDowns.Merge(keyUps)
-                        .DistinctUntilChanged()
-                        .SkipWhile(b => b == false) //Ensure the first value we hit is a true, i.e. a key down
-                        .CombineLatest(pointSource.Sequence, (b, point) => new TriggerSignal(b ? 1 : -1, null, point.Value))
-                        .DistinctUntilChanged(signal => signal.Signal) //Combining latest will output a trigger signal for every change in BOTH sequences - only output when the trigger signal changes
+                    var combined = keyDowns
+                                    .Merge(keyUps)
+                                    .SkipWhile(b => b.eventType == EventType.UP) //Ensure the first value we hit is a key down
+                                    .CombineLatest(pointSource.Sequence, (buttonEvent, point) => new RepeatableTriggerSignal(
+                                        new TriggerSignal(buttonEvent.eventType == EventType.DOWN ? 1 : -1, null, point.Value), buttonEvent.isRepeat))
+                                    ;
+
+                    // Keep track of keyvalue at original keydown, to allow repeats for this keyvalue only
+                    var startKey = combined
+                                    .DistinctUntilChanged(e => e.triggerSignal.Signal)
+                                    .Where(e => (e.triggerSignal.Signal == 1.0) && !e.isRepeat)
+                                    .Select(e => e.triggerSignal.PointAndKeyValue.KeyValue);
+
+                    // Use startKeyValue to flag up repeats that are not permitted
+                    var combinedWithRepeatSuppression = startKey.CombineLatest(combined, (kv, rts) => {
+                        rts.isRepeatAllowed = kv == rts.triggerSignal.PointAndKeyValue.KeyValue;
+                        return rts;
+                    });
+
+                    // Filter out bad repeats
+                    var final = combinedWithRepeatSuppression
+                                .Where(rts => rts.isRepeatAllowed)
+                                .DistinctUntilChanged(rts => rts.triggerSignal.Signal)
+                                .Select(rts => rts.triggerSignal)
+                                ;
+
+                    sequence = final
                         .Where(_ => State == RunningStates.Running)
                         .Publish()
                         .RefCount();
-
                 }
 
                 return sequence;
