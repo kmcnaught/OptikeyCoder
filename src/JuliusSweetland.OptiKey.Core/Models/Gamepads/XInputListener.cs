@@ -15,19 +15,19 @@ namespace JuliusSweetland.OptiKey.Models.Gamepads
 
         #region event-handling
 
-        public class GamepadButtonEventArgs : EventArgs
+        public class XInputButtonEventArgs : EventArgs
         {
-            public GamepadButtonEventArgs(GamepadButtonFlags button)
+            public XInputButtonEventArgs(EventType type, GamepadButtonFlags button, bool isRepeat = false)
             {
-                this.button = button;
+                this.buttonEvent = new GamepadButtonEvent<GamepadButtonFlags>(type, button, isRepeat);
             }
-            public GamepadButtonFlags button;
+            public GamepadButtonEvent<GamepadButtonFlags> buttonEvent;
         }
         
         public event XInputButtonDownEventHandler ButtonDown;
         public event XInputButtonUpEventHandler ButtonUp;
-        public delegate void XInputButtonDownEventHandler(object sender, GamepadButtonEventArgs e);
-        public delegate void XInputButtonUpEventHandler(object sender, GamepadButtonEventArgs e);
+        public delegate void XInputButtonDownEventHandler(object sender, XInputButtonEventArgs e);
+        public delegate void XInputButtonUpEventHandler(object sender, XInputButtonEventArgs e);
 
         #endregion
 
@@ -36,6 +36,11 @@ namespace JuliusSweetland.OptiKey.Models.Gamepads
 
         private BackgroundWorker pollWorker;
         private int pollDelayMs;
+
+        private bool allowRepeats = false;
+        private int repeatDelayFirstMs;
+        private int repeatDelayNextMs;
+        private Dictionary<GamepadButtonFlags, long> repeatTimes;
 
         public static bool IsDeviceAvailable(UserIndex userIndex)
         {           
@@ -47,10 +52,19 @@ namespace JuliusSweetland.OptiKey.Models.Gamepads
             this.pollDelayMs = pollDelayMs;
             this.requestedUserIndex = userIndex;
 
+            repeatTimes = new Dictionary<GamepadButtonFlags, long>();
+
             pollWorker = new BackgroundWorker();
             pollWorker.DoWork += pollGamepadButtons;
             pollWorker.WorkerSupportsCancellation = true;
             pollWorker.RunWorkerAsync();
+        }
+
+        public void AllowRepeats(bool allow, int firstDelayMs = 400, int nextDelayMs = 200)
+        {
+            allowRepeats = allow;
+            repeatDelayFirstMs = firstDelayMs;
+            repeatDelayNextMs = nextDelayMs;
         }
 
         public void Dispose()
@@ -102,10 +116,37 @@ namespace JuliusSweetland.OptiKey.Models.Gamepads
                             foreach (GamepadButtonFlags b in splitButtonsChanged)
                             {
                                 if ((conn.CurrentButtons & b) > 0)
-                                    this.ButtonDown?.Invoke(this, new GamepadButtonEventArgs(b));
+                                    this.ButtonDown?.Invoke(this, new XInputButtonEventArgs(EventType.DOWN, b));
                                 else
-                                    this.ButtonUp?.Invoke(this, new GamepadButtonEventArgs(b));
+                                    this.ButtonUp?.Invoke(this, new XInputButtonEventArgs(EventType.UP, b));
                             }
+                        }
+
+                        if (allowRepeats)
+                        {
+                            var currentButtons = conn.CurrentButtons;
+                            long currentTime = new DateTimeOffset(DateTime.Now).ToUnixTimeMilliseconds();
+
+                            var allButtons = Enum.GetValues(typeof(GamepadButtonFlags))
+                                                    .Cast<GamepadButtonFlags>()
+                                                    .Where(b => b != GamepadButtonFlags.None);
+                            foreach (GamepadButtonFlags b in allButtons)
+                            {
+
+                                if ((currentButtons & b) > 0) // if button is down
+                                {
+                                    if ((changedButtons & b) > 0) // then button is newly down
+                                    {
+                                        repeatTimes[b] = currentTime + repeatDelayFirstMs;
+                                    }
+                                    else if (currentTime > repeatTimes[b])
+                                    {
+                                        this.ButtonUp?.Invoke(this, new XInputButtonEventArgs(EventType.UP, b, isRepeat: true));
+                                        this.ButtonDown?.Invoke(this, new XInputButtonEventArgs(EventType.DOWN, b, isRepeat: true));
+                                        repeatTimes[b] = currentTime + repeatDelayNextMs;
+                                    }
+                                }
+                            }                        
                         }
                     }
                 }

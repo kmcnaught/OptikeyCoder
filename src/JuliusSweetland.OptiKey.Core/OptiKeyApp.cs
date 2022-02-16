@@ -797,6 +797,9 @@ namespace JuliusSweetland.OptiKey
                     keySelectionTriggerSource = new XInputButtonDownUpSource(
                         Settings.Default.KeySelectionTriggerGamepadXInputController,
                         Settings.Default.KeySelectionTriggerGamepadXInputButtonDownUpButton,
+                        Settings.Default.KeySelectionTriggerGamepadAllowRepeats,
+                        Settings.Default.KeySelectionTriggerGamepadFirstRepeatMilliseconds,
+                        Settings.Default.KeySelectionTriggerGamepadNextRepeatMilliseconds,
                         pointSource);
                     break;
 
@@ -845,6 +848,9 @@ namespace JuliusSweetland.OptiKey
                     pointSelectionTriggerSource = new XInputButtonDownUpSource(
                         Settings.Default.PointSelectionTriggerGamepadXInputController,
                         Settings.Default.PointSelectionTriggerGamepadXInputButtonDownUpButton,
+                        Settings.Default.PointSelectionTriggerGamepadAllowRepeats,
+                        Settings.Default.PointSelectionTriggerGamepadFirstRepeatMilliseconds,
+                        Settings.Default.PointSelectionTriggerGamepadNextRepeatMilliseconds,
                         pointSource);
                     break;
 
