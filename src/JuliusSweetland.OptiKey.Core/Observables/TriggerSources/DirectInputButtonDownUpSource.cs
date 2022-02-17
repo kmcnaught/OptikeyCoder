@@ -101,11 +101,11 @@ namespace JuliusSweetland.OptiKey.Observables.TriggerSources
                     var startKey = combined
                                     .DistinctUntilChanged(e => e.triggerSignal.Signal)
                                     .Where(e => (e.triggerSignal.Signal == 1.0) && !e.isRepeat)
-                                    .Select(e => e.triggerSignal.PointAndKeyValue.KeyValue);
+                                    .Select(e => e.triggerSignal.PointAndKeyValue?.KeyValue);
 
                     // Use startKeyValue to flag up repeats that are not permitted
                     var combinedWithRepeatSuppression = startKey.CombineLatest(combined, (kv, rts) => {
-                        rts.isRepeatAllowed = kv == rts.triggerSignal.PointAndKeyValue.KeyValue;
+                        rts.isRepeatAllowed = kv == rts.triggerSignal.PointAndKeyValue?.KeyValue;
                         return rts;
                     });
 
