@@ -242,6 +242,48 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
             }
         }
 
+        private bool pointSelectionTriggerGamepadAllowRepeats;
+        public bool PointSelectionTriggerGamepadAllowRepeats
+        {
+            get { return pointSelectionTriggerGamepadAllowRepeats; }
+            set { SetProperty(ref pointSelectionTriggerGamepadAllowRepeats, value); }
+        }
+
+        private bool keySelectionTriggerGamepadAllowRepeats;
+        public bool KeySelectionTriggerGamepadAllowRepeats
+        {
+            get { return keySelectionTriggerGamepadAllowRepeats; }
+            set { SetProperty(ref keySelectionTriggerGamepadAllowRepeats, value); }
+        }
+
+        private int pointSelectionTriggerGamepadFirstRepeatMilliseconds;
+        public int PointSelectionTriggerGamepadFirstRepeatMilliseconds
+        {
+            get { return pointSelectionTriggerGamepadFirstRepeatMilliseconds; }
+            set { SetProperty(ref pointSelectionTriggerGamepadFirstRepeatMilliseconds, value); }
+        }
+
+        private int pointSelectionTriggerGamepadNextRepeatMilliseconds;
+        public int PointSelectionTriggerGamepadNextRepeatMilliseconds
+        {
+            get { return pointSelectionTriggerGamepadNextRepeatMilliseconds; }
+            set { SetProperty(ref pointSelectionTriggerGamepadNextRepeatMilliseconds, value); }
+        }
+
+        private int keySelectionTriggerGamepadFirstRepeatMilliseconds;
+        public int KeySelectionTriggerGamepadFirstRepeatMilliseconds
+        {
+            get { return keySelectionTriggerGamepadFirstRepeatMilliseconds; }
+            set { SetProperty(ref keySelectionTriggerGamepadFirstRepeatMilliseconds, value); }
+        }
+
+        private int keySelectionTriggerGamepadNextRepeatMilliseconds;
+        public int KeySelectionTriggerGamepadNextRepeatMilliseconds
+        {
+            get { return keySelectionTriggerGamepadNextRepeatMilliseconds; }
+            set { SetProperty(ref keySelectionTriggerGamepadNextRepeatMilliseconds, value); }
+        }
+
         private PointsSources pointSource;
         public PointsSources PointsSource
         {
@@ -534,6 +576,12 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
                     || (Settings.Default.KeySelectionTriggerGamepadXInputController != KeySelectionTriggerGamepadXInputController && KeySelectionTriggerSource == Enums.TriggerSources.DirectInputButtonDownUps)
                     || (Settings.Default.KeySelectionTriggerGamepadDirectInputController != KeySelectionTriggerGamepadDirectInputController && KeySelectionTriggerSource == Enums.TriggerSources.DirectInputButtonDownUps)                     
                     || (Settings.Default.KeySelectionTriggerGamepadDirectInputButtonDownUpButton != KeySelectionTriggerGamepadDirectInputButtonDownUpButton && KeySelectionTriggerSource == Enums.TriggerSources.XInputButtonDownUps)
+                    || (Settings.Default.KeySelectionTriggerGamepadAllowRepeats != KeySelectionTriggerGamepadAllowRepeats && KeySelectionTriggerSource == Enums.TriggerSources.XInputButtonDownUps)
+                    || (Settings.Default.KeySelectionTriggerGamepadAllowRepeats != KeySelectionTriggerGamepadAllowRepeats && KeySelectionTriggerSource == Enums.TriggerSources.DirectInputButtonDownUps)
+                    || (Settings.Default.KeySelectionTriggerGamepadFirstRepeatMilliseconds != KeySelectionTriggerGamepadFirstRepeatMilliseconds && KeySelectionTriggerSource == Enums.TriggerSources.XInputButtonDownUps)
+                    || (Settings.Default.KeySelectionTriggerGamepadFirstRepeatMilliseconds != KeySelectionTriggerGamepadFirstRepeatMilliseconds && KeySelectionTriggerSource == Enums.TriggerSources.DirectInputButtonDownUps)
+                    || (Settings.Default.KeySelectionTriggerGamepadNextRepeatMilliseconds != KeySelectionTriggerGamepadNextRepeatMilliseconds && KeySelectionTriggerSource == Enums.TriggerSources.XInputButtonDownUps)
+                    || (Settings.Default.KeySelectionTriggerGamepadNextRepeatMilliseconds != KeySelectionTriggerGamepadNextRepeatMilliseconds && KeySelectionTriggerSource == Enums.TriggerSources.DirectInputButtonDownUps)
                     || (Settings.Default.KeySelectionTriggerMouseDownUpButton != KeySelectionTriggerMouseDownUpButton && KeySelectionTriggerSource == Enums.TriggerSources.MouseButtonDownUps)
                     || (Settings.Default.KeySelectionTriggerFixationLockOnTime != TimeSpan.FromMilliseconds(KeySelectionTriggerFixationLockOnTimeInMs) && KeySelectionTriggerSource == Enums.TriggerSources.Fixations)
                     || (Settings.Default.KeySelectionTriggerFixationResumeRequiresLockOn != KeySelectionTriggerFixationResumeRequiresLockOn && KeySelectionTriggerSource == Enums.TriggerSources.Fixations)
@@ -547,6 +595,12 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
                     || (Settings.Default.PointSelectionTriggerGamepadXInputController != PointSelectionTriggerGamepadXInputController && PointSelectionTriggerSource == Enums.TriggerSources.XInputButtonDownUps)
                     || (Settings.Default.PointSelectionTriggerGamepadDirectInputController != PointSelectionTriggerGamepadDirectInputController && PointSelectionTriggerSource == Enums.TriggerSources.XInputButtonDownUps)
                     || (Settings.Default.PointSelectionTriggerGamepadDirectInputButtonDownUpButton != PointSelectionTriggerGamepadDirectInputButtonDownUpButton && PointSelectionTriggerSource == Enums.TriggerSources.DirectInputButtonDownUps)
+                    || (Settings.Default.PointSelectionTriggerGamepadAllowRepeats != KeySelectionTriggerGamepadAllowRepeats && PointSelectionTriggerSource == Enums.TriggerSources.XInputButtonDownUps)
+                    || (Settings.Default.PointSelectionTriggerGamepadAllowRepeats != KeySelectionTriggerGamepadAllowRepeats && PointSelectionTriggerSource == Enums.TriggerSources.DirectInputButtonDownUps)
+                    || (Settings.Default.PointSelectionTriggerGamepadFirstRepeatMilliseconds != KeySelectionTriggerGamepadFirstRepeatMilliseconds && PointSelectionTriggerSource == Enums.TriggerSources.XInputButtonDownUps)
+                    || (Settings.Default.PointSelectionTriggerGamepadFirstRepeatMilliseconds != KeySelectionTriggerGamepadFirstRepeatMilliseconds && PointSelectionTriggerSource == Enums.TriggerSources.DirectInputButtonDownUps)
+                    || (Settings.Default.PointSelectionTriggerGamepadNextRepeatMilliseconds != KeySelectionTriggerGamepadNextRepeatMilliseconds && PointSelectionTriggerSource == Enums.TriggerSources.XInputButtonDownUps)
+                    || (Settings.Default.PointSelectionTriggerGamepadNextRepeatMilliseconds != KeySelectionTriggerGamepadNextRepeatMilliseconds && PointSelectionTriggerSource == Enums.TriggerSources.DirectInputButtonDownUps)
                     || (Settings.Default.PointSelectionTriggerMouseDownUpButton != PointSelectionTriggerMouseDownUpButton && PointSelectionTriggerSource == Enums.TriggerSources.MouseButtonDownUps)
                     || (Settings.Default.PointSelectionTriggerFixationLockOnTime != TimeSpan.FromMilliseconds(PointSelectionTriggerFixationLockOnTimeInMs) && PointSelectionTriggerSource == Enums.TriggerSources.Fixations)
                     || (Settings.Default.PointSelectionTriggerFixationCompleteTime != TimeSpan.FromMilliseconds(PointSelectionTriggerFixationCompleteTimeInMs) && PointSelectionTriggerSource == Enums.TriggerSources.Fixations)
@@ -585,6 +639,10 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
             KeySelectionTriggerFixationCompleteTimesByIndividualKey = Settings.Default.KeySelectionTriggerFixationCompleteTimesByIndividualKey;
             KeySelectionTriggerFixationCompleteTimeInMsByKeyValueGroups = FromSetting(Settings.Default.KeySelectionTriggerFixationCompleteTimesByKeyValues);
             KeySelectionTriggerIncompleteFixationTtlInMs = Settings.Default.KeySelectionTriggerIncompleteFixationTtl.TotalMilliseconds;
+            KeySelectionTriggerGamepadAllowRepeats = Settings.Default.KeySelectionTriggerGamepadAllowRepeats;
+            KeySelectionTriggerGamepadFirstRepeatMilliseconds = Settings.Default.KeySelectionTriggerGamepadFirstRepeatMilliseconds;
+            KeySelectionTriggerGamepadNextRepeatMilliseconds = Settings.Default.KeySelectionTriggerGamepadNextRepeatMilliseconds;
+
             PointSelectionTriggerSource = Settings.Default.PointSelectionTriggerSource;
             PointSelectionTriggerKeyboardKeyDownUpKey = Settings.Default.PointSelectionTriggerKeyboardKeyDownUpKey;
             PointSelectionTriggerGamepadXInputController = Settings.Default.PointSelectionTriggerGamepadXInputController;
@@ -596,6 +654,10 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
             PointSelectionTriggerFixationCompleteTimeInMs = Settings.Default.PointSelectionTriggerFixationCompleteTime.TotalMilliseconds;
             PointSelectionTriggerLockOnRadiusInPixels = Settings.Default.PointSelectionTriggerLockOnRadiusInPixels;
             PointSelectionTriggerFixationRadiusInPixels = Settings.Default.PointSelectionTriggerFixationRadiusInPixels;
+            PointSelectionTriggerGamepadAllowRepeats = Settings.Default.PointSelectionTriggerGamepadAllowRepeats;
+            PointSelectionTriggerGamepadFirstRepeatMilliseconds = Settings.Default.PointSelectionTriggerGamepadFirstRepeatMilliseconds;
+            PointSelectionTriggerGamepadNextRepeatMilliseconds = Settings.Default.PointSelectionTriggerGamepadNextRepeatMilliseconds;
+
             ProgressIndicatorBehaviour = Settings.Default.ProgressIndicatorBehaviour;
             ProgressIndicatorResizeStartProportion = Settings.Default.ProgressIndicatorResizeStartProportion;
             ProgressIndicatorResizeEndProportion = Settings.Default.ProgressIndicatorResizeEndProportion;
@@ -627,6 +689,10 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
             Settings.Default.KeySelectionTriggerFixationCompleteTimesByIndividualKey = KeySelectionTriggerFixationCompleteTimesByIndividualKey;
             Settings.Default.KeySelectionTriggerFixationCompleteTimesByKeyValues = ToSetting(KeySelectionTriggerFixationCompleteTimeInMsByKeyValueGroups);
             Settings.Default.KeySelectionTriggerIncompleteFixationTtl = TimeSpan.FromMilliseconds(KeySelectionTriggerIncompleteFixationTtlInMs);
+            Settings.Default.KeySelectionTriggerGamepadAllowRepeats = KeySelectionTriggerGamepadAllowRepeats;
+            Settings.Default.KeySelectionTriggerGamepadFirstRepeatMilliseconds = KeySelectionTriggerGamepadFirstRepeatMilliseconds;
+            Settings.Default.KeySelectionTriggerGamepadNextRepeatMilliseconds = KeySelectionTriggerGamepadNextRepeatMilliseconds;
+
             Settings.Default.PointSelectionTriggerSource = PointSelectionTriggerSource;
             Settings.Default.PointSelectionTriggerKeyboardKeyDownUpKey = PointSelectionTriggerKeyboardKeyDownUpKey;
             Settings.Default.PointSelectionTriggerGamepadXInputController = PointSelectionTriggerGamepadXInputController;
@@ -638,6 +704,10 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
             Settings.Default.PointSelectionTriggerFixationCompleteTime = TimeSpan.FromMilliseconds(PointSelectionTriggerFixationCompleteTimeInMs);
             Settings.Default.PointSelectionTriggerLockOnRadiusInPixels = PointSelectionTriggerLockOnRadiusInPixels;
             Settings.Default.PointSelectionTriggerFixationRadiusInPixels = PointSelectionTriggerFixationRadiusInPixels;
+            Settings.Default.PointSelectionTriggerGamepadAllowRepeats = PointSelectionTriggerGamepadAllowRepeats;
+            Settings.Default.PointSelectionTriggerGamepadFirstRepeatMilliseconds = PointSelectionTriggerGamepadFirstRepeatMilliseconds;
+            Settings.Default.PointSelectionTriggerGamepadNextRepeatMilliseconds = PointSelectionTriggerGamepadNextRepeatMilliseconds;
+
             Settings.Default.ProgressIndicatorBehaviour = ProgressIndicatorBehaviour;
             Settings.Default.ProgressIndicatorResizeStartProportion = ProgressIndicatorResizeStartProportion;
             Settings.Default.ProgressIndicatorResizeEndProportion = ProgressIndicatorResizeEndProportion;
