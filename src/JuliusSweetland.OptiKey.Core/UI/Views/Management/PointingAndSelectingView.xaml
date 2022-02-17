@@ -768,22 +768,24 @@ Copyright (c) 2020 OPTIKEY LTD (UK company number 11854839) - All Rights Reserve
                             </Style>
                         </controls:NumericUpDown.Style>
                     </controls:NumericUpDown>
-
-                    <!-- TODO: OR trigger instead of dupe -->
-                    <TextBlock Grid.Row="9" Grid.Column="0" Text="{x:Static resx:Resources.CONTROLLER_ENABLE_REPEATS}" 
-                               VerticalAlignment="Center" Margin="5">
-                        <TextBlock.Style>
-                            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
-                                <Setter Property="Visibility" Value="Collapsed" />
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding KeySelectionTriggerSource}" Value="{x:Static enums:TriggerSources.DirectInputButtonDownUps}">
-                                        <Setter Property="Visibility" Value="Visible" />
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
                     
+                    <TextBlock Grid.Row="9" Grid.Column="0" Text="{x:Static resx:Resources.CONTROLLER_ENABLE_REPEATS}" 
+                               VerticalAlignment="Center" Margin="5">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding KeySelectionTriggerSource}" Value="{x:Static enums:TriggerSources.DirectInputButtonDownUps}">
+                                        <Setter Property="Visibility" Value="Visible" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding KeySelectionTriggerSource}" Value="{x:Static enums:TriggerSources.XInputButtonDownUps}">
+                                        <Setter Property="Visibility" Value="Visible" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+
                     <CheckBox Grid.Row="9" Grid.Column="1"  
                               VerticalAlignment="Center"
                               IsChecked="{Binding KeySelectionTriggerGamepadAllowRepeats, Mode=TwoWay}">
@@ -794,31 +796,6 @@ Copyright (c) 2020 OPTIKEY LTD (UK company number 11854839) - All Rights Reserve
                                     <DataTrigger Binding="{Binding KeySelectionTriggerSource}" Value="{x:Static enums:TriggerSources.DirectInputButtonDownUps}">
                                         <Setter Property="Visibility" Value="Visible" />
                                     </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </CheckBox.Style>
-                    </CheckBox>
-
-                    <TextBlock Grid.Row="9" Grid.Column="0" Text="{x:Static resx:Resources.CONTROLLER_ENABLE_REPEATS}" 
-                               VerticalAlignment="Center" Margin="5">
-                        <TextBlock.Style>
-                            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
-                                <Setter Property="Visibility" Value="Collapsed" />
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding KeySelectionTriggerSource}" Value="{x:Static enums:TriggerSources.XInputButtonDownUps}">
-                                        <Setter Property="Visibility" Value="Visible" />
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
-                    <CheckBox Grid.Row="9" Grid.Column="1"  
-                              VerticalAlignment="Center"
-                              IsChecked="{Binding KeySelectionTriggerGamepadAllowRepeats, Mode=TwoWay}">
-                        <CheckBox.Style>
-                            <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
-                                <Setter Property="Visibility" Value="Collapsed" />
-                                <Style.Triggers>
                                     <DataTrigger Binding="{Binding KeySelectionTriggerSource}" Value="{x:Static enums:TriggerSources.XInputButtonDownUps}">
                                         <Setter Property="Visibility" Value="Visible" />
                                     </DataTrigger>
@@ -826,7 +803,6 @@ Copyright (c) 2020 OPTIKEY LTD (UK company number 11854839) - All Rights Reserve
                             </Style>
                         </CheckBox.Style>
                     </CheckBox>
-
 
 
                     <TextBlock Grid.Row="7" Grid.Column="0" Text="{x:Static resx:Resources.KEY_SELECTION_MOUSE_BUTTON_LABEL}" 
