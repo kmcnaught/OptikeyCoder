@@ -32,6 +32,7 @@ using presage;
 using Application = System.Windows.Application;
 using JuliusSweetland.OptiKey.Services.PluginEngine;
 using WindowsRecipes.TaskbarSingleInstance;
+using log4net.Repository;
 
 namespace JuliusSweetland.OptiKey
 {
@@ -594,6 +595,9 @@ namespace JuliusSweetland.OptiKey
                 };
                 crashWindow.ShowDialog();
 
+                // Make sure exception got logged
+                FlushAllLogs();
+
                 //The crash report has not been created yet - the UIDialogResult SendReport param determines what happens next
                 args.Result = new UIDialogResult(ExecutionFlow.BreakExecution, SendReport.Send);
             };
@@ -899,6 +903,20 @@ namespace JuliusSweetland.OptiKey
             Log.InfoFormat("OS version: {0}", DiagnosticInfo.OperatingSystemVersion);
             Log.InfoFormat("OS service pack: {0}", DiagnosticInfo.OperatingSystemServicePack);
             Log.InfoFormat("OS bitness: {0}", DiagnosticInfo.OperatingSystemBitness);
+        }
+
+        public static void FlushAllLogs()
+        {
+            // CC BY-SA 2.5 https://stackoverflow.com/a/2045992 
+            ILoggerRepository rep = LogManager.GetRepository();
+            foreach (IAppender appender in rep.GetAppenders())
+            {
+                var buffered = appender as BufferingAppenderSkeleton;
+                if (buffered != null)
+                {
+                    buffered.Flush();
+                }
+            }
         }
 
         #endregion
