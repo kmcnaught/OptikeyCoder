@@ -1106,12 +1106,28 @@ namespace JuliusSweetland.OptiKey
             catch
             {
                 var applicationDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"OptiKey\OptiKey\EyeGestures\");
-
+                if (!Directory.Exists(applicationDataPath))
+                {
+                    Directory.CreateDirectory(applicationDataPath);
+                }
                 var eyeGesturesFile = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory + @"\Resources\EyeGestures").First();
 
                 eyeGesturesFilePath = Path.Combine(applicationDataPath, Path.GetFileName(eyeGesturesFile));
 
                 File.Copy(eyeGesturesFile, eyeGesturesFilePath, true);
+
+                // Read into string also 
+                try
+                {
+                    Settings.Default.EyeGestureString = XmlEyeGestures.ReadFromFile(eyeGesturesFilePath).WriteToString();
+                }
+                catch
+                {
+                    Log.ErrorFormat("Could not read from gestures file {0}", eyeGesturesFilePath);
+#if DEBUG 
+                    throw;  // This file gets installed by Optikey so if there's an exception here we want to know about it
+#endif                    
+                }
             }
 
             Settings.Default.EyeGestureFile = eyeGesturesFilePath;
