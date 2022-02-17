@@ -1080,7 +1080,7 @@ Copyright (c) 2020 OPTIKEY LTD (UK company number 11854839) - All Rights Reserve
                         </ComboBox.Style>
                     </ComboBox>
 
-                    <TextBlock Grid.Row="17" Grid.Column="0" Text="{x:Static resx:Resources.POINT_SELECTION_GAMEPAD_SLOT_LABEL}" 
+                    <TextBlock Grid.Row="18" Grid.Column="0" Text="{x:Static resx:Resources.POINT_SELECTION_GAMEPAD_SLOT_LABEL}" 
                                VerticalAlignment="Center" Margin="5">
                         <TextBlock.Style>
                             <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
@@ -1093,7 +1093,7 @@ Copyright (c) 2020 OPTIKEY LTD (UK company number 11854839) - All Rights Reserve
                             </Style>
                         </TextBlock.Style>
                     </TextBlock>
-                    <ComboBox Grid.Row="17" Grid.Column="1" 
+                    <ComboBox Grid.Row="18" Grid.Column="1" 
                               ItemsSource="{Binding XInputSlots}"                              
                               DisplayMemberPath="Key"
                               SelectedValuePath="Value"
