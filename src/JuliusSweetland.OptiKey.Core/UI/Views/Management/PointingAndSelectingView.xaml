@@ -829,7 +829,7 @@ Copyright (c) 2020 OPTIKEY LTD (UK company number 11854839) - All Rights Reserve
                         </TextBlock.Style>
                     </TextBlock>
                     <controls:NumericUpDown Grid.Row="10" Grid.Column="1"  TextAlignment="Left"
-                                            Minimum="1" Maximum="5000" Interval="1" StringFormat="###,##0"
+                                            Minimum="50" Maximum="5000" Interval="1" StringFormat="###,##0"
                                             Value="{Binding KeySelectionTriggerGamepadFirstRepeatMilliseconds, Mode=TwoWay}">
                         <controls:NumericUpDown.Style>
                             <Style TargetType="{x:Type controls:NumericUpDown}" BasedOn="{StaticResource {x:Type controls:NumericUpDown}}">
@@ -879,7 +879,7 @@ Copyright (c) 2020 OPTIKEY LTD (UK company number 11854839) - All Rights Reserve
                         </TextBlock.Style>
                     </TextBlock>
                     <controls:NumericUpDown Grid.Row="11" Grid.Column="1"  TextAlignment="Left"
-                                            Minimum="1" Maximum="5000" Interval="1" StringFormat="###,##0"
+                                            Minimum="50" Maximum="5000" Interval="1" StringFormat="###,##0"
                                             Value="{Binding KeySelectionTriggerGamepadNextRepeatMilliseconds, Mode=TwoWay}">
                         <controls:NumericUpDown.Style>
                             <Style TargetType="{x:Type controls:NumericUpDown}" BasedOn="{StaticResource {x:Type controls:NumericUpDown}}">
@@ -1257,7 +1257,7 @@ Copyright (c) 2020 OPTIKEY LTD (UK company number 11854839) - All Rights Reserve
                         </TextBlock.Style>
                     </TextBlock>
                     <controls:NumericUpDown Grid.Row="21" Grid.Column="1"  TextAlignment="Left"
-                                            Minimum="1" Maximum="5000" Interval="1" StringFormat="###,##0"
+                                            Minimum="50" Maximum="5000" Interval="1" StringFormat="###,##0"
                                             Value="{Binding PointSelectionTriggerGamepadFirstRepeatMilliseconds, Mode=TwoWay}">
                         <controls:NumericUpDown.Style>
                             <Style TargetType="{x:Type controls:NumericUpDown}" BasedOn="{StaticResource {x:Type controls:NumericUpDown}}">
@@ -1307,7 +1307,7 @@ Copyright (c) 2020 OPTIKEY LTD (UK company number 11854839) - All Rights Reserve
                         </TextBlock.Style>
                     </TextBlock>
                     <controls:NumericUpDown Grid.Row="22" Grid.Column="1"  TextAlignment="Left"
-                                            Minimum="1" Maximum="5000" Interval="1" StringFormat="###,##0"
+                                            Minimum="50" Maximum="5000" Interval="1" StringFormat="###,##0"
                                             Value="{Binding PointSelectionTriggerGamepadNextRepeatMilliseconds, Mode=TwoWay}">
                         <controls:NumericUpDown.Style>
                             <Style TargetType="{x:Type controls:NumericUpDown}" BasedOn="{StaticResource {x:Type controls:NumericUpDown}}">
