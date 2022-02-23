@@ -1111,18 +1111,20 @@ namespace JuliusSweetland.OptiKey
 
         #endregion
 
-        #region Validate EyeGestures File
+        #region Validate EyeGestures File and settings
 
-        protected static void ValidateEyeGesturesFile()
+        protected static void ValidateEyeGestures()
         {
+            // Check that eye gestures file is readable, reset to default otherwise
             var eyeGesturesFilePath = Settings.Default.EyeGestureFile;
-
             try
             {
                 XmlEyeGestures.ReadFromFile(eyeGesturesFilePath);
             }
             catch
             {
+                Settings.Default.EyeGesturesEnabled = false; // to be enabled from Management Console by user
+
                 var applicationDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"OptiKey\OptiKey\EyeGestures\");
                 if (!Directory.Exists(applicationDataPath))
                 {
@@ -1134,9 +1136,9 @@ namespace JuliusSweetland.OptiKey
 
                 File.Copy(eyeGesturesFile, eyeGesturesFilePath, true);
 
-                // Read into string also 
+                // Read into settings also 
                 try
-                {
+                {                    
                     Settings.Default.EyeGestureString = XmlEyeGestures.ReadFromFile(eyeGesturesFilePath).WriteToString();
                 }
                 catch
@@ -1148,7 +1150,7 @@ namespace JuliusSweetland.OptiKey
                 }
             }
 
-            Settings.Default.EyeGestureFile = eyeGesturesFilePath;
+            Settings.Default.EyeGestureFile = eyeGesturesFilePath;            
         }
 
         #endregion
