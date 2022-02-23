@@ -566,6 +566,16 @@ namespace JuliusSweetland.OptiKey
             AppDomain.CurrentDomain.UnhandledException += NBug.Handler.UnhandledException;
             TaskScheduler.UnobservedTaskException += NBug.Handler.UnobservedTaskException;
 
+            // We want to set a specific folder at runtime
+            var nbugPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"OptiKey\OptiKey\Crashes");
+            if (!Directory.Exists(nbugPath))
+            {
+                Directory.CreateDirectory(nbugPath);
+            }
+
+            Log.InfoFormat("nbug path was: {0}", NBug.Settings.StoragePath);
+            NBug.Settings.StoragePath = nbugPath;
+            Log.InfoFormat("nbug path is now: {0}", NBug.Settings.StoragePath);
             NBug.Settings.ProcessingException += (exception, report) =>
             {
                 //Add latest log file contents as custom info in the error report
