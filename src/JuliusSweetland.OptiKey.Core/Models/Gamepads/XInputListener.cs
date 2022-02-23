@@ -100,55 +100,64 @@ namespace JuliusSweetland.OptiKey.Models.Gamepads
             TryConnect(requestedUserIndex);
 
             while (true)
-            {
+            {                
                 if (pollWorker.CancellationPending) { return; }
 
-                foreach (var conn in connections)
+                try
                 {
-                    if (conn.UpdateButtons()) // will return false if not connected
+                    foreach (var conn in connections)
                     {
-                        GamepadButtonFlags changedButtons = conn.ChangedButtons;
-                        if (changedButtons > 0)
+                        if (conn.UpdateButtons()) // will return false if not connected
                         {
-                            var splitButtonsChanged = Enum.GetValues(typeof(GamepadButtonFlags))
-                                                        .Cast<GamepadButtonFlags>()
-                                                        .Where(b => b != GamepadButtonFlags.None && changedButtons.HasFlag(b));
-                            foreach (GamepadButtonFlags b in splitButtonsChanged)
+                            GamepadButtonFlags changedButtons = conn.ChangedButtons;
+                            if (changedButtons > 0)
                             {
-                                if ((conn.CurrentButtons & b) > 0)
-                                    this.ButtonDown?.Invoke(this, new XInputButtonEventArgs(EventType.DOWN, b));
-                                else
-                                    this.ButtonUp?.Invoke(this, new XInputButtonEventArgs(EventType.UP, b));
-                            }
-                        }
-
-                        if (allowRepeats)
-                        {
-                            var currentButtons = conn.CurrentButtons;
-                            long currentTime = new DateTimeOffset(DateTime.Now).ToUnixTimeMilliseconds();
-
-                            var allButtons = Enum.GetValues(typeof(GamepadButtonFlags))
-                                                    .Cast<GamepadButtonFlags>()
-                                                    .Where(b => b != GamepadButtonFlags.None);
-                            foreach (GamepadButtonFlags b in allButtons)
-                            {
-
-                                if ((currentButtons & b) > 0) // if button is down
+                                var splitButtonsChanged = Enum.GetValues(typeof(GamepadButtonFlags))
+                                                            .Cast<GamepadButtonFlags>()
+                                                            .Where(b => b != GamepadButtonFlags.None && changedButtons.HasFlag(b));
+                                foreach (GamepadButtonFlags b in splitButtonsChanged)
                                 {
-                                    if ((changedButtons & b) > 0) // then button is newly down
+                                    if ((conn.CurrentButtons & b) > 0)
+                                        this.ButtonDown?.Invoke(this, new XInputButtonEventArgs(EventType.DOWN, b));
+                                    else
+                                        this.ButtonUp?.Invoke(this, new XInputButtonEventArgs(EventType.UP, b));
+                                }
+                            }
+
+                            if (allowRepeats)
+                            {
+                                var currentButtons = conn.CurrentButtons;
+                                long currentTime = new DateTimeOffset(DateTime.Now).ToUnixTimeMilliseconds();
+
+                                var allButtons = Enum.GetValues(typeof(GamepadButtonFlags))
+                                                        .Cast<GamepadButtonFlags>()
+                                                        .Where(b => b != GamepadButtonFlags.None);
+                                foreach (GamepadButtonFlags b in allButtons)
+                                {
+
+                                    if ((currentButtons & b) > 0) // if button is down
                                     {
-                                        repeatTimes[b] = currentTime + repeatDelayFirstMs;
-                                    }
-                                    else if (currentTime > repeatTimes[b])
-                                    {
-                                        this.ButtonUp?.Invoke(this, new XInputButtonEventArgs(EventType.UP, b, isRepeat: true));
-                                        this.ButtonDown?.Invoke(this, new XInputButtonEventArgs(EventType.DOWN, b, isRepeat: true));
-                                        repeatTimes[b] = currentTime + repeatDelayNextMs;
+                                        if ((changedButtons & b) > 0) // then button is newly down
+                                        {
+                                            repeatTimes[b] = currentTime + repeatDelayFirstMs;
+                                        }
+                                        else if (currentTime > repeatTimes[b])
+                                        {
+                                            this.ButtonUp?.Invoke(this, new XInputButtonEventArgs(EventType.UP, b, isRepeat: true));
+                                            this.ButtonDown?.Invoke(this, new XInputButtonEventArgs(EventType.DOWN, b, isRepeat: true));
+                                            repeatTimes[b] = currentTime + repeatDelayNextMs;
+                                        }
                                     }
                                 }
-                            }                        
+                            }
                         }
                     }
+                }
+                catch (Exception ex)
+                {
+                    Log.Error("Exception in XInputListener");
+                    Log.Error(ex.ToString());
+                    Thread.Sleep(5 * 1000); // try again after a delay
                 }
                 Thread.Sleep(pollDelayMs);
             }
