@@ -2295,6 +2295,24 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     KeyStateService.KeyDownStates[KeyValues.SpeakKey].Value = speechStarted ? KeyDownStates.Down : KeyDownStates.Up;
                     break;
 
+                case FunctionKeys.SuggestionsUseBasic:
+                    dictionaryService.ChangeSuggestionMethod(SuggestionMethods.Basic);
+                    inputService.RequestSuspend();
+                    RaiseToastNotification(Resources.SUCCESS, "Suggestions changed to BASIC", NotificationTypes.Normal, () => inputService.RequestResume());                    
+                    break;
+
+                case FunctionKeys.SuggestionsUseNGram:
+                    dictionaryService.ChangeSuggestionMethod(SuggestionMethods.NGram);
+                    inputService.RequestSuspend();
+                    RaiseToastNotification(Resources.SUCCESS, "Suggestions changed to NGRAM", NotificationTypes.Normal, () => inputService.RequestResume());
+                    break;
+
+                case FunctionKeys.SuggestionsUsePresage:
+                    dictionaryService.ChangeSuggestionMethod(SuggestionMethods.Presage);
+                    inputService.RequestSuspend();
+                    RaiseToastNotification(Resources.SUCCESS, "Suggestions changed to PRESAGE", NotificationTypes.Normal, () => inputService.RequestResume());
+                    break;
+
                 case FunctionKeys.Translation:
                     {
                         Log.Info("Translating text from scratchpad.");

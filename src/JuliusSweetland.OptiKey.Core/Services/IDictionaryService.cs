@@ -14,6 +14,7 @@ namespace JuliusSweetland.OptiKey.Services
         void LoadDictionary();
         bool ExistsInDictionary(string entryToFind);
         IEnumerable<DictionaryEntry> GetAllEntries();
+        void ChangeSuggestionMethod(SuggestionMethods suggestionMethod);
         IEnumerable<string> GetSuggestions(string root, bool nextWord);
         void AddNewEntryToCachedDictionary(string entry);
         void AddNewEntryToSavedDictionary(string entry);

@@ -29,7 +29,7 @@ namespace JuliusSweetland.OptiKey.Services
         #region Private Member Vars
 
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private readonly SuggestionMethods suggestionMethod;
+        private SuggestionMethods suggestionMethod;
 
     private Dictionary<string, HashSet<DictionaryEntry>> entries;
     private IManagedSuggestions managedSuggestions;
@@ -100,6 +100,13 @@ namespace JuliusSweetland.OptiKey.Services
         #endregion
 
         #region Load / Save Dictionary
+
+        public void ChangeSuggestionMethod(SuggestionMethods suggestionMethod)
+        {
+            this.suggestionMethod = suggestionMethod;
+
+            LoadDictionary();
+        }
 
         public void LoadDictionary()
         {
