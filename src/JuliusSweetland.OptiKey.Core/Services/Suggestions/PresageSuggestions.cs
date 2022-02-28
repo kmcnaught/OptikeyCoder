@@ -16,7 +16,7 @@ namespace JuliusSweetland.OptiKey.Services.Suggestions
 		private readonly HashSet<string> wordsIndex = new HashSet<string>();
 		private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-		private Presage prsg;
+		private static Presage prsg;
         private string root = "";
 
         public PresageSuggestions() : base()
@@ -24,6 +24,10 @@ namespace JuliusSweetland.OptiKey.Services.Suggestions
             prsg = new Presage(this.callback_get_past_stream, this.callback_get_future_stream);
         }
 
+        public static void Learn(string training_text)
+        {
+            prsg.learn(training_text);
+        }
         public override IEnumerable<string> GetSuggestions(string root, bool nextWord)
         {
             Log.DebugFormat("GetSuggestions called with root '{0}'", root);
