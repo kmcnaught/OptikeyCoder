@@ -538,8 +538,17 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
         private void AddClipboardToDictionary(bool lastWordOnly, bool saveToFile=false)
         {
             string clipboard = Clipboard.GetText();
-            var possibleWords = clipboard.ExtractWords();
-            AddWordsToDictionary(possibleWords, saveToFile);            
+            if (dictionaryService.GetSuggestionMethod() == SuggestionMethods.Basic)
+            {
+                var possibleWords = clipboard.ExtractWords();
+                AddWordsToDictionary(possibleWords, saveToFile);
+            }
+            else if (dictionaryService.GetSuggestionMethod() == SuggestionMethods.Presage)
+            {
+                PresageSuggestions.Learn(clipboard);
+                inputService.RequestSuspend();
+                RaiseToastNotification(Resources.SUCCESS, $"Presage trained on {clipboard.ExtractWords().Count} words from clipboard", NotificationTypes.Normal, () => inputService.RequestResume());
+            }
         }
 
         private void PromptToAddCandidatesToDictionary(List<string> candidates, IKeyboard originalKeyboard, bool saveToFile)

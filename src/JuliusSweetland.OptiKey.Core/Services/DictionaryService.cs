@@ -101,6 +101,11 @@ namespace JuliusSweetland.OptiKey.Services
 
         #region Load / Save Dictionary
 
+        public SuggestionMethods GetSuggestionMethod()
+        {
+            return suggestionMethod;
+        }
+
         public void ChangeSuggestionMethod(SuggestionMethods suggestionMethod)
         {
             this.suggestionMethod = suggestionMethod;
