@@ -184,6 +184,7 @@ namespace JuliusSweetland.OptiKey.Enums
         PersianIran,
         PolishPoland,
         PortuguesePortugal,
+        PresageLearnFromClipboard,
         PreviousSuggestions,
         PrintScreen,
         Quit,

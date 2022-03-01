@@ -12,6 +12,7 @@ using JuliusSweetland.OptiKey.Extensions;
 using JuliusSweetland.OptiKey.Models;
 using JuliusSweetland.OptiKey.Properties;
 using JuliusSweetland.OptiKey.Services.PluginEngine;
+using JuliusSweetland.OptiKey.Services.Suggestions;
 using JuliusSweetland.OptiKey.Services.Translation;
 using JuliusSweetland.OptiKey.UI.ViewModels.Keyboards;
 using JuliusSweetland.OptiKey.UI.ViewModels.Keyboards.Base;
@@ -2181,6 +2182,13 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
 
                 case FunctionKeys.PortuguesePortugal:
                     SelectLanguage(Languages.PortuguesePortugal);
+                    break;
+
+                case FunctionKeys.PresageLearnFromClipboard:
+                    string clipboard = Clipboard.GetText();                    
+                    PresageSuggestions.Learn(clipboard);
+                    inputService.RequestSuspend();                    
+                    RaiseToastNotification(Resources.SUCCESS, $"Presage trained on {clipboard.ExtractWords().Count} words from clipboard", NotificationTypes.Normal, () => inputService.RequestResume());
                     break;
 
                 case FunctionKeys.PreviousSuggestions:
