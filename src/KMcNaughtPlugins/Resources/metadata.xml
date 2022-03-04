@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright (c) 2020 OPTIKEY LTD (UK company number 11854839) - All Rights Reserved
+-->
+<Plugins>
+  <Plugin>    
+    <Id>FilterClipboard</Id>
+    <Impl>JuliusSweetland.OptiKey.Plugins.FilterClipboard</Impl>
+    <Name>Clipboard filter plugin</Name>
+    <Description>This is a plugin that filters the clipboard text, for example extracting code comments, removeing comments, applying regex filter.</Description>
+    <Methods>
+      <Method>
+        <Name>ExtractCommentsOnly</Name>
+        <Description>Extracts block comments /* ... */ and line comments // from source code</Description>        
+        <SampleConfig>
+          <![CDATA[<DynamicKey>FIXME
+</DynamicKey>]]>
+        </SampleConfig>
+      </Method>
+      <Method>
+        <Name>RemoveComments</Name>
+        <Description>Removes block comments /* ... */ and line comments // from source code</Description>
+        <SampleConfig>
+          <![CDATA[<DynamicKey>FIXME
+</DynamicKey>]]>
+        </SampleConfig>
+      </Method>
+      <Method>
+        <Name>RemoveEmptyLines</Name>
+        <Description>Removes empty lines from clipboard text</Description>
+        <SampleConfig>
+          <![CDATA[<DynamicKey>FIXME
+</DynamicKey>]]>
+        </SampleConfig>
+      </Method>
+      <Method>
+        <Name>RemovePrintln</Name>
+        <Description>Removes any lines which start with a System.out.print call</Description>
+        <SampleConfig>
+          <![CDATA[<DynamicKey>FIXME
+</DynamicKey>]]>
+        </SampleConfig>
+      </Method>
+      <Method>
+        <Name>RemoveIndentation</Name>
+        <Description>Removes all leading whitespace</Description>
+        <SampleConfig>
+          <![CDATA[<DynamicKey>FIXME
+</DynamicKey>]]>
+        </SampleConfig>
+      </Method>
+      <Method>
+        <Name>RemoveCurlyBraces</Name>
+        <Description>Removes all leading whitespace</Description>
+        <SampleConfig>
+          <![CDATA[<DynamicKey>FIXME
+</DynamicKey>]]>
+        </SampleConfig>
+      </Method>      
+    </Methods>
+  </Plugin>
+</Plugins>
