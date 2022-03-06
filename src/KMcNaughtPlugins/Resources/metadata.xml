@@ -56,7 +56,64 @@ Copyright (c) 2020 OPTIKEY LTD (UK company number 11854839) - All Rights Reserve
           <![CDATA[<DynamicKey>FIXME
 </DynamicKey>]]>
         </SampleConfig>
-      </Method>      
+      </Method>
+      <Method>
+        <Name>RegexRemove</Name>
+        <Description>Removes text from clipboard that matches regular expression</Description>
+        <Arguments>
+          <Argument>
+            <Name>pattern</Name>
+            <Description>regular expression</Description>
+            <Sample>\/\*(.*)\*\/</Sample>
+            <Required>true</Required>
+          </Argument>
+          <Argument>
+            <Name>singleLineMode</Name>
+            <Description>whether to use single-line mode (dot matches newline)</Description>
+            <Sample>true</Sample>
+            <Required>false</Required>
+          </Argument>
+          <Argument>
+            <Name>multiLineMode</Name>
+            <Description>whether to use multi-line mode (^ and $ match start and end of line)</Description>
+            <Sample>true</Sample>
+            <Required>false</Required>
+          </Argument>
+        </Arguments>
+        <SampleConfig>
+          <![CDATA[<DynamicKey>FIXME
+</DynamicKey>]]>
+        </SampleConfig>
+      </Method>
+      <Method>
+        <Name>RegexFilter</Name>
+        <Description>Extracts text from clipboard that matches regular expression</Description>
+        <Arguments>
+          <Argument>
+            <Name>pattern</Name>
+            <Description>regular expression</Description>
+            <Sample>\/\*(.*)\*\/</Sample>
+            <Required>true</Required>
+          </Argument>
+          <Argument>
+            <Name>singleLineMode</Name>
+            <Description>whether to use single-line mode (dot matches newline)</Description>
+            <Sample>true</Sample>
+            <Required>false</Required>
+          </Argument>
+          <Argument>
+            <Name>multiLineMode</Name>
+            <Description>whether to use multi-line mode (^ and $ match start and end of line)</Description>
+            <Sample>true</Sample>
+            <Required>false</Required>
+          </Argument>
+        </Arguments>
+        <SampleConfig>
+          <![CDATA[<DynamicKey>FIXME
+</DynamicKey>]]>
+        </SampleConfig>
+      </Method>
     </Methods>
+    
   </Plugin>
 </Plugins>

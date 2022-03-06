@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows;
+using System.Xml;
 
 /**
  * A selection of plugins to filter clipboard text.
@@ -74,7 +75,57 @@ namespace JuliusSweetland.OptiKey.Plugins
             Clipboard.SetText(textOutput);
         }
 
-        
+        public void RegexFilter(string pattern, string singleLineMode = "false", string multiLineMode = "false")
+        {
+            bool bSingleLineMode = ConvertToBoolean(singleLineMode);
+            bool bMultiLineMode = ConvertToBoolean(multiLineMode);
+            
+            RegexOptions options = RegexOptions.None;
+            if (bSingleLineMode)
+                options |= RegexOptions.Singleline;
+
+            if (bMultiLineMode)
+                options |= RegexOptions.Multiline;
+
+            Regex regex = new Regex(pattern, options);
+            string textInput = Clipboard.GetText();
+
+            string textOutput = "";
+            foreach (Match m in Regex.Matches(textInput, pattern, options))
+            {
+                for (int i = 1; i < m.Groups.Count; i++) // skip 0 which is whole expression
+                {
+                    string capture = m.Groups[i].Value;                                       
+                    if (String.IsNullOrEmpty(textOutput))
+                    {
+                        textOutput += "\n";
+                    }
+                    textOutput += capture;
+                }
+            }
+
+            Clipboard.SetText(textOutput);
+        }
+
+        public void RegexRemove(string pattern, string singleLineMode = "false", string multiLineMode = "false")
+        {
+            bool bSingleLineMode = ConvertToBoolean(singleLineMode);
+            bool bMultiLineMode = ConvertToBoolean(multiLineMode);
+
+            RegexOptions options = RegexOptions.None;
+            if (bSingleLineMode)
+                options |= RegexOptions.Singleline;
+
+            if (bMultiLineMode)
+                options |= RegexOptions.Multiline;
+
+            Regex regex = new Regex(pattern, options);
+
+            string textInput = Clipboard.GetText();
+            string textOutput = regex.Replace(textInput, "");
+            Clipboard.SetText(textOutput);
+        }
+
         public void RemoveEmptyLines()
         {
             string textInput = Clipboard.GetText();
@@ -146,6 +197,18 @@ namespace JuliusSweetland.OptiKey.Plugins
             string textOutput = regex.Replace(textInput, "");
 
             Clipboard.SetText(textOutput);
+        }
+
+        public static bool ConvertToBoolean(string value)
+        {
+            if (value.Trim().ToLower().Equals("true"))
+                return true;
+            else if (value.Trim().ToLower().Equals("false"))
+                return false;
+            else
+            {
+                return XmlConvert.ToBoolean(value);                
+            }
         }
 
     }
