@@ -43,6 +43,7 @@ namespace JuliusSweetland.OptiKey.Observables.TriggerSources
             this.userIndex = userIndex;
 
             xinputListener = XInputListener.Instance;
+            // BUG: this prevents us from having a different repeat rule for point selection vs key selection
             xinputListener.AllowRepeats(allowRepeats, firstRepeatMs, nextRepeatMs);
         }
 
