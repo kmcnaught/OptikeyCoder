@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Threading;
 using SharpDX.DirectInput;
@@ -13,14 +13,27 @@ namespace JuliusSweetland.OptiKey.Models.Gamepads
     {
         protected static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
+        // Singleton instance allows multiple callers to subscribe to one or more controllers
+        private static readonly Lazy<DirectInputListener> instance =
+            new Lazy<DirectInputListener>(() => new DirectInputListener(Guid.Empty));
+        public static DirectInputListener Instance { get { return instance.Value; } }
+
         #region event-handling
 
         public class DirectInputButtonEventArgs : EventArgs
         {
-            public DirectInputButtonEventArgs(EventType type, int button, bool isRepeat = false) { 
-                this.buttonEvent = new GamepadButtonEvent<int>(type, button, isRepeat);
+            public DirectInputButtonEventArgs(Guid controller, EventType type, int button, bool isRepeat = false)
+            {
+                this.controller = controller;
+                this.eventType = type;
+                this.button = button;
+                this.isRepeat = isRepeat;
             }
-            public GamepadButtonEvent<int> buttonEvent;
+
+            public Guid controller;
+            public int button;
+            public EventType eventType;
+            public bool isRepeat;
         }
 
         public event DirectInputButtonDownEventHandler ButtonDown;
@@ -46,13 +59,10 @@ namespace JuliusSweetland.OptiKey.Models.Gamepads
 
         public DirectInputListener(Guid controllerGuid, int pollDelayMs = 20, int scanDelayMs = 2000)
         {
-            Log.InfoFormat("Setting up DirectInputListener, GUID {0}", controllerGuid);
-
             this.pollDelayMs = pollDelayMs;
             this.scanDelayMs = scanDelayMs;
             this.requestedGuid = controllerGuid;
-
-            repeatTimes = new long[128];
+            this.repeatTimes = new long[128];
 
             pollWorker = new BackgroundWorker();
             pollWorker.DoWork += pollGamepadButtons;
@@ -60,7 +70,7 @@ namespace JuliusSweetland.OptiKey.Models.Gamepads
             pollWorker.RunWorkerAsync();
         }
 
-        public void AllowRepeats(bool allow, int firstDelayMs=400, int nextDelayMs=200)
+        public void AllowRepeats(bool allow, int firstDelayMs = 400, int nextDelayMs = 200)
         {
             allowRepeats = allow;
             repeatDelayFirstMs = firstDelayMs;
@@ -164,11 +174,11 @@ namespace JuliusSweetland.OptiKey.Models.Gamepads
                             {
                                 if (controller.CurrentButtons[i])
                                 {
-                                    this.ButtonDown?.Invoke(this, new DirectInputButtonEventArgs(EventType.DOWN, i + 1));
+                                    this.ButtonDown?.Invoke(this, new DirectInputButtonEventArgs(controller.InstanceGuid, EventType.DOWN, i + 1));
                                 }
                                 else
                                 {
-                                    this.ButtonUp?.Invoke(this, new DirectInputButtonEventArgs(EventType.UP, i + 1));
+                                    this.ButtonUp?.Invoke(this, new DirectInputButtonEventArgs(controller.InstanceGuid, EventType.UP, i + 1));
                                 }
                             }
                         }
@@ -178,7 +188,7 @@ namespace JuliusSweetland.OptiKey.Models.Gamepads
                             var currentButtons = controller.CurrentButtons;
                             long currentTime = new DateTimeOffset(DateTime.Now).ToUnixTimeMilliseconds();
 
-                            for (int i =0; i < currentButtons.Length; i++)
+                            for (int i = 0; i < currentButtons.Length; i++)
                             {
                                 if (currentButtons[i]) // if button is down
                                 {
@@ -187,15 +197,23 @@ namespace JuliusSweetland.OptiKey.Models.Gamepads
                                         //this.ButtonDown?.Invoke(this, new DirectInputButtonEventArgs(i + 1)); (already done above - could be combined)
                                         repeatTimes[i] = currentTime + repeatDelayFirstMs;
                                     }
-                                    else if (currentTime > repeatTimes[i]){
-                                        this.ButtonUp?.Invoke(this, new DirectInputButtonEventArgs(EventType.UP, i + 1, isRepeat: true)); 
-                                        this.ButtonDown?.Invoke(this, new DirectInputButtonEventArgs(EventType.DOWN, i + 1, isRepeat: true)); 
+                                    else if (currentTime > repeatTimes[i])
+                                    {
+                                        this.ButtonUp?.Invoke(this, new DirectInputButtonEventArgs(controller.InstanceGuid,
+                                                                                                    EventType.UP,
+                                                                                                    i + 1,
+                                                                                                    isRepeat: true));
+                                        this.ButtonDown?.Invoke(this, new DirectInputButtonEventArgs(controller.InstanceGuid,
+                                                                                                    EventType.DOWN,
+                                                                                                    i + 1,
+                                                                                                    isRepeat: true));
                                         repeatTimes[i] = currentTime + repeatDelayNextMs;
                                     }
                                 }
                             }
                         }
                     }
+
                 }
                 Thread.Sleep(pollDelayMs);
             }

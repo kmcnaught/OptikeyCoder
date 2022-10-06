@@ -1094,7 +1094,7 @@ a pozícia</value>
     <value>TheEyeTribe nebol nakalibrovaný. Prenos dát nie je možný kým nebude kalibrácia dokončená.</value>
   </data>
   <data name="THE_EYE_TRIBE_UNABLE_TO_CALIBRATE_NO_ENGINE" xml:space="preserve">
-    <value>Nie je možné začať kalibráciu, pretože EyeX engine nie je k dispozícii.</value>
+    <value>Nie je možné začať kalibráciu, pretože EyeTribe software nie je k dispozícii.</value>
   </data>
   <data name="THEME_LABEL" xml:space="preserve">
     <value>Téma:</value>
@@ -1112,10 +1112,10 @@ a pozícia</value>
     <value>Kalibrácia bola dokončená, alebo možno zrušená, ale všetko opäť funguje!</value>
   </data>
   <data name="TOBII_EYEX_ENGINE_NOT_FOUND" xml:space="preserve">
-    <value>Nepodarilo sa nájsť Tobii EyeX Engine. Prosím nainštalujte Tobii EyeX Engine a skúste znova.</value>
+    <value>Nepodarilo sa nájsť Tobii Service. Prosím nainštalujte Tobii software a skúste znova.</value>
   </data>
   <data name="TOBII_EYEX_ENGINE_NOT_RUNNING" xml:space="preserve">
-    <value>Tobii EyeX Engine nie je spustený. Prosím spustite Tobii EyeX Engine a skúste znova.</value>
+    <value>Tobii Service nie je spustený. Prosím spustite Tobii Service a skúste znova.</value>
   </data>
   <data name="TOBII_PCEYE_GO" xml:space="preserve">
     <value>Tobii PCEye Go</value>

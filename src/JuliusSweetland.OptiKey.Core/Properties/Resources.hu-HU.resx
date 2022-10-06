@@ -1111,7 +1111,7 @@ POZÍCIÓ</value>
     <value>TheEyeTribe nem lett kalibrálva. Nem fog érkezni adat, amíg a kalibráció el nem készült.</value>
   </data>
   <data name="THE_EYE_TRIBE_UNABLE_TO_CALIBRATE_NO_ENGINE" xml:space="preserve">
-    <value>Sikertelen kalibrálás, mert az EyeX nem elérhető.</value>
+    <value>Sikertelen kalibrálás, mert az EyeTribe nem elérhető.</value>
   </data>
   <data name="THEME_LABEL" xml:space="preserve">
     <value>Téma:</value>
@@ -1132,10 +1132,10 @@ POZÍCIÓ</value>
     <value>A kalibráció elkészült, vagy lehetséges meg lett tagadva, de minden működik újra!</value>
   </data>
   <data name="TOBII_EYEX_ENGINE_NOT_FOUND" xml:space="preserve">
-    <value>Tobii EyeX Engine nem található. Kérem telepítse az EyeX Engine-t és próbálja meg újra.</value>
+    <value>Tobii Service nem található. Kérem telepítse az Tobii software -t és próbálja meg újra.</value>
   </data>
   <data name="TOBII_EYEX_ENGINE_NOT_RUNNING" xml:space="preserve">
-    <value>Tobii EyeX Engine nem fut. Kérem indítsa el és próbálja meg újra.</value>
+    <value>Tobii Service nem fut. Kérem indítsa el és próbálja meg újra.</value>
   </data>
   <data name="TOBII_PCEYE_GO" xml:space="preserve">
     <value>Tobii PCEye Go</value>

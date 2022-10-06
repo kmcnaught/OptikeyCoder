@@ -1057,7 +1057,7 @@ POLOŽAJ</value>
     <value>TheEyeTribe nije kalibriran. Podaci neće biti obrađivani dok se kalibracija ne dovrši.</value>
   </data>
   <data name="THE_EYE_TRIBE_UNABLE_TO_CALIBRATE_NO_ENGINE" xml:space="preserve">
-    <value>Nije moguće započeti kalibraciju jer EyeX engine nije dostupan.</value>
+    <value>Nije moguće započeti kalibraciju jer EyeTribe software  nije dostupan.</value>
   </data>
   <data name="THEME_LABEL" xml:space="preserve">
     <value>Tema:</value>
@@ -1072,10 +1072,10 @@ POLOŽAJ</value>
     <value>Kalibracija dovršena, ili moguće otkazana, ali sve ipak opet radi!</value>
   </data>
   <data name="TOBII_EYEX_ENGINE_NOT_FOUND" xml:space="preserve">
-    <value>Tobii EyeX Engine nije pronađen. Molimo instalirajte EyeX Engine i pokušajte ponovno.</value>
+    <value>Tobii Service nije pronađen. Molimo instalirajte Tobii software  i pokušajte ponovno.</value>
   </data>
   <data name="TOBII_EYEX_ENGINE_NOT_RUNNING" xml:space="preserve">
-    <value>Tobii EyeX Engine nije pokrenut. Molimo pokrenite EyeX Engine i pokušajte ponovno.</value>
+    <value>Tobii Service nije pokrenut. Molimo pokrenite Tobii service  i pokušajte ponovno.</value>
   </data>
   <data name="TONE_SOUND_1" xml:space="preserve">
     <value>Ton 1</value>

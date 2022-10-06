@@ -187,11 +187,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
                     new KeyValuePair<string, int>
                         ("3 - " + Resources.HIGH, 3),
                     new KeyValuePair<string, int>
-                        ("4 - Ultra", 4),
-                    new KeyValuePair<string, int>
-                        ("5 - Extreme", 5),
-                    new KeyValuePair<string, int>
-                        ("6 - XXtreme", 6),
+                        ("4 - Extreme", 4),
                 };
             }
         }
@@ -595,8 +591,8 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
                     || (Settings.Default.PointSelectionTriggerGamepadXInputController != PointSelectionTriggerGamepadXInputController && PointSelectionTriggerSource == Enums.TriggerSources.XInputButtonDownUps)
                     || (Settings.Default.PointSelectionTriggerGamepadDirectInputController != PointSelectionTriggerGamepadDirectInputController && PointSelectionTriggerSource == Enums.TriggerSources.XInputButtonDownUps)
                     || (Settings.Default.PointSelectionTriggerGamepadDirectInputButtonDownUpButton != PointSelectionTriggerGamepadDirectInputButtonDownUpButton && PointSelectionTriggerSource == Enums.TriggerSources.DirectInputButtonDownUps)
-                    || (Settings.Default.PointSelectionTriggerGamepadAllowRepeats != KeySelectionTriggerGamepadAllowRepeats && PointSelectionTriggerSource == Enums.TriggerSources.XInputButtonDownUps)
-                    || (Settings.Default.PointSelectionTriggerGamepadAllowRepeats != KeySelectionTriggerGamepadAllowRepeats && PointSelectionTriggerSource == Enums.TriggerSources.DirectInputButtonDownUps)
+                    || (Settings.Default.PointSelectionTriggerGamepadAllowRepeats != PointSelectionTriggerGamepadAllowRepeats && PointSelectionTriggerSource == Enums.TriggerSources.XInputButtonDownUps)
+                    || (Settings.Default.PointSelectionTriggerGamepadAllowRepeats != PointSelectionTriggerGamepadAllowRepeats && PointSelectionTriggerSource == Enums.TriggerSources.DirectInputButtonDownUps)
                     || (Settings.Default.PointSelectionTriggerGamepadFirstRepeatMilliseconds != KeySelectionTriggerGamepadFirstRepeatMilliseconds && PointSelectionTriggerSource == Enums.TriggerSources.XInputButtonDownUps)
                     || (Settings.Default.PointSelectionTriggerGamepadFirstRepeatMilliseconds != KeySelectionTriggerGamepadFirstRepeatMilliseconds && PointSelectionTriggerSource == Enums.TriggerSources.DirectInputButtonDownUps)
                     || (Settings.Default.PointSelectionTriggerGamepadNextRepeatMilliseconds != KeySelectionTriggerGamepadNextRepeatMilliseconds && PointSelectionTriggerSource == Enums.TriggerSources.XInputButtonDownUps)

@@ -28,11 +28,9 @@ using log4net.Appender;
 using log4net.Core;
 using log4net.Repository.Hierarchy;
 using Microsoft.Win32;
-using NBug.Core.UI;
 using Octokit;
 using presage;
 using log4net.Appender; //Do not remove even if marked as unused by Resharper - it is used by the Release build configuration
-using NBug.Core.UI; //Do not remove even if marked as unused by Resharper - it is used by the Release build configuration
 using WindowsRecipes.TaskbarSingleInstance;
 using Application = System.Windows.Application;
 
@@ -191,7 +189,8 @@ namespace JuliusSweetland.OptiKey.Pro
                     new LookToScrollOverlayWindow(mainViewModel);
                 }
 
-                new OverlayWindow(mainViewModel);
+                if (Settings.Default.GazeIndicatorStyle != GazeIndicatorStyles.None)
+                    new OverlayWindow(mainViewModel);
 
                 //Display splash screen and check for updates (and display message) after the window has been sized and positioned for the 1st time
                 EventHandler sizeAndPositionInitialised = null;

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using System.Windows;
 using JuliusSweetland.OptiKey.Enums;
 using JuliusSweetland.OptiKey.Extensions;
@@ -20,6 +21,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
     partial class MainViewModel : ILookToScrollOverlayViewModel
     {
         private const int WheelUnitsPerClick = 120;
+        private bool lookToScrolActive;
 
         private bool choosingLookToScrollBoundsTarget = false;
         private LookToScrollBounds lookToScrollBoundsWhenActivated = LookToScrollBounds.ScreenPoint;
@@ -71,6 +73,8 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
         private void ToggleLookToScroll()
         {
             Log.Info("Look to scroll active key was selected.");
+
+            lookToScrollBoundsWhenActivated = Settings.Default.LookToScrollBounds;
 
             if (keyStateService.KeyDownStates[KeyValues.LookToScrollActiveKey].Value.IsDownOrLockedDown())
             {
@@ -285,8 +289,8 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
 
             Func<IntPtr, bool> criteria = hWnd => 
             {
-                // Exclude the shell window.
-                if (hWnd == shellWindow)
+                // Exclude the shell and Optikey windows
+                if (hWnd == shellWindow || hWnd == mainWindowManipulationService.WindowHandle)
                 {
                     return false;
                 }
@@ -475,8 +479,10 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 PerformLookToScroll(scrollAmount);
             }
 
-            UpdateLookToScrollOverlayProperties(active, bounds, centre);
+            if (lookToScrolActive || active)
+                UpdateLookToScrollOverlayProperties(active, bounds, centre);
 
+            lookToScrolActive = active;
             lookToScrollLastUpdate = thisUpdate;
         }
 
@@ -778,8 +784,10 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 {
                     Log.Info("Look to scroll has suspended.");
 
-                    resumeAction = () =>
+                    resumeAction = async () =>
                     {
+                        //Give time for click to process before resuming
+                        await Task.Delay(200);
                         activeKey.Value = originalState;
 
                         if (Settings.Default.LookToScrollCentreMouseWhenActivated)

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Threading;
 using SharpDX.XInput;
@@ -9,19 +9,32 @@ using System.Reflection;
 
 namespace JuliusSweetland.OptiKey.Models.Gamepads
 {
-    class XInputListener : IDisposable
+    public class XInputListener : IDisposable
     {
         protected static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
+        // Singleton instance allows multiple callers to subscribe to one or more controllers
+        private static readonly Lazy<XInputListener> instance =
+            new Lazy<XInputListener>(() => new XInputListener(UserIndex.Any));
+
+        public static XInputListener Instance { get { return instance.Value; } }
 
         #region event-handling
 
         public class XInputButtonEventArgs : EventArgs
         {
-            public XInputButtonEventArgs(EventType type, GamepadButtonFlags button, bool isRepeat = false)
+            public XInputButtonEventArgs(UserIndex userIndex, EventType type, GamepadButtonFlags button, bool isRepeat = false)
             {
-                this.buttonEvent = new GamepadButtonEvent<GamepadButtonFlags>(type, button, isRepeat);
+                this.userIndex = userIndex;
+                this.eventType = type;
+                this.button = button;
+                this.isRepeat = isRepeat;
             }
-            public GamepadButtonEvent<GamepadButtonFlags> buttonEvent;
+
+            public UserIndex userIndex;
+            public GamepadButtonFlags button;
+            public EventType eventType;
+            public bool isRepeat;
         }
         
         public event XInputButtonDownEventHandler ButtonDown;
@@ -35,7 +48,7 @@ namespace JuliusSweetland.OptiKey.Models.Gamepads
         private UserIndex requestedUserIndex;
 
         private BackgroundWorker pollWorker;
-        private int pollDelayMs;
+        private int pollDelayMs = 20;
 
         private bool allowRepeats = false;
         private int repeatDelayFirstMs;
@@ -47,11 +60,9 @@ namespace JuliusSweetland.OptiKey.Models.Gamepads
             return new Controller(userIndex).IsConnected;
         }    
 
-        public XInputListener(UserIndex userIndex, int pollDelayMs = 20)
-        {
-            this.pollDelayMs = pollDelayMs;
+        public XInputListener(UserIndex userIndex)
+        {            
             this.requestedUserIndex = userIndex;
-
             repeatTimes = new Dictionary<GamepadButtonFlags, long>();
 
             pollWorker = new BackgroundWorker();
@@ -100,64 +111,55 @@ namespace JuliusSweetland.OptiKey.Models.Gamepads
             TryConnect(requestedUserIndex);
 
             while (true)
-            {                
+            {
                 if (pollWorker.CancellationPending) { return; }
 
-                try
+                foreach (var conn in connections)
                 {
-                    foreach (var conn in connections)
+                    if (conn.UpdateButtons()) // will return false if not connected
                     {
-                        if (conn.UpdateButtons()) // will return false if not connected
+                        GamepadButtonFlags changedButtons = conn.ChangedButtons;
+                        if (changedButtons > 0)
                         {
-                            GamepadButtonFlags changedButtons = conn.ChangedButtons;
-                            if (changedButtons > 0)
-                            {
-                                var splitButtonsChanged = Enum.GetValues(typeof(GamepadButtonFlags))
-                                                            .Cast<GamepadButtonFlags>()
-                                                            .Where(b => b != GamepadButtonFlags.None && changedButtons.HasFlag(b));
-                                foreach (GamepadButtonFlags b in splitButtonsChanged)
-                                {
-                                    if ((conn.CurrentButtons & b) > 0)
-                                        this.ButtonDown?.Invoke(this, new XInputButtonEventArgs(EventType.DOWN, b));
-                                    else
-                                        this.ButtonUp?.Invoke(this, new XInputButtonEventArgs(EventType.UP, b));
-                                }
-                            }
-
-                            if (allowRepeats)
-                            {
-                                var currentButtons = conn.CurrentButtons;
-                                long currentTime = new DateTimeOffset(DateTime.Now).ToUnixTimeMilliseconds();
-
-                                var allButtons = Enum.GetValues(typeof(GamepadButtonFlags))
+                            var splitButtonsChanged = Enum.GetValues(typeof(GamepadButtonFlags))
                                                         .Cast<GamepadButtonFlags>()
-                                                        .Where(b => b != GamepadButtonFlags.None);
-                                foreach (GamepadButtonFlags b in allButtons)
-                                {
+                                                        .Where(b => b != GamepadButtonFlags.None && changedButtons.HasFlag(b));
+                            foreach (GamepadButtonFlags b in splitButtonsChanged)
+                            {
+                                if ((conn.CurrentButtons & b) > 0)
+                                    this.ButtonDown?.Invoke(this, new XInputButtonEventArgs(conn.UserIndex, EventType.DOWN, b));
+                                else
+                                    this.ButtonUp?.Invoke(this, new XInputButtonEventArgs(conn.UserIndex, EventType.UP, b));
+                            }
+                        }
 
-                                    if ((currentButtons & b) > 0) // if button is down
+                        if (allowRepeats)
+                        {
+                            var currentButtons = conn.CurrentButtons;
+                            long currentTime = new DateTimeOffset(DateTime.Now).ToUnixTimeMilliseconds();
+
+                            var allButtons = Enum.GetValues(typeof(GamepadButtonFlags))
+                                                    .Cast<GamepadButtonFlags>()
+                                                    .Where(b => b != GamepadButtonFlags.None);
+                            foreach (GamepadButtonFlags b in allButtons)
+                            {
+
+                                if ((currentButtons & b) > 0) // if button is down
+                                {
+                                    if ((changedButtons & b) > 0) // then button is newly down
                                     {
-                                        if ((changedButtons & b) > 0) // then button is newly down
-                                        {
-                                            repeatTimes[b] = currentTime + repeatDelayFirstMs;
-                                        }
-                                        else if (currentTime > repeatTimes[b])
-                                        {
-                                            this.ButtonUp?.Invoke(this, new XInputButtonEventArgs(EventType.UP, b, isRepeat: true));
-                                            this.ButtonDown?.Invoke(this, new XInputButtonEventArgs(EventType.DOWN, b, isRepeat: true));
-                                            repeatTimes[b] = currentTime + repeatDelayNextMs;
-                                        }
+                                        repeatTimes[b] = currentTime + repeatDelayFirstMs;
+                                    }
+                                    else if (currentTime > repeatTimes[b])
+                                    {
+                                        this.ButtonUp?.Invoke(this, new XInputButtonEventArgs(conn.UserIndex, EventType.UP, b, isRepeat: true));
+                                        this.ButtonDown?.Invoke(this, new XInputButtonEventArgs(conn.UserIndex, EventType.DOWN, b, isRepeat: true));
+                                        repeatTimes[b] = currentTime + repeatDelayNextMs;
                                     }
                                 }
                             }
                         }
                     }
-                }
-                catch (Exception ex)
-                {
-                    Log.Error("Exception in XInputListener");
-                    Log.Error(ex.ToString());
-                    Thread.Sleep(5 * 1000); // try again after a delay
                 }
                 Thread.Sleep(pollDelayMs);
             }

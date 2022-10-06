@@ -1,5 +1,5 @@
 ﻿<!--
-Copyright (c) 2020 OPTIKEY LTD (UK company number 11854839) - All Rights Reserved
+Copyright (c) 2022 OPTIKEY LTD (UK company number 11854839) - All Rights Reserved
 -->
 <Window x:Class="JuliusSweetland.OptiKey.UI.Windows.OverlayWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -8,9 +8,11 @@ Copyright (c) 2020 OPTIKEY LTD (UK company number 11854839) - All Rights Reserve
         WindowStyle="None"
         Background="Transparent"
         Focusable="False"
+        IsTabStop="False"
         IsHitTestVisible="False"
         ShowInTaskbar="False"
-        Topmost="True" Visibility="Visible">
+        Topmost="True"
+        Visibility="Visible">
   
   <Window.Resources>
     <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
@@ -37,15 +39,6 @@ Copyright (c) 2020 OPTIKEY LTD (UK company number 11854839) - All Rights Reserve
             Data="M0,4 C0,8 8,8 8,4 C8,0 0,0 0,4"/>
       <Path Stroke="Black" Fill="Transparent" Stretch="Fill" StrokeThickness="2" Opacity=".5"
             Data="M0,4 C0,8 8,8 8,4 C8,0 0,0 0,4"/>
-    </Grid>
-    <Grid Visibility="{Binding ShowSuggestions, Converter={StaticResource BooleanToVisibility}}">
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition/>
-        <ColumnDefinition/>
-      </Grid.ColumnDefinitions>
-      <Border Grid.Column="1" Background="Black" Opacity=".5">
-        <ListView Foreground="White" FontSize="15" ItemsSource="{Binding SuggestionService.Suggestions}"/>
-      </Border>
     </Grid>
   </Grid>
 </Window>

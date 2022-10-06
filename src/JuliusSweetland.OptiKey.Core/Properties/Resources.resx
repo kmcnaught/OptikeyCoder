@@ -1140,7 +1140,7 @@ POSITION</value>
     <value>TheEyeTribe has not been calibrated. No data will be received until calibration is completed.</value>
   </data>
   <data name="THE_EYE_TRIBE_UNABLE_TO_CALIBRATE_NO_ENGINE" xml:space="preserve">
-    <value>Unable to attempt a calibration as no EyeX engine is available.</value>
+    <value>Unable to attempt a calibration as no EyeTribe software is available.</value>
   </data>
   <data name="THEME_LABEL" xml:space="preserve">
     <value>Theme:</value>
@@ -2088,6 +2088,9 @@ such as "DB Browser for SQLite" (which is a free program).</value>
   <data name="LOOK_TO_SCROLL" xml:space="preserve">
     <value>Look to Scroll</value>
   </data>
+  <data name="LOOK_TO_SCROLL_ENABLED_LABEL" xml:space="preserve">
+    <value>Look To Scroll is the default scrolling method:</value>
+  </data>
   <data name="LOOK_TO_SCROLL_BOUNDS_LABEL" xml:space="preserve">
     <value>Scrolling point and boundary:</value>
   </data>
@@ -2475,5 +2478,8 @@ Magyar
   </data>
   <data name="CONTROLLER_NEXT_REPEAT_TIME" xml:space="preserve">
     <value>Time delay for subsequent repeats (ms)</value>
+  </data>
+  <data name="LIMIT_BACKONE" xml:space="preserve">
+    <value>Limit "BackOne" deletion to a single character</value>
   </data>
 </root>

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿using System;
+=======
+﻿﻿using System;
+>>>>>>> master-keyrepeats
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +10,11 @@ using System.Threading.Tasks;
 
 namespace JuliusSweetland.OptiKey.Models.Gamepads
 {
+<<<<<<< HEAD
     public struct RepeatableTriggerSignal 
+=======
+    public struct RepeatableTriggerSignal
+>>>>>>> master-keyrepeats
     {
         public RepeatableTriggerSignal(TriggerSignal triggerSignal, bool isRepeat)
         {

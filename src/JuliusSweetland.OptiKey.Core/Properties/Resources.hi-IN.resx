@@ -1088,7 +1088,7 @@
     <value>TheEyeTribe को कैलिब्रेट नहीं किया गया है। अंशांकन पूरा होने तक कोई डेटा प्राप्त नहीं होगा।</value>
   </data>
 	<data name="THE_EYE_TRIBE_UNABLE_TO_CALIBRATE_NO_ENGINE" xml:space="preserve">
-    <value>अंशांकन का प्रयास करने में असमर्थ क्योंकि कोई EyeX इंजन उपलब्ध नहीं है।</value>
+    <value>अंशांकन का प्रयास करने में असमर्थ क्योंकि कोई EyeTribe इंजन उपलब्ध नहीं है।</value>
   </data>
 	<data name="THEME_LABEL" xml:space="preserve">
     <value>थीम</value>
@@ -1106,10 +1106,10 @@
     <value>अंशांकन पूरा हो गया, या संभवतः रद्द कर दिया गया, लेकिन सब कुछ फिर से काम कर रहा है!</value>
   </data>
 	<data name="TOBII_EYEX_ENGINE_NOT_FOUND" xml:space="preserve">
-    <value>Tobii EyeX इंजन नहीं मिल सकता है। कृपया EyeX Engine इंस्टॉल करें और पुनः प्रयास करें।</value>
+    <value>Tobii इंजन नहीं मिल सकता है। कृपया Tobii software  इंस्टॉल करें और पुनः प्रयास करें।</value>
   </data>
 	<data name="TOBII_EYEX_ENGINE_NOT_RUNNING" xml:space="preserve">
-    <value>Tobii EyeX इंजन नहीं चल रहा है। कृपया EyeX इंजन शुरू करें और फिर से प्रयास करें</value>
+    <value>Tobii service इंजन नहीं चल रहा है। कृपया Tobii service इंजन शुरू करें और फिर से प्रयास करें</value>
   </data>
 	<data name="TONE_SOUND_1" xml:space="preserve">
     <value>टोन 1</value>

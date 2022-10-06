@@ -292,6 +292,22 @@ namespace JuliusSweetland.OptiKey.Properties {
 
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public bool LimitBackOne
+        {
+            get
+            {
+                return ((bool)(this["LimitBackOne"]));
+            }
+            set
+            {
+                this["LimitBackOne"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("00:00:00.0130000")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
         public global::System.TimeSpan PointsMousePositionSampleInterval {
@@ -2269,6 +2285,19 @@ namespace JuliusSweetland.OptiKey.Properties {
             }
             set {
                 this["DisplayVoicesWhenChangingKeyboardLanguage"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public virtual bool LookToScrollIsDefault {
+            get {
+                return ((bool)(this["LookToScrollIsDefault"]));
+            }
+            set {
+                this["LookToScrollIsDefault"] = value;
             }
         }
 

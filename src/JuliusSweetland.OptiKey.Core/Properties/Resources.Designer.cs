@@ -3154,6 +3154,15 @@ namespace JuliusSweetland.OptiKey.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Limit &quot;BackOne&quot; deletion to a single character.
+        /// </summary>
+        public static string LIMIT_BACKONE {
+            get {
+                return ResourceManager.GetString("LIMIT_BACKONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Load dictionary.
         /// </summary>
         public static string LOAD_DICTIONARY {
@@ -3241,6 +3250,15 @@ namespace JuliusSweetland.OptiKey.Properties {
         public static string LOOK_TO_SCROLL_DEACTIVATE_UPON_SWITCHING_KEYBOARDS_LABEL {
             get {
                 return ResourceManager.GetString("LOOK_TO_SCROLL_DEACTIVATE_UPON_SWITCHING_KEYBOARDS_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Look To Scroll is the default scrolling method:.
+        /// </summary>
+        public static string LOOK_TO_SCROLL_ENABLED_LABEL {
+            get {
+                return ResourceManager.GetString("LOOK_TO_SCROLL_ENABLED_LABEL", resourceCulture);
             }
         }
         
@@ -5990,7 +6008,7 @@ namespace JuliusSweetland.OptiKey.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unable to attempt a calibration as no EyeX engine is available..
+        ///   Looks up a localized string similar to Unable to attempt a calibration as no EyeTribe software is available..
         /// </summary>
         public static string THE_EYE_TRIBE_UNABLE_TO_CALIBRATE_NO_ENGINE {
             get {

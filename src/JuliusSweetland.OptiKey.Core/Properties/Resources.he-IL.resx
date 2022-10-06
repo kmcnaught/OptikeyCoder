@@ -1114,7 +1114,7 @@ LK</value>
     <value>TheEyeTribe לא כויל. שום מידע לא יתקבל עד אשר הכיול יסתיים.</value>
   </data>
   <data name="THE_EYE_TRIBE_UNABLE_TO_CALIBRATE_NO_ENGINE" xml:space="preserve">
-    <value>אי אפשר לבצע כיול. מנוע EyeX לא פנוי.</value>
+    <value>אי אפשר לבצע כיול. מנוע EyeTribe לא פנוי.</value>
   </data>
   <data name="THEME_LABEL" xml:space="preserve">
     <value>ערכת נושא:</value>
@@ -1135,10 +1135,10 @@ LK</value>
     <value>כיול נגמר או בוטל, אבל הכל עובד שוב!</value>
   </data>
   <data name="TOBII_EYEX_ENGINE_NOT_FOUND" xml:space="preserve">
-    <value>המנוע Tobii EyeX לא נמצא. אנא התקינו אותו ונסו שוב.</value>
+    <value>המנוע Tobii Software לא נמצא. אנא התקינו אותו ונסו שוב.</value>
   </data>
   <data name="TOBII_EYEX_ENGINE_NOT_RUNNING" xml:space="preserve">
-    <value>המנוע Tobii EyeX לא פועל. אנא הפעילו אותו ונסו שוב.</value>
+    <value>המנוע Tobii Service לא פועל. אנא הפעילו אותו ונסו שוב.</value>
   </data>
   <data name="TOBII_PCEYE_GO" xml:space="preserve">
     <value>Tobii PCEye Go </value>

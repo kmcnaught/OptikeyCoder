@@ -14,6 +14,7 @@ using JuliusSweetland.OptiKey.Properties;
 using JuliusSweetland.OptiKey.Services.PluginEngine;
 using JuliusSweetland.OptiKey.Services.Suggestions;
 using JuliusSweetland.OptiKey.Services.Translation;
+using JuliusSweetland.OptiKey.Static;
 using JuliusSweetland.OptiKey.UI.ViewModels.Keyboards;
 using JuliusSweetland.OptiKey.UI.ViewModels.Keyboards.Base;
 
@@ -1871,6 +1872,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                         ResetAndCleanupAfterMouseAction();
                         resumeLookToScroll();
                     });
+
                     break;
 
                 case FunctionKeys.MouseMoveToBottom:
@@ -1885,8 +1887,15 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                             && Settings.Default.SuppressModifierKeysForAllMouseActions)
                         {
                             reinstateModifiers = keyStateService.ReleaseModifiers(Log);
-                        }
+                        };
                         mouseOutputService.MoveTo(moveToPoint);
+                        //N.B. InputSimulator does not deal in pixels so the point gets scaled between 0 and 65535.
+                        //If no movement when pixel amount is 1 then submit the next larger point
+                        if (mouseOutputService.GetCursorPosition().Y == cursorPosition.Y)
+                        {
+                            moveToPoint.Y += 1;
+                            mouseOutputService.MoveTo(moveToPoint);
+                        }
                         reinstateModifiers();
                     };
                     lastMouseActionStateManager.LastMouseAction = simulateMoveToBottom;
@@ -1927,6 +1936,14 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                             reinstateModifiers = keyStateService.ReleaseModifiers(Log);
                         }
                         mouseOutputService.MoveTo(moveToPoint);
+
+                        //N.B. InputSimulator does not deal in pixels so the point gets scaled between 0 and 65535.
+                        //If no movement when pixel amount is 1 then submit the next larger point
+                        if (mouseOutputService.GetCursorPosition().X == cursorPosition.X)
+                        {
+                            moveToPoint.X += 1;
+                            mouseOutputService.MoveTo(moveToPoint);
+                        }
                         reinstateModifiers();
                     };
                     lastMouseActionStateManager.LastMouseAction = simulateMoveToRight;
@@ -2230,6 +2247,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                         () =>
                         {
                             Settings.Default.CleanShutdown = true;
+                            Settings.Default.Save();
                             OptiKeyApp.RestartApp();
                             Application.Current.Shutdown();
                         },
@@ -2418,6 +2436,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             ShowCursor = false;
             MagnifyAtPoint = null;
             MagnifiedPointSelectionAction = null;
+            suspendCommands = false;
 
             if (keyStateService.KeyDownStates[KeyValues.MouseMagnifierKey].Value == KeyDownStates.Down)
             {
@@ -2611,8 +2630,26 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     if (keyCommand.Name == KeyCommands.Function)
                     {
                         Log.InfoFormat("CommandList: Press function key: {0}", keyCommand.Value);
-                         if (Enum.TryParse(keyCommand.Value, out FunctionKeys fk))
+                        if (Enum.TryParse(keyCommand.Value, out FunctionKeys fk))
+                        {
+                            if (fk == FunctionKeys.MouseDrag
+                                || fk == FunctionKeys.MouseMoveTo
+                                || fk == FunctionKeys.MouseMoveAndLeftClick
+                                || fk == FunctionKeys.MouseMoveAndLeftDoubleClick
+                                || fk == FunctionKeys.MouseMoveAndMiddleClick
+                                || fk == FunctionKeys.MouseMoveAndRightClick
+                                || fk == FunctionKeys.MouseMoveAndScrollToBottom
+                                || fk == FunctionKeys.MouseMoveAndScrollToLeft
+                                || fk == FunctionKeys.MouseMoveAndScrollToRight
+                                || fk == FunctionKeys.MouseMoveAndScrollToTop
+                                || fk == FunctionKeys.MouseMoveAndMiddleClick)
+                            {
+                                suspendCommands = true;
+                            }
                             KeySelectionResult(new KeyValue(fk), multiKeySelection);
+                            while (suspendCommands)
+                                await Task.Delay(10);
+                        }
                     }
                     else if (keyCommand.Name == KeyCommands.ChangeKeyboard)
                     {

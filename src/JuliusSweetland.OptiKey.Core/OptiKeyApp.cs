@@ -26,7 +26,6 @@ using log4net;
 using log4net.Core;
 using log4net.Repository.Hierarchy;
 using log4net.Appender; //Do not remove even if marked as unused by Resharper - it is used by the Release build configuration
-using NBug.Core.UI; //Do not remove even if marked as unused by Resharper - it is used by the Release build configuration
 using Octokit;
 using presage;
 using Application = System.Windows.Application;
@@ -88,7 +87,7 @@ namespace JuliusSweetland.OptiKey
         // Previously in core OptiKey ctr, now called by derived classes after setting up Settings class
         protected void Initialise()
         {
-            //Setup unhandled exception handling and NBug
+            //Setup unhandled exception handling 
             AttachUnhandledExceptionHandlers();
 
             //Log startup diagnostic info
@@ -559,65 +558,39 @@ namespace JuliusSweetland.OptiKey
 
         #region Attach Unhandled Exception Handlers
 
+        // Make sure exceptions get logged, and a crash message appears
         protected static void AttachUnhandledExceptionHandlers()
         {
+            Action CloseLogsAndShowCrashWindow = () =>
+            {
 #if !DEBUG
-            Application.Current.DispatcherUnhandledException += NBug.Handler.DispatcherUnhandledException;
-            AppDomain.CurrentDomain.UnhandledException += NBug.Handler.UnhandledException;
-            TaskScheduler.UnobservedTaskException += NBug.Handler.UnobservedTaskException;
-
-            // We want to set a specific folder at runtime
-            var nbugPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"OptiKey\OptiKey\Crashes");
-            if (!Directory.Exists(nbugPath))
-            {
-                Directory.CreateDirectory(nbugPath);
-            }
-
-            Log.InfoFormat("nbug path was: {0}", NBug.Settings.StoragePath);
-            NBug.Settings.StoragePath = nbugPath;
-            Log.InfoFormat("nbug path is now: {0}", NBug.Settings.StoragePath);
-            NBug.Settings.ProcessingException += (exception, report) =>
-            {
-                //Add latest log file contents as custom info in the error report
-                var rootAppender = ((Hierarchy)LogManager.GetRepository())
-                    .Root.Appenders.OfType<FileAppender>()
-                    .FirstOrDefault();
-
-                if (rootAppender != null)
-                {
-                    using (var fs = new FileStream(rootAppender.File, System.IO.FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-                    {
-                        using (var sr = new StreamReader(fs, Encoding.Default))
-                        {
-                            var logFileText = sr.ReadToEnd();
-                            report.CustomInfo = logFileText;
-                        }
-                    }
-                }
-            };
-
-            NBug.Settings.CustomUIEvent += (sender, args) =>
-            {
-                var crashWindow = new CrashWindow
-                {
-                    Topmost = true,
-                    ShowActivated = true
-                };
-                crashWindow.ShowDialog();
-
-                // Make sure exception got logged
                 LogManager.Flush(1000);
+                LogManager.Shutdown();
 
-                //The crash report has not been created yet - the UIDialogResult SendReport param determines what happens next
-                args.Result = new UIDialogResult(ExecutionFlow.BreakExecution, SendReport.Send);
+                Application.Current.Dispatcher.Invoke((Action)delegate
+                {
+                    CrashWindow crashWindow = CrashWindow.Instance;
+                    if (!crashWindow.IsVisible)
+                        crashWindow.ShowDialog();                    
+                });
+#endif
             };
 
-            NBug.Settings.InternalLogWritten += (logMessage, category) => Log.DebugFormat("NBUG:{0} - {1}", category, logMessage);
-#endif
-
-            Current.DispatcherUnhandledException += (sender, args) => Log.Error("A DispatcherUnhandledException has been encountered...", args.Exception);
-            AppDomain.CurrentDomain.UnhandledException += (sender, args) => Log.Error("An UnhandledException has been encountered...", args.ExceptionObject as Exception);
-            TaskScheduler.UnobservedTaskException += (sender, args) => Log.Error("An UnobservedTaskException has been encountered...", args.Exception);
+            Current.DispatcherUnhandledException += (sender, args) =>
+            {
+                Log.Error("A DispatcherUnhandledException has been encountered...", args.Exception);
+                CloseLogsAndShowCrashWindow();
+            };
+            AppDomain.CurrentDomain.UnhandledException += (sender, args) =>
+            {
+                Log.Error("An UnhandledException has been encountered...", args.ExceptionObject as Exception);
+                CloseLogsAndShowCrashWindow();                
+            };
+            TaskScheduler.UnobservedTaskException += (sender, args) =>
+            {
+                Log.Error("An UnobservedTaskException has been encountered...", args.Exception);
+                CloseLogsAndShowCrashWindow();
+            };        
         }
 
         #endregion
@@ -820,12 +793,11 @@ namespace JuliusSweetland.OptiKey
                 case TriggerSources.DirectInputButtonDownUps:
                     keySelectionTriggerSource = new DirectInputButtonDownUpSource(
                         Settings.Default.KeySelectionTriggerGamepadDirectInputController,
-                        Settings.Default.KeySelectionTriggerGamepadDirectInputButtonDownUpButton,                        
+                        Settings.Default.KeySelectionTriggerGamepadDirectInputButtonDownUpButton,
                         Settings.Default.KeySelectionTriggerGamepadAllowRepeats,
                         Settings.Default.KeySelectionTriggerGamepadFirstRepeatMilliseconds,
                         Settings.Default.KeySelectionTriggerGamepadNextRepeatMilliseconds,
-                        pointSource
-                        );
+                        pointSource);
                     break;
 
                 default:
@@ -1042,20 +1014,29 @@ namespace JuliusSweetland.OptiKey
                             var latestAvailableVersion = new Version(tagNameWithoutLetters);
                             if (latestAvailableVersion > currentVersion)
                             {
-                                Log.InfoFormat(
-                                    "An update is available. Current version is {0}. Latest version on GitHub repo is {1}",
-                                    currentVersion, latestAvailableVersion);
+                                if (currentVersion.Major < 4 && latestAvailableVersion.Major >= 4)
+                                {
+                                    //There should be no update prompt to upgrade from v3 (or earlier) to v4 (or later) due to a breaking change that means that v4 is not
+                                    //a suitable choice for many users on earlier version of Optikey (v4 removes supports for Tobii gaming devices).
+                                    Log.InfoFormat("An update is available, BUT this update could remove support for the user's current input device. The user will not be notified. " +
+                                                   "Current version is {0}. Latest version on GitHub repo is {1}", currentVersion, latestAvailableVersion);
+                                }
+                                else
+                                {
+                                    Log.InfoFormat("An update is available. Current version is {0}. Latest version on GitHub repo is {1}",
+                                        currentVersion, latestAvailableVersion);
 
-                                inputService.RequestSuspend();
-                                audioService.PlaySound(Settings.Default.InfoSoundFile, Settings.Default.InfoSoundVolume);
-                                mainViewModel.RaiseToastNotification(OptiKey.Properties.Resources.UPDATE_AVAILABLE,
-                                    string.Format(OptiKey.Properties.Resources.URL_DOWNLOAD_PROMPT, latestRelease.TagName),
-                                    NotificationTypes.Normal,
-                                     () =>
-                                     {
-                                         inputService.RequestResume();
-                                         taskCompletionSource.SetResult(true);
-                                     });
+                                    inputService.RequestSuspend();
+                                    audioService.PlaySound(Settings.Default.InfoSoundFile, Settings.Default.InfoSoundVolume);
+                                    mainViewModel.RaiseToastNotification(OptiKey.Properties.Resources.UPDATE_AVAILABLE,
+                                        string.Format(OptiKey.Properties.Resources.URL_DOWNLOAD_PROMPT, latestRelease.TagName),
+                                        NotificationTypes.Normal,
+                                        () =>
+                                        {
+                                            inputService.RequestResume();
+                                            taskCompletionSource.SetResult(true);
+                                        });
+                                }
                             }
                             else
                             {
@@ -1107,12 +1088,38 @@ namespace JuliusSweetland.OptiKey
 
         #endregion
 
-        #region Validate EyeGestures File and settings
+        #region Copying of installed resources 
+
+        protected static string CopyResourcesFirstTime(string subDirectoryName)
+        {
+            // Ensure resources have been copied from Program Files to user's AppData folder
+
+            var sourcePath = AppDomain.CurrentDomain.BaseDirectory + @"\Resources\" + subDirectoryName;
+
+            var destPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), 
+                                           @"OptiKey\OptiKey\" + subDirectoryName);
+
+            // If directory doesn't exist, assume that this is the first run. 
+            // So, move resource from installation package to target path
+            if (!Directory.Exists(destPath))
+            {
+                Directory.CreateDirectory(destPath);
+                foreach (string file in Directory.GetFiles(sourcePath))
+                {
+                    File.Copy(file, 
+                              Path.Combine(destPath, Path.GetFileName(file)), 
+                              true);
+                }
+            }
+            
+            return destPath;
+        }        
 
         protected static void ValidateEyeGestures()
         {
             // Check that eye gestures file is readable, reset to default otherwise
             var eyeGesturesFilePath = Settings.Default.EyeGestureFile;
+
             try
             {
                 XmlEyeGestures.ReadFromFile(eyeGesturesFilePath);
@@ -1121,20 +1128,13 @@ namespace JuliusSweetland.OptiKey
             {
                 Settings.Default.EyeGesturesEnabled = false; // to be enabled from Management Console by user
 
-                var applicationDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"OptiKey\OptiKey\EyeGestures\");
-                if (!Directory.Exists(applicationDataPath))
-                {
-                    Directory.CreateDirectory(applicationDataPath);
-                }
-                var eyeGesturesFile = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory + @"\Resources\EyeGestures").First();
+                // Copy bundled gesture file/s
+                var applicationDataPath = CopyResourcesFirstTime("EyeGestures");
 
-                eyeGesturesFilePath = Path.Combine(applicationDataPath, Path.GetFileName(eyeGesturesFile));
-
-                File.Copy(eyeGesturesFile, eyeGesturesFilePath, true);
-
-                // Read into settings also 
+                // Read into string also 
+                eyeGesturesFilePath = Directory.GetFiles(applicationDataPath).First();
                 try
-                {                    
+                {
                     Settings.Default.EyeGestureString = XmlEyeGestures.ReadFromFile(eyeGesturesFilePath).WriteToString();
                 }
                 catch
@@ -1146,30 +1146,7 @@ namespace JuliusSweetland.OptiKey
                 }
             }
 
-            Settings.Default.EyeGestureFile = eyeGesturesFilePath;            
-        }
-
-        #endregion
-
-        #region Validate Dynamic Keyboard Location
-
-        protected static string GetDefaultUserKeyboardFolder()
-        {
-            const string applicationDataSubPath = @"OptiKey\OptiKey\Keyboards\";
-
-            var applicationDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), applicationDataSubPath);
-
-            // If directory doesn't exist, assume that this is the first run. So, move dynamic keyboards from installation package to target path
-            if (!Directory.Exists(applicationDataPath))
-            {
-                Directory.CreateDirectory(applicationDataPath);
-                foreach (string dynamicKeyboard in Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory + @"\Resources\DynamicKeyboards"))
-                {
-                    File.Copy(dynamicKeyboard, Path.Combine(applicationDataPath, Path.GetFileName(dynamicKeyboard)), true);
-                }
-            }
-
-            return applicationDataPath;
+            Settings.Default.EyeGestureFile = eyeGesturesFilePath;
         }
 
         protected static void ValidateDynamicKeyboardLocation()
@@ -1177,39 +1154,16 @@ namespace JuliusSweetland.OptiKey
             if (string.IsNullOrEmpty(Settings.Default.DynamicKeyboardsLocation))
             {
                 // First time we set to APPDATA location, user may move through settings later
-                Settings.Default.DynamicKeyboardsLocation = GetDefaultUserKeyboardFolder();
+                Settings.Default.DynamicKeyboardsLocation = CopyResourcesFirstTime("Keyboards");
             }
-        }
-
-        #endregion
-
-        #region Validate Plugins Location
-
-        protected static string GetDefaultPluginsFolder()
-        {
-            const string applicationDataSubPath = @"OptiKey\OptiKey\Plugins\";
-
-            var applicationDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), applicationDataSubPath);
-
-            // If directory doesn't exist, assume that this is the first run. So, move plugins from installation package to target path
-            if (!Directory.Exists(applicationDataPath))
-            {
-                Directory.CreateDirectory(applicationDataPath);
-                foreach (string pluginFile in Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory + @"\Resources\Plugins"))
-                {
-                    File.Copy(pluginFile, Path.Combine(applicationDataPath, Path.GetFileName(pluginFile)), true);
-                }
-            }
-
-            return applicationDataPath;
-        }
+        } 
 
         protected static void ValidatePluginsLocation()
         {
             if (string.IsNullOrEmpty(Settings.Default.PluginsLocation))
             {
                 // First time we set to APPDATA location, user may move through settings later
-                Settings.Default.PluginsLocation = GetDefaultPluginsFolder(); ;
+                Settings.Default.PluginsLocation = CopyResourcesFirstTime("Plugins");
             }
         }
 

@@ -1082,7 +1082,7 @@ LK</value>
     <value>TheEyeTribe није калибрисан. Подаци неће бити обрађивани док се калибрација не доврши.</value>
   </data>
   <data name="THE_EYE_TRIBE_UNABLE_TO_CALIBRATE_NO_ENGINE" xml:space="preserve">
-    <value>Није могуће почети калибрацију јер EyeX енгине није доступан.</value>
+    <value>Није могуће почети калибрацију јер EyeTribe енгине није доступан.</value>
   </data>
   <data name="THEME_LABEL" xml:space="preserve">
     <value>Тема:</value>
@@ -1103,10 +1103,10 @@ LK</value>
     <value>Калибрација завршена, или могуће отказана, али све ипак опет ради!</value>
   </data>
   <data name="TOBII_EYEX_ENGINE_NOT_FOUND" xml:space="preserve">
-    <value>Tobii ЕyеX Engine није пронађен. Молимо инсталирајте ЕyеX Engine и покушајте поновно.</value>
+    <value>Tobii service није пронађен. Молимо инсталирајте Tobii software и покушајте поновно.</value>
   </data>
   <data name="TOBII_EYEX_ENGINE_NOT_RUNNING" xml:space="preserve">
-    <value>Tobii ЕyеX Engine није покренут. Молимо покрените ЕyеX Engine и покушајте поновно.</value>
+    <value>Tobii service није покренут. Молимо покрените Tobii service и покушајте поновно.</value>
   </data>
   <data name="TOBII_PCEYE_GO" xml:space="preserve">
     <value>Tobii PCEye Go</value>

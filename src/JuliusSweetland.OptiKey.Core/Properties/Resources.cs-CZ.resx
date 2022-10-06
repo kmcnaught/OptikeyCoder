@@ -1462,7 +1462,7 @@ a pozice</value>
     <value>The Eye Tribe nebyl nakalibrovaný. Přenos dat není možný dokud nebude kalibrace dokončená.</value>
   </data>
   <data name="THE_EYE_TRIBE_UNABLE_TO_CALIBRATE_NO_ENGINE" xml:space="preserve">
-    <value>Není možné začít kalibraci, protože EyeX engine není k dispozici.</value>
+    <value>Není možné začít kalibraci, protože Eye Tribe software není k dispozici.</value>
   </data>
   <data name="TIME_UNTIL_POINT_BECOMES_IRRELEVENT_LABEL" xml:space="preserve">
     <value>Čas dokud se bod stane nepodstatným (ms):</value>
@@ -1477,10 +1477,10 @@ a pozice</value>
     <value>Množství zpracovaných dat z datového toku:</value>
   </data>
   <data name="TOBII_EYEX_ENGINE_NOT_FOUND" xml:space="preserve">
-    <value>Nepodařilo se najít Tobii EyeX Engine. Prosím nainstalujte Tobii EyeX Engine a zkuste to znovu.</value>
+    <value>Nepodařilo se najít Tobii Service. Prosím nainstalujte Tobii software a zkuste to znovu.</value>
   </data>
   <data name="TOBII_EYEX_ENGINE_NOT_RUNNING" xml:space="preserve">
-    <value>Tobii EyeX Engine není spuštěný. Prosím spusťte Tobii EyeX Engine a zkuste to znovu.</value>
+    <value>Tobii Service není spuštěný. Prosím spusťte Tobii Service a zkuste to znovu.</value>
   </data>
   <data name="TONE_SOUND_1" xml:space="preserve">
     <value>Tón 1</value>

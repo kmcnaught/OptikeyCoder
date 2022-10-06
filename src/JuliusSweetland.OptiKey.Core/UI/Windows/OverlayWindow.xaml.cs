@@ -1,6 +1,7 @@
 ﻿// Copyright (c) 2022 OPTIKEY LTD (UK company number 11854839) - All Rights Reserved
 using JuliusSweetland.OptiKey.Enums;
 using JuliusSweetland.OptiKey.Extensions;
+using JuliusSweetland.OptiKey.Native.Common.Enums;
 using JuliusSweetland.OptiKey.Properties;
 using JuliusSweetland.OptiKey.UI.ViewModels;
 using System;
@@ -16,7 +17,6 @@ namespace JuliusSweetland.OptiKey.UI.Windows
     {
         private Point point = new Point(0, 0);
         private double indicatorSize;
-        private string suggestion="hello0";
      
         public OverlayWindow(MainViewModel viewModel)
         {
@@ -42,8 +42,6 @@ namespace JuliusSweetland.OptiKey.UI.Windows
 
             //Calculate position based on CurrentPositionPoint
             viewModel.OnPropertyChanges(vm => vm.CurrentPositionPoint).Subscribe(cpp => Point = cpp);
-
-            viewModel.OnPropertyChanges(vm => vm.SuggestionService.Suggestions).Subscribe(css => Suggestion = css[0]);
         }
 
         private Point Point
@@ -63,20 +61,13 @@ namespace JuliusSweetland.OptiKey.UI.Windows
             }
         }
 
-        public string Suggestion
-        {
-            get { return suggestion; }
-            set { suggestion = "hello"; }
-        }
-
         protected override void OnSourceInitialized(EventArgs e)
         {
             base.OnSourceInitialized(e);
 
-            // Apply the WS_EX_TRANSPARENT flag to the overlay window so that mouse events will
-            // pass through to any window underneath.
-            var hWnd = new WindowInteropHelper(this).Handle;
-            Static.Windows.SetWindowExTransparent(hWnd);
+            var windowHandle = new WindowInteropHelper(this).Handle;
+            Static.Windows.SetExtendedWindowStyle(windowHandle, 
+                Static.Windows.GetExtendedWindowStyle(windowHandle) | ExtendedWindowStyles.WS_EX_TRANSPARENT | ExtendedWindowStyles.WS_EX_TOOLWINDOW);
         }
     }
 }
