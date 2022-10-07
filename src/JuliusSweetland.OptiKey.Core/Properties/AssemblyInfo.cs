@@ -59,8 +59,8 @@ using System.Windows;
 //MAJOR version when you make incompatible API changes,
 //MINOR version when you add functionality in a backwards-compatible manner, and
 //PATCH version when you make backwards-compatible bug fixes (in the Version class this is the Build number).
-[assembly: AssemblyVersion("3.1.11")]
-[assembly: AssemblyFileVersion("3.1.11")]
+[assembly: AssemblyVersion("3.1.12")]
+[assembly: AssemblyFileVersion("3.1.12")]
 
 [assembly: InternalsVisibleTo("JuliusSweetland.OptiKey.UnitTests")]
 [assembly: InternalsVisibleTo("JuliusSweetland.OptiKey.AutoCompletePerformance")]
