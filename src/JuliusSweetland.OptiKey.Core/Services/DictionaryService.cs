@@ -20,9 +20,9 @@ namespace JuliusSweetland.OptiKey.Services
     {
         #region Constants
 
-        private const string ApplicationDataSubPath = @"OptiKey\OptiKey\Dictionaries\";
         private const string OriginalDictionariesSubPath = @"Dictionaries\";
-        private const string DictionaryFileType = ".dic";
+        public static readonly string ApplicationDataSubPath = @"OptiKey\OptiKey\Dictionaries\";
+        public static readonly string DictionaryFileType = ".dic";
 
         #endregion
 
