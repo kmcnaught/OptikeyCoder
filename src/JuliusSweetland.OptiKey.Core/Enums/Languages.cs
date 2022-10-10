@@ -8,6 +8,7 @@ namespace JuliusSweetland.OptiKey.Enums
     {
         CatalanSpain,
         CroatianCroatia,
+        Custom,
         CzechCzechRepublic,
         DanishDenmark,
         DutchBelgium,
