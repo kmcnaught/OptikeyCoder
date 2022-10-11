@@ -19,6 +19,7 @@ using Prism.Mvvm;
 using System.Text;
 using System.Net.Http;
 using JuliusSweetland.OptiKey.Services.Suggestions;
+using System.IO;
 
 namespace JuliusSweetland.OptiKey.UI.ViewModels
 {
