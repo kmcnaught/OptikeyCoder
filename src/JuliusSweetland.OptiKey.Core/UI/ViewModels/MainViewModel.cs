@@ -562,13 +562,12 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 }
 
                 var possibleWords = readContents.ExtractWords();
-                var possibleLines = readContents.ExtractLines();
-
+                
                 List<string> possibleEntries = new List<string>();                
-                possibleEntries = possibleWords.Concat(possibleLines).Distinct().ToList();
+                possibleEntries = possibleWords.Distinct().ToList();
 
                 // Remove any 'digit only' words, which may be tf-idf scores
-                possibleEntries.Where(e => !e.IsNumber());
+                possibleEntries = possibleEntries.Where(e => !e.IsNumber()).Select(e => e).ToList(); 
 
                 if (possibleEntries.Count > 1000)
                 {

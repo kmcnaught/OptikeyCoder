@@ -49,6 +49,7 @@ namespace JuliusSweetland.OptiKey.Enums
             {
                 case Languages.CatalanSpain: return Resources.CATALAN_SPAIN;
                 case Languages.CroatianCroatia: return Resources.CROATIAN_CROATIA;
+                case Languages.Custom: return "Custom dictionary";
                 case Languages.CzechCzechRepublic: return Resources.CZECH_CZECH_REPUBLIC;
                 case Languages.DanishDenmark: return Resources.DANISH_DENMARK;
                 case Languages.DutchBelgium: return Resources.DUTCH_BELGIUM;
@@ -90,6 +91,7 @@ namespace JuliusSweetland.OptiKey.Enums
             {
                 case Languages.CatalanSpain: return CultureInfo.GetCultureInfo("ca-ES");
                 case Languages.CroatianCroatia: return CultureInfo.GetCultureInfo("hr-HR");
+                case Languages.Custom: return CultureInfo.GetCultureInfo("en-GB");
                 case Languages.CzechCzechRepublic: return CultureInfo.GetCultureInfo("cs-CZ");
                 case Languages.DanishDenmark: return CultureInfo.GetCultureInfo("da-DK");
                 case Languages.DutchBelgium: return CultureInfo.GetCultureInfo("nl-BE");

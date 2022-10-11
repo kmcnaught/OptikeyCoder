@@ -2424,6 +2424,10 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 case FunctionKeys.AddWordsFromFile:
                     AddWordsToDictionaryFromFile(null);
                     break;
+
+                case FunctionKeys.ClearDictionary:
+                    SelectLanguage(Languages.Custom, true);
+                    break;
             }
 
             keyboardOutputService.ProcessFunctionKey(singleKeyValue.FunctionKey.Value);
@@ -2511,18 +2515,18 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             }
         }
 
-        private void SelectLanguage(Languages language)
+        private void SelectLanguage(Languages language, bool skipUI = false)
         {
             Log.Info("Changing keyboard language to " + language);
             InputService.RequestSuspend(); //Reloading the dictionary locks the UI thread, so suspend input service to prevent accidental selections until complete
             Settings.Default.KeyboardAndDictionaryLanguage = language;
             InputService.RequestResume();
 
-            if (Settings.Default.DisplayVoicesWhenChangingKeyboardLanguage)
+            if (Settings.Default.DisplayVoicesWhenChangingKeyboardLanguage && !skipUI)
             {
                 NavigateToVoiceKeyboard();
             }
-            else
+            else if (!skipUI)
             {
                 NavigateToMenu();
             }

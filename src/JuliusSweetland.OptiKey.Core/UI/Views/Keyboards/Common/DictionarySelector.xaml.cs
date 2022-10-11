@@ -73,7 +73,7 @@ namespace JuliusSweetland.OptiKey.UI.Views.Keyboards.Common
                 {
                     Key newKey = new Key();                    
                     newKey.Text = "Clear all";
-                    newKey.Value = KeyValues.SleepKey;//FIXME
+                    newKey.Value = new KeyValue(Enums.FunctionKeys.ClearDictionary);
                     this.AddKey(newKey, this.mRows - 1, 0);
                 }
 

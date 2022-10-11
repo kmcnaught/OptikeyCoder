@@ -260,6 +260,7 @@ namespace JuliusSweetland.OptiKey.Enums
         WebBrowsingKeyboard,
         YesQuestionResult,
         SelectDictionaries,
-        AddWordsFromFile
+        AddWordsFromFile,
+        ClearDictionary
     }
 }
