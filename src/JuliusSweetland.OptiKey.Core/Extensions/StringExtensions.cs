@@ -401,5 +401,49 @@ namespace JuliusSweetland.OptiKey.Extensions
             return s;
         }
 
+        public static IEnumerable<int> AllIndexesOf(this string str, string searchstring)
+        {
+            int minIndex = str.IndexOf(searchstring);
+            while (minIndex != -1)
+            {
+                yield return minIndex;
+                minIndex = str.IndexOf(searchstring, minIndex + 1);
+            }
+        }
+
+        public static string SplitToTwoLines(this string s)
+        {
+            string s2 = s.ToStringWithValidNewlines();
+            int length = s.Length;
+            int idealSplit = length / 2;
+            if (s2.Contains(Environment.NewLine))
+            {
+                return s;
+            }
+            else {
+                // Find most central place to split
+                int bestIndex = 0;
+                int bestDelta = length;
+                foreach(int i in s.AllIndexesOf(" "))
+                {
+                    int delta = Math.Abs(i - idealSplit);
+                    if (delta < bestDelta)
+                    {
+                        bestDelta = delta;
+                        bestIndex = i;
+                    }
+                }
+                // Insert newline at best place
+                s = s.Insert(bestIndex, Environment.NewLine);
+            }
+
+            return s;
+        }
+
+       public static bool IsNumber(this string s)
+        {
+            return double.TryParse(s, out _);
+        }
+
     }
 }

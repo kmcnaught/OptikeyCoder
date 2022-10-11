@@ -520,7 +520,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             }
         }
 
-        private void AddWordsToDictionary(List<string> possibleEntries, bool saveToFile)
+        private void AddWordsToDictionary(List<string> possibleEntries, bool saveToFile, bool askConfirmation)
         {
             if (possibleEntries.Any())
             {
@@ -528,7 +528,10 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
 
                 if (candidates.Any())
                 {
-                    PromptToAddCandidatesToDictionary(candidates, Keyboard, saveToFile);
+                    if (askConfirmation)
+                        PromptToAddCandidatesToDictionary(candidates, Keyboard, saveToFile);
+                    else
+                        AddCandidatesToDictionary(candidates, Keyboard, saveToFile);
                 }
                 else
                 {
@@ -547,6 +550,38 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             }
         }
 
+        private void AddWordsToDictionaryFromFile(string filename)
+        {
+            // TODO: if filename is null, then use file picker?
+            if (File.Exists(filename))
+            {
+                string readContents;
+                using (StreamReader streamReader = new StreamReader(filename, Encoding.UTF8))
+                {
+                    readContents = streamReader.ReadToEnd();
+                }
+
+                var possibleWords = readContents.ExtractWords();
+                var possibleLines = readContents.ExtractLines();
+
+                List<string> possibleEntries = new List<string>();                
+                possibleEntries = possibleWords.Concat(possibleLines).Distinct().ToList();
+
+                // Remove any 'digit only' words, which may be tf-idf scores
+                possibleEntries.Where(e => !e.IsNumber());
+
+                if (possibleEntries.Count > 1000)
+                {
+                    inputService.RequestSuspend();
+                    RaiseToastNotification(Resources.ERROR_TITLE, $"{ possibleEntries.Count} words found, not adding", NotificationTypes.Error, () => inputService.RequestResume());
+                }
+                else
+                {
+                    AddWordsToDictionary(possibleEntries, saveToFile: false, askConfirmation: false);
+                }
+            }
+        }
+
         private void AddTextToDictionary(bool lastWordOnly, bool saveToFile)
         {
 
@@ -559,7 +594,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             else
                 possibleEntries = possibleWords.Concat(possibleLines).Distinct().ToList();
 
-            AddWordsToDictionary(possibleEntries, saveToFile);
+            AddWordsToDictionary(possibleEntries, saveToFile, true);
 
         }
 
@@ -569,7 +604,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             if (dictionaryService.GetSuggestionMethod() == SuggestionMethods.Basic)
             {
                 var possibleWords = clipboard.ExtractWords();
-                AddWordsToDictionary(possibleWords, saveToFile);
+                AddWordsToDictionary(possibleWords, saveToFile, false);
             }
             else if (dictionaryService.GetSuggestionMethod() == SuggestionMethods.Presage)
             {
@@ -578,6 +613,35 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 RaiseToastNotification(Resources.SUCCESS, $"Presage trained on {clipboard.ExtractWords().Count} words from clipboard", NotificationTypes.Normal, () => inputService.RequestResume());
             }
         }
+
+        private void AddCandidatesToDictionary(List<string> candidates, IKeyboard originalKeyboard, bool saveToFile)
+        {
+            int n = 0;
+            foreach (string candidate in candidates) {
+
+                // TODO: consider checking for duplicates? But not sure how safe to do so without confirmation,
+                // e.g. case insensitive matches?
+                n++;
+
+                if (saveToFile)
+                {
+                    dictionaryService.AddNewEntryToSavedDictionary(candidate);
+                }
+                else
+                {
+                    dictionaryService.AddNewEntryToCachedDictionary(candidate);
+                }
+            }
+
+            // Toast notification
+
+            inputService.RequestSuspend();
+
+            RaiseToastNotification(Resources.ADDED, $"{n} entries added to dictionary",
+                NotificationTypes.Normal, () => { inputService.RequestResume(); });
+
+        }
+
 
         private void PromptToAddCandidatesToDictionary(List<string> candidates, IKeyboard originalKeyboard, bool saveToFile)
         {

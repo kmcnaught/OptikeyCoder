@@ -259,6 +259,7 @@ namespace JuliusSweetland.OptiKey.Enums
         UrduPakistan,
         WebBrowsingKeyboard,
         YesQuestionResult,
-        SelectDictionaries
+        SelectDictionaries,
+        AddWordsFromFile
     }
 }
