@@ -22,6 +22,7 @@ namespace JuliusSweetland.OptiKey.Enums
         NumericAndSymbols3,
         PhysicalKeys,
         SizeAndPosition,
-        WebBrowsing
+        WebBrowsing,
+        DictionarySelection
     }
 }

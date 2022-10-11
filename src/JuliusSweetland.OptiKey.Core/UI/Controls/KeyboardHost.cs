@@ -660,6 +660,11 @@ namespace JuliusSweetland.OptiKey.UI.Controls
                 var kb = Keyboard as ViewModelKeyboards.DynamicKeyboardSelector;
                 newContent = new CommonViews.DynamicKeyboardSelector(kb.PageIndex, kb.Directory) { DataContext = Keyboard };
             }
+            else if (Keyboard is ViewModelKeyboards.DictionarySelector)
+            {
+                var kb = Keyboard as ViewModelKeyboards.DictionarySelector;
+                newContent = new CommonViews.DictionarySelector(kb.PageIndex) { DataContext = Keyboard };
+            }
             Content = newContent;
         }
 

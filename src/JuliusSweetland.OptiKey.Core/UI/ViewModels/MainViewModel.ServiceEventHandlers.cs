@@ -1026,6 +1026,31 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     }
                     break;
 
+                case FunctionKeys.SelectDictionaries:
+                    {
+                        Log.Info("Changing keyboard to Dictionary Selection.");
+
+                        var currentKeyboard2 = Keyboard;
+
+                        Action reinstateModifiers = keyStateService.ReleaseModifiers(Log);
+                        Action backAction = () =>
+                        {
+                            Keyboard = currentKeyboard2;
+
+                            reinstateModifiers();
+                        };
+
+                        int pageIndex = 0;
+                        if (Keyboard is DictionarySelector)
+                        {
+                            var kb = Keyboard as DictionarySelector;
+                            backAction = kb.BackAction;
+                            pageIndex = kb.PageIndex + 1;
+                        }
+                        Keyboard = new DictionarySelector(backAction, pageIndex);
+                    }
+                    break;
+
 
                 case FunctionKeys.DynamicKeyboardPrev:
                     {

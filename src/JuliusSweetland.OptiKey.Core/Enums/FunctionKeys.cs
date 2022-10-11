@@ -258,6 +258,7 @@ namespace JuliusSweetland.OptiKey.Enums
         UkrainianUkraine,
         UrduPakistan,
         WebBrowsingKeyboard,
-        YesQuestionResult
+        YesQuestionResult,
+        SelectDictionaries
     }
 }
