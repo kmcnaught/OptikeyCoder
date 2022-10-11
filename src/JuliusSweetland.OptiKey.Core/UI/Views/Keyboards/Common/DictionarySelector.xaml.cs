@@ -11,6 +11,7 @@ using log4net;
 using JuliusSweetland.OptiKey.Properties;
 using System.IO;
 using JuliusSweetland.OptiKey.Services;
+using JuliusSweetland.OptiKey.Extensions;
 
 namespace JuliusSweetland.OptiKey.UI.Views.Keyboards.Common
 {
@@ -44,7 +45,7 @@ namespace JuliusSweetland.OptiKey.UI.Views.Keyboards.Common
 
             if (Directory.Exists(filePath))
             {
-                string[] fileArray = Directory.GetFiles(filePath, "*.dic");
+                string[] fileArray = Directory.GetFiles(filePath, "*.txt");
                 Log.InfoFormat("Found {0} dictionary files", fileArray.Length);
 
                 // Setup grid
@@ -87,7 +88,7 @@ namespace JuliusSweetland.OptiKey.UI.Views.Keyboards.Common
                 for (int i = 0; i < maxDicFilesPerPage; i++)
                 {
                     var r = i / (this.mCols); // integer division
-                    var c = 1 + (i % (this.mCols));
+                    var c = (i % (this.mCols));
 
                     if (i < nKBs)
                     {
@@ -134,12 +135,18 @@ namespace JuliusSweetland.OptiKey.UI.Views.Keyboards.Common
             Grid.SetRowSpan(key, rowspan);
 
         }
+        
 
         private void AddDicKey(string filename, int row, int col)
         {
+            String filename_simple = Path.GetFileNameWithoutExtension(filename);
+            filename_simple = filename_simple.Split('.')[0];
+            filename_simple = filename_simple.SplitToTwoLines();
+
             Key lKey = new Key();            
             lKey.SharedSizeGroup = "KeyboardKey"; 
-            lKey.Text = Path.GetFileNameWithoutExtension(filename);            
+            lKey.Value = new KeyValue(Enums.FunctionKeys.AddWordsFromFile, filename);
+            lKey.Text = filename_simple;            
             this.AddKey(lKey, row, col);
         }
 
