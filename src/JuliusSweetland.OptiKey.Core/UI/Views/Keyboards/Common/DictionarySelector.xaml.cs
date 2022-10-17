@@ -77,6 +77,23 @@ namespace JuliusSweetland.OptiKey.UI.Views.Keyboards.Common
                     this.AddKey(newKey, this.mRows - 1, 0);
                 }
 
+                // Load English
+                {
+                    Key newKey = new Key();
+                    newKey.Text = "Reset Dictionary";
+                    newKey.Value = new KeyValue(Enums.FunctionKeys.EnglishUK_NoUI);
+                    this.AddKey(newKey, this.mRows - 1, 1);                    
+                }
+
+                // Load file
+                {
+                    Key newKey = new Key();
+                    newKey.Text = "Pick file";
+                    newKey.Value = new KeyValue(Enums.FunctionKeys.AddWordsFromFile);
+                    this.AddKey(newKey, this.mRows - 1, 2);
+                }
+
+
                 // Add keyboard keys, or blanks
                 int maxDicFilesPerPage = (this.mCols) * (this.mRows - 1);
                 int totalNumDicFiles = fileArray.Length;

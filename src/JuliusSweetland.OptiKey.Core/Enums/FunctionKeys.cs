@@ -261,6 +261,7 @@ namespace JuliusSweetland.OptiKey.Enums
         YesQuestionResult,
         SelectDictionaries,
         AddWordsFromFile,
-        ClearDictionary
+        ClearDictionary,
+        EnglishUK_NoUI
     }
 }

@@ -2427,7 +2427,17 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
 
                 case FunctionKeys.ClearDictionary:
                     SelectLanguage(Languages.Custom, true);
+
+                    inputService.RequestSuspend();
+                    RaiseToastNotification("Success", "Cleared dictionary", NotificationTypes.Normal, () => inputService.RequestResume());                    
                     break;
+
+                case FunctionKeys.EnglishUK_NoUI:
+                    SelectLanguage(Languages.EnglishUK, true);
+                    inputService.RequestSuspend();
+                    RaiseToastNotification("Success", "Reset dictionary to\nEnglish (UK)", NotificationTypes.Normal, () => inputService.RequestResume());
+                    break;
+
             }
 
             keyboardOutputService.ProcessFunctionKey(singleKeyValue.FunctionKey.Value);

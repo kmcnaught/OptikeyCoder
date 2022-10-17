@@ -553,8 +553,24 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
         private void AddWordsToDictionaryFromFile(string filename)
         {
             // TODO: if filename is null, then use file picker?
+            if (filename == null)
+            {
+                var fileDialog = new System.Windows.Forms.OpenFileDialog() { };
+                var result = fileDialog.ShowDialog();
+                switch (result)
+                {
+                    case System.Windows.Forms.DialogResult.OK:
+                        filename = fileDialog.FileName; 
+                        break;
+                    case System.Windows.Forms.DialogResult.Cancel:
+                    default:
+                        return;
+                }
+            }
+
             if (File.Exists(filename))
             {
+                // FIXME: check on filesize / type?
                 string readContents;
                 using (StreamReader streamReader = new StreamReader(filename, Encoding.UTF8))
                 {
@@ -578,7 +594,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 {
                     AddWordsToDictionary(possibleEntries, saveToFile: false, askConfirmation: false);
                 }
-            }
+            }            
         }
 
         private void AddTextToDictionary(bool lastWordOnly, bool saveToFile)
