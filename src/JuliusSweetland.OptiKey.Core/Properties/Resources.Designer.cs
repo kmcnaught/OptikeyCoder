@@ -1066,6 +1066,15 @@ namespace JuliusSweetland.OptiKey.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Folder containing custom vocab lists.
+        /// </summary>
+        public static string CUSTOM_DICTIONARIES_LOCATION_LABEL {
+            get {
+                return ResourceManager.GetString("CUSTOM_DICTIONARIES_LOCATION_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dynamic keyboard file.
         /// </summary>
         public static string CUSTOM_LAYOUT {

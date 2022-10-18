@@ -600,6 +600,13 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
             set { SetProperty(ref dynamicKeyboardsLocation, value); }
         }
 
+        private string customDictionariesLocation;
+        public string CustomDictionariesLocation
+        {
+            get { return customDictionariesLocation; }
+            set { SetProperty(ref customDictionariesLocation, value); }
+        }
+
         private string startupKeyboardFile;
         public string StartupKeyboardFile
         {
@@ -658,6 +665,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
             MainWindowCollapsedDockThicknessAsPercentageOfFullDockThickness = Settings.Default.MainWindowCollapsedDockThicknessAsPercentageOfFullDockThickness;
             ConversationBorderThickness = Settings.Default.ConversationBorderThickness;
             DynamicKeyboardsLocation = Settings.Default.DynamicKeyboardsLocation;
+            CustomDictionariesLocation = Settings.Default.CustomDictionariesLocation;
             StartupKeyboardFile = Settings.Default.StartupKeyboardFile;
             DockPosition = Settings.Default.MainWindowDockPosition;
             MainWindowState = Settings.Default.MainWindowState;
@@ -691,6 +699,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
             Settings.Default.MainWindowCollapsedDockThicknessAsPercentageOfFullDockThickness = MainWindowCollapsedDockThicknessAsPercentageOfFullDockThickness;
             Settings.Default.ConversationBorderThickness = ConversationBorderThickness;
             Settings.Default.DynamicKeyboardsLocation = DynamicKeyboardsLocation;
+            Settings.Default.CustomDictionariesLocation = CustomDictionariesLocation;            
             Settings.Default.StartupKeyboardFile = StartupKeyboardFile;
 
             // We don't apply changes to window/size position if Optikey's state has changed to one in which re-positioning isn't supported

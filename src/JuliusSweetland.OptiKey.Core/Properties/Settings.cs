@@ -2136,6 +2136,22 @@ namespace JuliusSweetland.OptiKey.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public string CustomDictionariesLocation
+        {
+            get
+            {
+                return ((string)(this["CustomDictionariesLocation"]));
+            }
+            set
+            {
+                this["CustomDictionariesLocation"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
         public string DynamicKeyboardsLocation {
             get {
                 return ((string)(this["DynamicKeyboardsLocation"]));

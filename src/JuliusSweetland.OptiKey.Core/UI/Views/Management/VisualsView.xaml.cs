@@ -33,6 +33,20 @@ namespace JuliusSweetland.OptiKey.UI.Views.Management
             }
         }
 
+        private void FindDictionariesFolder(object sender, System.Windows.RoutedEventArgs e)
+        {
+            FolderBrowserDialog folderBrowser = new FolderBrowserDialog();
+            folderBrowser.Description = "Select folder containing custom vocabulary lists";
+            folderBrowser.SelectedPath = txtDictionariesLocation.Text;
+
+            if (folderBrowser.ShowDialog() == DialogResult.OK)
+            {
+                // This is hooked up to the CustomDictionariesLocation property
+                txtDictionariesLocation.Text = folderBrowser.SelectedPath;
+            }
+        }
+
+
         private void FindStartupKeyboardFile(object sender, System.Windows.RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog

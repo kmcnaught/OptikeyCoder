@@ -41,7 +41,7 @@ namespace JuliusSweetland.OptiKey.UI.Views.Keyboards.Common
             this.pageIndex = pageIndex;
 
             // Find all possible dic files
-            var filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), DictionaryService.ApplicationDataSubPath);
+            var filePath = Settings.Default.CustomDictionariesLocation;
 
             if (Directory.Exists(filePath))
             {

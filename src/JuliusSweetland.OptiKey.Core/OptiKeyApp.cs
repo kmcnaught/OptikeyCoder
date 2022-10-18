@@ -1156,7 +1156,24 @@ namespace JuliusSweetland.OptiKey
                 // First time we set to APPDATA location, user may move through settings later
                 Settings.Default.DynamicKeyboardsLocation = CopyResourcesFirstTime("Keyboards");
             }
-        } 
+        }
+
+        protected static void ValidateCustomDictionariesLocation()
+        {
+            if (string.IsNullOrEmpty(Settings.Default.CustomDictionariesLocation))
+            {
+                string startPathGuess = Path.Combine(Settings.Default.DynamicKeyboardsLocation, "Dictionaries");
+                if (Directory.Exists(startPathGuess))
+                {
+                    Settings.Default.CustomDictionariesLocation = startPathGuess;
+                }
+                else
+                {
+                    // First time we set to DynamicKeyboardsLocation location, user may move through settings later
+                    Settings.Default.CustomDictionariesLocation = Settings.Default.DynamicKeyboardsLocation;
+                }
+            }
+        }
 
         protected static void ValidatePluginsLocation()
         {
