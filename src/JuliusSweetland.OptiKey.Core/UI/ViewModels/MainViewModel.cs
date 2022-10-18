@@ -568,9 +568,30 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 }
             }
 
-            if (File.Exists(filename))
+            if (File.Exists(filename) /*&& filename.ToLower().EndsWith(".txt")*/)
             {
-                // FIXME: check on filesize / type?
+                // Some sanity checking on file input
+                FileInfo fi = new FileInfo(filename);
+                long fileSize = fi.Length; // The size of the current file in bytes.
+
+                string excuse = null;
+
+                if (!filename.ToLower().EndsWith(".txt"))
+                {
+                    excuse = "Only .txt files are supported";
+                }
+                if (fileSize > 100*1000) // 10 KB max
+                {
+                    excuse = "Files must be < 100KB";
+                }
+
+                if (excuse != null)
+                {
+                    inputService.RequestSuspend();
+                    RaiseToastNotification(Resources.ERROR_TITLE, excuse, NotificationTypes.Error, () => inputService.RequestResume());
+                    return;
+                }
+            
                 string readContents;
                 using (StreamReader streamReader = new StreamReader(filename, Encoding.UTF8))
                 {
@@ -583,17 +604,42 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 possibleEntries = possibleWords.Distinct().ToList();
 
                 // Remove any 'digit only' words, which may be tf-idf scores
-                possibleEntries = possibleEntries.Where(e => !e.IsNumber()).Select(e => e).ToList(); 
+                possibleEntries = possibleEntries.Where(e => !e.IsNumber()).Select(e => e).ToList();
 
-                if (possibleEntries.Count > 1000)
+                Action addToDictionary = () =>
                 {
                     inputService.RequestSuspend();
-                    RaiseToastNotification(Resources.ERROR_TITLE, $"{ possibleEntries.Count} words found, not adding", NotificationTypes.Error, () => inputService.RequestResume());
+                    try
+                    {
+                        AddWordsToDictionary(possibleEntries, saveToFile: false, askConfirmation: false);
+                    }
+                    catch (Exception e)
+                    {
+                        inputService.RequestSuspend();
+                        Log.Error($"Error adding words to dictionary: {e.ToString()}");
+                        RaiseToastNotification(Resources.ERROR_TITLE, $"Error adding words to dictionary", NotificationTypes.Error, () => inputService.RequestResume());
+                    }
+                    finally
+                    {
+                        inputService.RequestResume();
+                    }
+                };
+
+                if (possibleEntries.Count > 200)
+                {
+                    inputService.RequestSuspend();
+                    RaiseToastNotification("WARNING", $"{ possibleEntries.Count} words found, this may take some time", NotificationTypes.Normal, () =>
+                    {
+                        inputService.RequestResume();
+                        addToDictionary();
+                    });
+                    // TODO: ideally we'd have another toast at the end, but this seems problematic
                 }
                 else
                 {
-                    AddWordsToDictionary(possibleEntries, saveToFile: false, askConfirmation: false);
+                    addToDictionary();
                 }
+                
             }            
         }
 
