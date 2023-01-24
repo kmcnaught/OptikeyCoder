@@ -46,6 +46,8 @@ namespace JuliusSweetland.OptiKey.UI.Views.Keyboards.Common
             if (Directory.Exists(filePath))
             {
                 string[] fileArray = Directory.GetFiles(filePath, "*.txt");
+                fileArray = new string[0];
+
                 Log.InfoFormat("Found {0} dictionary files", fileArray.Length);
 
                 // Setup grid
@@ -101,6 +103,13 @@ namespace JuliusSweetland.OptiKey.UI.Views.Keyboards.Common
                 int nKBs = Math.Min(remainingDicFiles, maxDicFilesPerPage);
                 int firstKB = maxDicFilesPerPage * pageIndex;
 
+                if (totalNumDicFiles == 0)
+                {
+                    Key newKey = new Key();
+                    newKey.SharedSizeGroup = "ErrorText1";
+                    newKey.Text = "No files\nfound";
+                    this.AddKey(newKey, 0, 0);
+                }
                 
                 for (int i = 0; i < maxDicFilesPerPage; i++)
                 {
@@ -113,14 +122,28 @@ namespace JuliusSweetland.OptiKey.UI.Views.Keyboards.Common
                     }
                     else
                     {
-                        // Add empty/inactive key for consistent aesthetic
-                        this.AddKey(new Key(), r, c);
+                        if (i > 0) // for 0 files we used this key for an error dialog
+                        {
+                            // Add empty/inactive key for consistent aesthetic
+                            this.AddKey(new Key(), r, c);
+                        }
                     }
                 }
                 
             }            
             else
             {
+                // Setup grid
+                for (int i = 0; i < this.mRows; i++)
+                {
+                    MainGrid.RowDefinitions.Add(new RowDefinition());
+                }
+
+                for (int i = 0; i < this.mCols; i++)
+                {
+                    MainGrid.ColumnDefinitions.Add(new ColumnDefinition());
+                }
+
                 // Error layout for when there are no keyboards
                 {
                     Key newKey = new Key();
@@ -130,14 +153,14 @@ namespace JuliusSweetland.OptiKey.UI.Views.Keyboards.Common
                 }
                 {
                     Key newKey = new Key();
-                    newKey.SharedSizeGroup = "ErrorText1";
-                    newKey.Text = DynamicKeyboard.StringWithValidNewlines("Couldn't find any dictionaries");
-                    this.AddKey(newKey, 1, 1, 1, 2);
+                    newKey.SharedSizeGroup = "ErrorText2";
+                    newKey.Text = DynamicKeyboard.StringWithValidNewlines("Couldn't find any dictionaries in "+ filePath);
+                    this.AddKey(newKey, 1, 0, 1, 4);
                 }
                 {
                     Key newKey = new Key();
-                    newKey.SharedSizeGroup = "ErrorText2";
-                    newKey.Text = filePath;
+                    newKey.SharedSizeGroup = "ErrorText3";
+                    newKey.Text = "Change path in Management Console";
                     this.AddKey(newKey, 2, 1, 1, 2);
                 }
             }            
