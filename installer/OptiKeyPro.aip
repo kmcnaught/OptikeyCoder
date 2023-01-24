@@ -519,7 +519,7 @@
     <ROW Path="&lt;AI_REPOSITORY&gt;Dialogs\Languages\Languages_uk.ail"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.DigCertStoreComponent">
-    <ROW TimeStampUrl="http://timestamp.digicert.com" SignerDescription="[|ProductName]" SignOptions="7" SignTool="0" UseSha256="1" Thumbprint="dd9fbb5482023949f9ad9e9862d6bcf0e9d79362 Subject: Open Source Developer, Kirsty McNaught&#10;Issuer: Certum Code Signing 2021 CA&#10;Valid from 12/30/2021 to 12/30/2022&#10;User\MY" Subject="E=kirsty.mcnaught@gmail.com, CN=&quot;Open Source Developer, Kirsty McNaught&quot;, O=Open Source Developer, L=Oxford, C=GB"/>
+    <ROW TimeStampUrl="http://timestamp.digicert.com" SignerDescription="[|ProductName]" SignOptions="7" SignTool="0" UseSha256="1" Thumbprint="b6bfd1fdaa4e976949d56c81ff311a851ddbfe41 Subject: Open Source Developer, Kirsty McNaught&#10;Issuer: Certum Code Signing 2021 CA&#10;Valid from 12/30/2022 to 12/30/2023&#10;User\MY" Subject="E=kirsty.mcnaught@gmail.com, CN=&quot;Open Source Developer, Kirsty McNaught&quot;, O=Open Source Developer, L=Oxford, C=GB"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.FragmentComponent">
     <ROW Fragment="CommonUI.aip" Path="&lt;AI_FRAGS&gt;CommonUI.aip"/>
