@@ -1,35 +1,5 @@
-# OptiKey
+# OptiKey Coder
 
-OptiKey is an on-screen keyboard that is designed to help Motor Neuron Disease (MND) patients interact with Windows computers. When used with an eye-tracking device, OptiKey's on-screen keyboard allows MND patients to complete tasks, such as email composition, using only their eyes. OptiKey can also be used with a mouse or webcam. Unlike expensive and unreliable Alternative and Augmentative Communication (AAC) products that are difficult to use, Optikey is free, reliable, and easy to use.
+This is an experimental fork of [OptiKey](https://github.com/OptiKey/OptiKey) with some features and ideas specific to users who want to write code. 
 
-# Getting Started
-
-[**The OptiKey Wiki**](https://github.com/OptiKey/OptiKey/wiki) contains OptiKey's user guides, installation and system requirements, and additional support information. OptiKey's Windows installer can be downloaded from the [latest release](https://github.com/JuliusSweetland/OptiKey/releases/latest). To get an understanding of OptiKey's use, users should watch [Optikey's introduction video](https://www.youtube.com/watch?v=HLkyORh7vKk).
-
-# Supported Platforms
-
-OptiKey uses the .Net 4.6 Framework and is designed to run on Windows 8 / 8.1 / 10.
-
-# Problems?
-
-If users encounter an issue with OptiKey, such as a software crash or an unexpected behaviour, users should add an issue ticket to [OptiKey's issue tracker](https://github.com/OptiKey/OptiKey/issues). Users are encouraged to check if their issue is already being tracked by OptiKey before creating a new issue ticket.
-
-The following information should be specified in an issue ticket:
-
-* How OptiKey was being used
-* What the user expected to happen
-* What the user actually experienced
-* Steps to reproduce the issue
-* Any other information that helps to describe and/or reproduce the problem (ex. screenshots)
-
-# License
-
-Licensed under the GNU GENERAL PUBLIC LICENSE (Version 3, 29th June 2007)
-
-# Contributing
-
-Contributions to this project are always welcome. If you'd like to help translate Optikey to another language, fix bugs or add new features, check out our [Contributing page](https://github.com/OptiKey/OptiKey/wiki/Contribute). 
-
-# Contact
-
-To ask a question, or to discuss information that is not on the [**OptiKey Wiki**](https://github.com/JuliusSweetland/OptiKey/wiki/), please use <julius@optikey.org> or <optikeyfeedback@gmail.com> to contact Julius.
+There is a low bar to adding features/hacks in the interest of trialling different workflows and seeing what is most helpful. However, the stability this fork is not guaranteed - if you like a feature, open an issue to discuss whether it's appropriate for going back into the core Optikey app. 
