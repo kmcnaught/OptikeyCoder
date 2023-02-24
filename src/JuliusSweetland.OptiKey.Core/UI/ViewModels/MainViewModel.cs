@@ -344,11 +344,14 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 else if (File.Exists(keyboardOverride))
                 {
                     Log.Info($"Loading keyboard from requested file: {keyboardOverride}");
-                    Keyboard = new DynamicKeyboard(() =>
-                    {
-                        mainWindowManipulationService.Restore();
-                        Keyboard = new Menu(() => Keyboard = new Alpha1());
-                    }, keyStateService, keyboardOverride);
+                    SetKeyboardFromXml(keyboardOverride,
+                                       windowManipulationService,
+                                       () =>
+                                       {
+                                           mainWindowManipulationService.Restore();
+                                           //TODO: consider whether back action should take you to 'normal' keyboards?
+                                           //Keyboard = new Menu(() => Keyboard = new Alpha1());
+                                       });                    
                     return;
                 }
             }
@@ -394,6 +397,57 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 }
             }
             SetKeyboardFromEnum(Settings.Default.StartupKeyboard, windowManipulationService, backaction);
+        }
+
+
+        private void SetKeyboardFromXml(string filename,
+                                        IWindowManipulationService windowManipulationService,
+                                        Action backAction)
+        {
+            // Set up new dynamic keyboard
+            XmlKeyboard keyboard = new XmlKeyboard();
+            // Extract any key states if present
+            var initialKeyStates = new Dictionary<KeyValue, KeyDownStates>();
+            try
+            {
+                keyboard = XmlKeyboard.ReadFromFile(filename);
+                XmlKeyStates states = keyboard.InitialKeyStates;
+
+                XmlKeys onEnter = keyboard.OnEnter;
+                XmlKeys onExit = keyboard.OnExit;
+
+                if ((onEnter != null && onEnter.Count > 0) ||
+                     (onExit != null && onExit.Count > 0))
+                {
+                    int a = 23;
+                }
+
+                if (states != null)
+                {
+                    foreach (var item in states.GetKeyOverrides())
+                    {
+                        // TODO: move this into XmlKeyStates.GetKeyOverrides ?
+                        FunctionKeys? fKey = FunctionKeysExtensions.FromString(item.Item1);
+                        if (fKey.HasValue)
+                        {
+                            KeyValue val = new KeyValue(fKey.Value);
+                            initialKeyStates.Add(val, item.Item2);
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                // will get caught and handled when DynamicKeyboard is created so we are good to ignore here 
+            }
+
+            DynamicKeyboard newDynKeyboard = new DynamicKeyboard(backAction, keyStateService,
+                filename, initialKeyStates);
+            Keyboard = newDynKeyboard;
+
+            // Clear the scratchpad when launching a dynamic keyboard.
+            // (scratchpad only supported on single dynamic keyboard currently)
+            keyboardOutputService.ProcessFunctionKey(FunctionKeys.ClearScratchpad);
         }
 
         private void SetKeyboardFromEnum(Enums.Keyboards keyboardEnum,
