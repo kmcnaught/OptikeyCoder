@@ -5068,6 +5068,15 @@ namespace JuliusSweetland.OptiKey.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reload keyboard.
+        /// </summary>
+        public static string RELOAD_KEYBOARD {
+            get {
+                return ResourceManager.GetString("RELOAD_KEYBOARD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to REPEAT LAST.
         /// </summary>
         public static string REPEAT_LAST {

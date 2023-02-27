@@ -36,7 +36,7 @@ namespace JuliusSweetland.OptiKey.UI.Windows
         private readonly ICommand toggleManualModeCommand;
         private readonly ICommand backCommand;
         private readonly ICommand quitCommand;
-        private readonly ICommand restartCommand;
+        private readonly ICommand reloadCommand;
 
         public MainWindow(
             IAudioService audioService,
@@ -65,7 +65,11 @@ namespace JuliusSweetland.OptiKey.UI.Windows
             toggleManualModeCommand = new DelegateCommand(ToggleManualMode, () => !(defaultPointSource is MousePositionSource));
             quitCommand = new DelegateCommand(Quit);
             backCommand = new DelegateCommand(Back);
-            restartCommand = new DelegateCommand(Restart);
+            reloadCommand = new DelegateCommand(Reload, () =>
+            {
+                var mainViewModel = MainView.DataContext as MainViewModel;
+                return null != mainViewModel && mainViewModel.UsingDynamicKeyboard;
+            });
 
             //Setup key binding (Alt+M and Shift+Alt+M) to open settings
             InputBindings.Add(new KeyBinding
@@ -144,7 +148,7 @@ namespace JuliusSweetland.OptiKey.UI.Windows
         public ICommand ToggleManualModeCommand { get { return toggleManualModeCommand; } }
         public ICommand QuitCommand { get { return quitCommand; } }
         public ICommand BackCommand { get { return backCommand; } }
-        public ICommand RestartCommand { get { return restartCommand; } }
+        public ICommand ReloadCommand { get { return reloadCommand; } }
 
         public static readonly DependencyProperty BackgroundColourOverrideProperty =
             DependencyProperty.Register("BackgroundColourOverride", typeof(Brush), typeof(MainWindow), new PropertyMetadata(default(Brush)));
@@ -263,13 +267,13 @@ namespace JuliusSweetland.OptiKey.UI.Windows
             }            
         }
 
-        private void Restart()
+        private void Reload()
         {
-            if (MessageBox.Show(Properties.Resources.REFRESH_MESSAGE, Properties.Resources.RESTART, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            var mainViewModel = MainView.DataContext as MainViewModel;
+            if (null != mainViewModel)
             {
-                OptiKeyApp.RestartApp();
-                Application.Current.Shutdown();
-            }
+                mainViewModel.ReloadXml();
+            }            
         }
     }
 }

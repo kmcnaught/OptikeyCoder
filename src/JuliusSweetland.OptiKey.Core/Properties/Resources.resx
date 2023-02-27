@@ -2491,4 +2491,7 @@ Magyar
   <data name="CUSTOM_DICTIONARIES_LOCATION_LABEL" xml:space="preserve">
     <value>Folder containing custom vocab lists</value>
   </data>
+  <data name="RELOAD_KEYBOARD" xml:space="preserve">
+    <value>Reload keyboard</value>
+  </data>
 </root>

@@ -397,6 +397,14 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             }
         }
 
+        public void ReloadXml()
+        {
+            if (Keyboard is DynamicKeyboard keyb)
+            {
+                SetKeyboardFromXml(keyb.Link, mainWindowManipulationService, keyb.BackAction); 
+            }
+        }
+
         private void ProcessBasicKeyValue(KeyValue singleKeyValue)
         {
             Log.InfoFormat("KeySelectionResult received with string value '{0}' and function key values '{1}'",

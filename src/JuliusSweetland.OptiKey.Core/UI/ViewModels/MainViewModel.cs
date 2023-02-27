@@ -161,6 +161,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 Log.InfoFormat("Keyboard changed to {0}", value);
             }
         }
+        public bool UsingDynamicKeyboard { get { return Keyboard is DynamicKeyboard; } }
 
         public void BackFromKeyboard()
         {
