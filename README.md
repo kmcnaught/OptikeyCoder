@@ -14,7 +14,7 @@ Core features we have experimented with so far:
 - Add larger SuggestionGrid for situations in which you want more suggestions visible
 
 Keyboard features:
-- Reset prediction mid-word for camel_case, snakeCase variable names 
+- Reset prediction mid-word for snake_case, CamelCase variable names 
 - Specific keyboard for VS Code, including lockable shortcut bar, snippets, navigation and more
 - Colour styling of keyboard to help find symbols
 
