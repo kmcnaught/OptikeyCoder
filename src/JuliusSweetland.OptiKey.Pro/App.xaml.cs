@@ -220,7 +220,7 @@ namespace JuliusSweetland.OptiKey.Pro
 
                     inputService.RequestResume(); //Start the input service
 
-                    await CheckForUpdates(inputService, audioService, mainViewModel);
+                    await CheckForUpdatesCoder(inputService, audioService, mainViewModel);
                 };
 
                 if (mainWindowManipulationService.SizeAndPositionIsInitialised)
@@ -244,7 +244,93 @@ namespace JuliusSweetland.OptiKey.Pro
                 throw;
             }
         }
-    #endregion
+
+        protected static async Task<bool> CheckForUpdatesCoder(IInputService inputService, IAudioService audioService, MainViewModel mainViewModel)
+        {
+            var taskCompletionSource = new TaskCompletionSource<bool>(); //Used to make this method awaitable on the InteractionRequest callback
+
+            try
+            {
+                if (Settings.Default.CheckForUpdates)
+                {
+                    string GitHubRepoOwner = "kmcnaught";
+                    string GitHubRepoName = "OptikeyCoder";
+                    Log.InfoFormat("Checking GitHub for updates (repo owner:'{0}', repo name:'{1}').", GitHubRepoOwner, GitHubRepoName);
+
+                    var github = new GitHubClient(new ProductHeaderValue(GitHubRepoOwner));
+                    var releases = await github.Repository.Release.GetAll(GitHubRepoOwner, GitHubRepoName);
+                    var latestRelease = releases.FirstOrDefault(release => !release.Prerelease);
+                    if (latestRelease != null)
+                    {
+                        var currentVersion = new Version(DiagnosticInfo.AssemblyVersion); //Convert from string
+
+                        //Discard revision (4th number) as my GitHub releases are tagged with "vMAJOR.MINOR.PATCH"
+                        currentVersion = new Version(currentVersion.Major, currentVersion.Minor, currentVersion.Build);
+
+                        if (!string.IsNullOrEmpty(latestRelease.TagName))
+                        {
+                            var tagNameWithoutLetters =
+                                new string(latestRelease.TagName.ToCharArray().Where(c => !char.IsLetter(c)).ToArray());
+                            var latestAvailableVersion = new Version(tagNameWithoutLetters);
+                            if (latestAvailableVersion > currentVersion)
+                            {
+                                if (currentVersion.Major < 4 && latestAvailableVersion.Major >= 4)
+                                {
+                                    //There should be no update prompt to upgrade from v3 (or earlier) to v4 (or later) due to a breaking change that means that v4 is not
+                                    //a suitable choice for many users on earlier version of Optikey (v4 removes supports for Tobii gaming devices).
+                                    Log.InfoFormat("An update is available, BUT this update could remove support for the user's current input device. The user will not be notified. " +
+                                                   "Current version is {0}. Latest version on GitHub repo is {1}", currentVersion, latestAvailableVersion);
+                                }
+                                else
+                                {
+                                    Log.InfoFormat("An update is available. Current version is {0}. Latest version on GitHub repo is {1}",
+                                        currentVersion, latestAvailableVersion);
+
+                                    inputService.RequestSuspend();
+                                    audioService.PlaySound(Settings.Default.InfoSoundFile, Settings.Default.InfoSoundVolume);
+                                    mainViewModel.RaiseToastNotification(OptiKey.Properties.Resources.UPDATE_AVAILABLE,
+                                        string.Format(OptiKey.Properties.Resources.URL_DOWNLOAD_PROMPT, latestRelease.TagName),
+                                        NotificationTypes.Normal,
+                                        () =>
+                                        {
+                                            inputService.RequestResume();
+                                            taskCompletionSource.SetResult(true);
+                                        });
+                                }
+                            }
+                            else
+                            {
+                                Log.Info("No update found.");
+                                taskCompletionSource.SetResult(false);
+                            }
+                        }
+                        else
+                        {
+                            Log.Info("Unable to determine if an update is available as the latest release lacks a tag.");
+                            taskCompletionSource.SetResult(false);
+                        }
+                    }
+                    else
+                    {
+                        Log.Info("No releases found.");
+                        taskCompletionSource.SetResult(false);
+                    }
+                }
+                else
+                {
+                    Log.Info("Check for update is disabled - skipping check.");
+                    taskCompletionSource.SetResult(false);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.ErrorFormat("Error when checking for updates. Exception message:{0}\nStackTrace:{1}", ex.Message, ex.StackTrace);
+                taskCompletionSource.SetResult(false);
+            }
+
+            return await taskCompletionSource.Task;
+        }
+        #endregion
 
     }
 
