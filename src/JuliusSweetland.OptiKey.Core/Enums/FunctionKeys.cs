@@ -193,6 +193,7 @@ namespace JuliusSweetland.OptiKey.Enums
         PreviousSuggestions,
         PrintScreen,
         Quit,
+        ReloadKeyboard,
         RepeatLastMouseAction,
         RepeatLastKeyAction,
         Restart,

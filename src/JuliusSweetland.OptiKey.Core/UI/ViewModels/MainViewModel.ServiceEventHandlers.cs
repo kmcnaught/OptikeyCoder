@@ -2459,6 +2459,10 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     }
                     break;
 
+                case FunctionKeys.ReloadKeyboard:
+                    ReloadXml();
+                    break;
+
                 case FunctionKeys.Quit:
                     Log.Info("Quit key selected.");
                     var keyboardBeforeQuit = Keyboard;

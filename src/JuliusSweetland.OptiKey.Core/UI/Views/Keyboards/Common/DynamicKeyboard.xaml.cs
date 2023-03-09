@@ -457,6 +457,19 @@ namespace JuliusSweetland.OptiKey.UI.Views.Keyboards.Common
                 PlaceKeyInPosition(newKey, 3, 3);
             }
 
+            // Reload key
+            {
+                var newKey = new Key
+                {
+                    SymbolGeometry = (Geometry)Application.Current.Resources["RestartIcon"],
+                    Text = "Reload",
+                    Value = new KeyValue(FunctionKeys.ReloadKeyboard),
+                    ForegroundColourOverride = Brushes.Black,
+                    BackgroundColourOverride = Brushes.White
+                };
+                PlaceKeyInPosition(newKey, 3, 0);
+            }
+
             // Fill in empty keys
             {
                 var newKey = new Key {
@@ -471,14 +484,7 @@ namespace JuliusSweetland.OptiKey.UI.Views.Keyboards.Common
                     DisabledBackgroundColourOverride = Brushes.White
                 };
                 PlaceKeyInPosition(newKey, 0, 3, 1, 1);
-            }
-            {
-                var newKey = new Key {
-                    DisabledForegroundColourOverride = Brushes.Black,
-                    DisabledBackgroundColourOverride = Brushes.White
-                };
-                PlaceKeyInPosition(newKey, 3, 0, 1, 1);
-            }
+            }            
             {
                 var newKey = new Key {
                     DisabledForegroundColourOverride = Brushes.Black,
