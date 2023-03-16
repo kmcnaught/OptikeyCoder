@@ -1,0 +1,567 @@
+{
+	// Place your snippets for java here. Each snippet is defined under a snippet name and has a prefix, body and 
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+	// same ids are connected. Eggs 
+	"If statement": {
+		"prefix": [
+			"if",
+			"snippet_if"
+		],
+		"body": [
+			"if ($1) {",
+			"\t$TM_SELECTED_TEXT",
+			"\t$0",
+			"}"
+		],
+		"description": "An if statement"
+	},
+	"find item of certain type": {
+		"prefix": "snippet_findItem",
+		"body": [
+			"int ${1:swordId} = ModUtils.findItemInHotbar(inventory, (item) -> item instanceof ${2:SwordItem});",
+			""
+		],
+		"description": "find item of certain type"
+	},
+	"If null statement": {
+		"prefix": [
+			"ifn",
+			"snippet_if_null"
+		],
+		"body": [
+			"if (${1:varName} == null) {",
+			"\t$TM_SELECTED_TEXT",
+			"\t$0",
+			"}"
+		],
+		"description": "An if null statement"
+	},
+	"If not null statement": {
+		"prefix": [
+			"ifnn",
+			"snippet_if_notnull"
+		],
+		"body": [
+			"if (${1:varName} != null) {",
+			"\t$TM_SELECTED_TEXT",
+			"\t$0",
+			"}"
+		],
+		"description": "An if not null statement"
+	},
+	"If instanceof statement then cast": {
+		"prefix": [
+			"ific",
+			"snippet_if_instanceof_then_cast"
+		],
+		"body": [
+			"if (${1:varName} instanceof ${2:$TM_FILENAME_BASE}) {",
+			"\t$TM_SELECTED_TEXT",
+			"\t$2 ${3:varName2} = ($2) $1;",
+			"\t$0",
+			"}"
+		],
+		"description": "An if instanceof statement then cast"
+	},
+	"If empty statement": {
+		"prefix": [
+			"ife",
+			"snippet_if_empty"
+		],
+		"body": [
+			"if (${1:varName}.isEmpty()) {",
+			"\t$TM_SELECTED_TEXT",
+			"\t$0",
+			"}"
+		],
+		"description": "An if empty statement"
+	},
+	"If not empty statement": {
+		"prefix": [
+			"ifne",
+			"snippet_if_not_empty"
+		],
+		"body": [
+			"if (!${1:varName}.isEmpty()) {",
+			"\t$TM_SELECTED_TEXT",
+			"\t$0",
+			"}"
+		],
+		"description": "An if not empty statement"
+	},
+	"Else statement": {
+		"prefix": [
+			"else",
+			"snippet_else"
+		],
+		"body": [
+			"else {",
+			"\t$TM_SELECTED_TEXT",
+			"\t$0",
+			"}"
+		],
+		"description": "An else statement"
+	},
+	"If Else statement": {
+		"prefix": [
+			"snippet_if_else"
+		],
+		"body": [
+			"if ($1) {",
+			"\t$TM_SELECTED_TEXT",
+			"\t$2",
+			"}",
+			"else {",
+			"\t$0",
+			"}"
+		],
+		"description": "An else statement"
+	},
+	"Switch statement": {
+		"prefix": [
+			"sw",
+			"switch",
+			"snippet_switch"
+		],
+		"body": [
+			"switch (${1:varName}) {",
+			"\tcase ${2:value}:",
+			"\t\t$0",
+			"\t\tbreak;",
+			"\tdefault:",
+			"\t\tbreak;",
+			"}"
+		],
+		"description": "A switch statement"
+	},
+	"Field": {
+		"prefix": [
+			"f",
+			"field",
+			"snippet_field"
+		],
+		"body": [
+			"${1|private,public,protected, |}${2| , String,boolean,int,float,double,Boolean,Integer,Float,Double,long, Long, short, Short, byte, Byte, char, Character, BigDecimal, StringBuilder, LocalDate, LocalDateTime, ZonedDateTime, LocalTime, Instant, YearMonth, Month, Year, MonthDay, DayOfWeek, Period, Duration, Date, Class<?>, Object, Object[], Consumer<>, BiConsumer<>, Predicate<>, BiPredicate<>, Function<>, BiFunction<>, Supplier<>, Optional<>, List<>, Set<>, Map<>, Collection<>, Stream<>|} ${3:fieldName};",
+			"$0"
+		],
+		"description": "A field"
+	},
+	"Field = value": {
+		"prefix": [
+			"fv",
+			"field",
+			"fieldv",
+			"snippet_field_value"
+		],
+		"body": [
+			"${1|private,public,protected, |}${2| , String, int, Integer, long, Long, float, Float, double, Double, boolean, Boolean, short, Short, byte, Byte, char, Character, BigDecimal, StringBuilder, LocalDate, LocalDateTime, ZonedDateTime, LocalTime, Instant, YearMonth, Month, Year, MonthDay, DayOfWeek, Period, Duration, Date, Class<?>, Object, Object[], Consumer<>, BiConsumer<>, Predicate<>, BiPredicate<>, Function<>, BiFunction<>, Supplier<>, Optional<>, List<>, Set<>, Map<>, Collection<>, Stream<>|} ${3:fieldName} = ${4:defaultValue};",
+			"$0"
+		],
+		"description": "A field with default value"
+	},
+	"Final field": {
+		"prefix": [
+			"ff",
+			"field",
+			"ffield",
+			"snippet_field_final"
+		],
+		"body": [
+			"${1|private,public,protected, |} final${2| , String,boolean,int,float,double,Boolean,Integer,Float,Double, long, Long, short, Short, byte, Byte, char, Character, BigDecimal, StringBuilder, LocalDate, LocalDateTime, ZonedDateTime, LocalTime, Instant, YearMonth, Month, Year, MonthDay, DayOfWeek, Period, Duration, Date, Class<?>, Object, Object[], Consumer<>, BiConsumer<>, Predicate<>, BiPredicate<>, Function<>, BiFunction<>, Supplier<>, Optional<>, List<>, Set<>, Map<>, Collection<>, Stream<>|} ${3:fieldName};",
+			"$0"
+		],
+		"description": "A final field"
+	},
+	"Parameter": {
+		"prefix": [
+			"p",
+			"param",
+			"snippet_param"
+		],
+		"body": [
+			"${1|Void,String,boolean,int,float,double,Boolean,Integer,Float,Double,long,Long,short,Short,byte,Byte,char,Character,BigDecimal,StringBuilder,LocalDate,LocalDateTime,ZonedDateTime,LocalTime,Instant,YearMonth,Month,Year,MonthDay,DayOfWeek,Period,Duration,Date,Class<?>,Object,Object[],Consumer<>,BiConsumer<>,Predicate<>,BiPredicate<>,Function<>,BiFunction<>,Supplier<>,Optional<>,List<>,Set<>,Map<>,Collection<>,Stream<>|} ${2:paramName}$0"
+		],
+		"description": "A parameter"
+	},
+	"Variable": {
+		"prefix": [
+			"v",
+			"var",
+			"snippet_var"
+		],
+		"body": [
+			"${1| ,String,boolean,int,float,double,Boolean,Integer,Float,Double,long,Long,short,Short,byte,Byte,char,Character,BigDecimal,StringBuilder,LocalDate,LocalDateTime,ZonedDateTime,LocalTime,Instant,YearMonth,Month,Year,MonthDay,DayOfWeek,Period,Duration,Date,Class<?>,Object,Object[],Consumer<>,BiConsumer<>,Predicate<>,BiPredicate<>,Function<>,BiFunction<>,Supplier<>,Optional<>,List<>,Set<>,Map<>,Collection<>,Stream<>|} ${2:varName};",
+			"$0"
+		],
+		"description": "A local variable"
+	},
+	"Variable = value": {
+		"prefix": [
+			"vv",
+			"var",
+			"varv",
+			"snippet_var_value"
+		],
+		"body": [
+			"${1| ,String,boolean,int,float,double,Boolean,Integer,Float,Double,long,Long,short,Short,byte,Byte,char,Character,BigDecimal,StringBuilder,LocalDate,LocalDateTime,ZonedDateTime,LocalTime,Instant,YearMonth,Month,Year,MonthDay,DayOfWeek,Period,Duration,Date,Class<?>,Object,Object[],Consumer<>,BiConsumer<>,Predicate<>,BiPredicate<>,Function<>,BiFunction<>,Supplier<>,Optional<>,List<>,Set<>,Map<>,Collection<>,Stream<>|} ${2:varName} = ${3:defaultValue};",
+			"$0"
+		],
+		"description": "A local variable with initial value"
+	},
+	"printv": {
+		"prefix": [
+			"pv",
+			"print",
+			"snippet_print_variable"
+		],
+		"body": [
+			"System.out.println($1 + \"${1:varName} = \" + $1);$0"
+		],
+		"description": "Prints the variable value"
+	},
+	"println": {
+		"prefix": [
+			"pln",
+			"println",
+			"snippet_println"
+		],
+		"body": [
+			"System.out.println(\"$1\");$0"
+		],
+		"description": "Prints a String and then terminate the line"
+	},
+	"Main method": {
+		"prefix": [
+			"psvm",
+			"main",
+			"snippet_method_main"
+		],
+		"body": [
+			"public static void main(String[] args) {",
+			"\t$0",
+			"}",
+			""
+		],
+		"description": "A main method"
+	},
+	"Method": {
+		"prefix": [
+			"m",
+			"method",
+			"snippet_method"
+		],
+		"body": [
+			"${1|private,public,protected, |}${2| , void, String,boolean,int,float,double,Boolean,Integer,Float,Double, long, Long, short, Short, byte, Byte, char, Character, BigDecimal, StringBuilder, LocalDate, LocalDateTime, ZonedDateTime, LocalTime, Instant, YearMonth, Month, Year, MonthDay, DayOfWeek, Period, Duration, Date, Class<?>, Object, Object[], Consumer<>, BiConsumer<>, Predicate<>, BiPredicate<>, Function<>, BiFunction<>, Supplier<>, Optional<>, List<>, Set<>, Map<>, Collection<>, Stream<>|} ${3:methodName}($4) {",
+			"\t$0",
+			"}",
+			""
+		],
+		"description": "A method"
+	},
+	"Static method": {
+		"prefix": [
+			"sm",
+			"method",
+			"smethod",
+			"snippet_static_method"
+		],
+		"body": [
+			"${1|private,public,protected, |} static${2| , void, String,boolean,int,float,double,Boolean,Integer,Float,Double, long, Long, short, Short, byte, Byte, char, Character, BigDecimal, StringBuilder, LocalDate, LocalDateTime, ZonedDateTime, LocalTime, Instant, YearMonth, Month, Year, MonthDay, DayOfWeek, Period, Duration, Date, Class<?>, Object, Object[], Consumer<>, BiConsumer<>, Predicate<>, BiPredicate<>, Function<>, BiFunction<>, Supplier<>, Optional<>, List<>, Set<>, Map<>, Collection<>, Stream<>|} ${3:methodName}($4) {",
+			"\t$0",
+			"}",
+			""
+		],
+		"description": "A static method"
+	},
+	"class": {
+		"prefix": [
+			"c",
+			"class",
+			"snippet_class"
+		],
+		"body": [
+			"public class ${1:$TM_FILENAME_BASE} {",
+			"",
+			"\t$0",
+			"",
+			"}"
+		],
+		"description": "A class"
+	},
+	"Static class": {
+		"prefix": [
+			"sc",
+			"sclass",
+			"snippet_class_static"
+		],
+		"body": [
+			"public static class ${1:$TM_FILENAME_BASE} {",
+			"",
+			"\t$0",
+			"",
+			"}"
+		],
+		"description": "A static class"
+	},
+	"Interface": {
+		"prefix": [
+			"i",
+			"interface",
+			"snippet_class_interface"
+		],
+		"body": [
+			"public interface ${1:$TM_FILENAME_BASE} {",
+			"",
+			"\t$0",
+			"",
+			"}"
+		],
+		"description": "An interface"
+	},
+	"Enum": {
+		"prefix": [
+			"e",
+			"enum",
+			"snippet_class_enum"
+		],
+		"body": [
+			"public enum ${1:$TM_FILENAME_BASE} {",
+			"",
+			"\t$0",
+			"",
+			"}"
+		],
+		"description": "An enum"
+	},
+	"Try catch": {
+		"prefix": [
+			"tc",
+			"tryc",
+			"snippet_try_catch"
+		],
+		"body": [
+			"try {",
+			"\t$TM_SELECTED_TEXT",
+			"} catch (${1:Exception} ex) {",
+			"\t$0",
+			"}"
+		],
+		"description": "A try catch block around the selected text"
+	},
+	"For loop over sequence": {
+		"prefix": [
+			"fors",
+			"snippet_for_sequence"
+		],
+		"body": [
+			"for (int i = ${1:0}; i <= ${2:10}; i++) {",
+			"\t$0",
+			"}"
+		],
+		"description": "A for loop over sequence"
+	},
+	"For loop over array": {
+		"prefix": [
+			"fora",
+			"snippet_for_array"
+		],
+		"body": [
+			"for (int i = 0; i < ${1:array}.length; i++) {",
+			"\t$0",
+			"}"
+		],
+		"description": "A for loop over array"
+	},
+	"For loop over reverse array": {
+		"prefix": [
+			"forra",
+			"snippet_for_array_reverse"
+		],
+		"body": [
+			"for (int i = (${1:array}.length - 1); i >= 0; i--) {",
+			"\t$0",
+			"}"
+		],
+		"description": "A for loop over reverse array"
+	},
+	"For loop over iterable": {
+		"prefix": [
+			"snippet_for_each",
+		],
+		"body": [
+			"for (${1| ,String,boolean,int,float,double,Boolean,Integer,Float,Double,long,Long,short,Short,byte,Byte,char,Character,BigDecimal,StringBuilder,LocalDate,LocalDateTime,ZonedDateTime,LocalTime,Instant,YearMonth,Month,Year,MonthDay,DayOfWeek,Period,Duration,Date,Class<?>,Object,Object[],Consumer<>,BiConsumer<>,Predicate<>,BiPredicate<>,Function<>,BiFunction<>,Supplier<>,Optional<>,List<>,Set<>,Map<>,Collection<>,Stream<>|} ${2:varName} : ${3:values}) {",
+			"\t$0",
+			"}"
+		],
+		"description": "A for loop over iterable"
+	},
+	"While loop": {
+		"prefix": [
+			"wh",
+			"snippet_while"
+		],
+		"body": [
+			"while ($1) {",
+			"\t$0",
+			"}"
+		],
+		"description": "A while loop"
+	},
+	"Do-while loop": {
+		"prefix": [
+			"dwh",
+			"dwhile",
+			"dowhile",
+			"snippet_do_while"
+		],
+		"body": [
+			"do {",
+			"\t$0",
+			"} while ($1);"
+		],
+		"description": "A do-while loop"
+	},
+	"a snippet for getValidInt": {
+		"prefix": "getValidInt",
+		"body": [
+			"public static int getValidInt(String message)",
+			"{",
+			"// Create scanner to receive user input",
+			"Scanner scan = new Scanner(System.in);",
+			"",
+			"int validInteger = 0;  // Valid integer entered by user",
+			"",
+			"// Ask the user to enter a number",
+			"System.out.print(message);",
+			"",
+			"if (scan.hasNextInt() == true)  // User has entered a valid integer",
+			"{",
+			"// Read in the choice entered by the user",
+			"validInteger = scan.nextInt();",
+			"}",
+			"else  // The user hasn't entered a valid integer so ask again",
+			"{",
+			"do",
+			"{",
+			"System.out.println(\"ERROR: Invalid integer.\");",
+			"scan.next(); ",
+			"",
+			"// Ask the user to enter another number",
+			"System.out.print(message);",
+			"}",
+			"// Keep asking for a number until there is a valid integer",
+			"while (scan.hasNextInt() == false);  ",
+			"",
+			"// Read the valid integer",
+			"validInteger = scan.nextInt();",
+			"}",
+			"",
+			"return validInteger;",
+			"}",
+		],
+		"description": "a snippet for  validInteger",
+	},
+	"a snippet for getString": {
+		"prefix": "getString",
+		"body": [
+			"public static String getString(String userPrompt)",
+			"{",
+			"Scanner scan = new Scanner(System.in);",
+			"System.out.print(userPrompt);",
+			"String userInput = scan.nextLine();",
+			"while (userInput.length() == 0)",
+			"{",
+			"System.out.print(userPrompt);",
+			"userInput = scan.nextLine();",
+			"}",
+			"return userInput;",
+			"}",
+			""
+		],
+		"description": "a snippet for getString",
+	},
+	"snippet_new_mod": {
+		"prefix": "",
+		"body": [
+			"",
+			"import com.specialeffect.eyemine.client.Keybindings;",
+			"import com.specialeffect.eyemine.submod.SubMod;",
+			"import com.specialeffect.utils.ModUtils;",
+			"",
+			"import org.lwjgl.glfw.GLFW;",
+			"",
+			"import net.minecraft.client.KeyMapping;",
+			"import net.minecraft.client.Minecraft;",
+			"import net.minecraft.client.player.LocalPlayer;",
+			"",
+			"import com.mojang.blaze3d.platform.InputConstants;",
+			"import com.mojang.blaze3d.platform.InputConstants.Type;",
+			"",
+			"import dev.architectury.event.events.client.ClientTickEvent;",
+			"import dev.architectury.event.events.client.ClientRawInputEvent;",
+			"import dev.architectury.event.EventResult;",
+			"",
+			"public class $TM_SELECTED_TEXT extends SubMod {",
+			"    public final String MODID = \"$TM_SELECTED_TEXT\";",
+			"",
+			"    // KeyBinding if you require an action on keypress",
+			"    public static KeyMapping modKeyBinding;",
+			"",
+			"    public void onInitializeClient() {",
+			"",
+			"        // Register any key bindings here",
+			"        Keybindings.keybindings.add(modKeyBinding = new KeyMapping(",
+			"                \"$TM_SELECTED_TEXT\", // this needs to be a unique name",
+			"                Type.KEYSYM, // this is always KEYSYM",
+			"                GLFW.GLFW_KEY_O, // TODO replace with your chosen default key.",
+			"                                 // try autocompleting GLFW.GLFW_KEY... to see more options",
+			"                \"category.eyemine.category.eyegaze_common\" // this sets the translation key for the name of the category",
+			"                                                           // in the controls list",
+			"                                                           // (we use eyegaze_common, eyegaze_extra and eyegaze_settings",
+			"                                                           // depending on the mod)",
+			"        ));",
+			"",
+			"        // Register here for any events you need to subscribe to",
+			"        // (TODO remove if unused)",
+			"",
+			"        ClientRawInputEvent.KEY_PRESSED.register(this::onKeyInput);",
+			"",
+			"        ClientTickEvent.CLIENT_PRE.register(this::onClientTick);",
+			"",
+			"    }",
+			"",
+			"    private EventResult onKeyInput(Minecraft minecraft, int keyCode, int scanCode, int action, int modifiers) {",
+			"        // This method gets called when *any* key is pressed",
+			"",
+			"        // Skip if there is a GUI visible",
+			"        if (ModUtils.hasActiveGui()) {",
+			"            return EventResult.pass();",
+			"        }",
+			"",
+			"        // Skip if F3 is held down (this is used for debugging)",
+			"        if (InputConstants.isKeyDown(minecraft.getWindow().getWindow(), 292)) {",
+			"            return EventResult.pass();",
+			"        }",
+			"",
+			"        if (modKeyBinding.matches(keyCode, scanCode) && modKeyBinding.consumeClick()) {",
+			"",
+			"            // TODO: Whatever needs to happen when your chosen key is pressed",
+			"",
+			"        }",
+			"        return EventResult.pass();",
+			"    }",
+			"",
+			"    // Called on client for every game tick",
+			"    public void onClientTick(Minecraft minecraft) {",
+			"",
+			"        LocalPlayer player = minecraft.player;",
+			"",
+			"        // TODO: Whatever needs to happen on every client tick",
+			"    }",
+			"}",
+			""
+		],
+		"description": "snippet_new_mod"
+	}
+}

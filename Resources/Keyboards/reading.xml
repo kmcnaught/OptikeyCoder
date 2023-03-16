@@ -1,0 +1,108 @@
+<Keyboard>
+  <Name>Reading</Name>
+  <WindowState>Docked</WindowState>
+  <Position>Bottom</Position>
+  <Width>100%</Width>
+  <SymbolMargin>10</SymbolMargin>
+  <BorderThickness>0,0,0,20</BorderThickness>
+  <BackgroundColor>Transparent</BackgroundColor>
+  <HideFromKeyboardMenu>false</HideFromKeyboardMenu>
+  <BorderColor>Transparent</BorderColor>
+  <Height>10%</Height>
+
+  <Grid>
+    <Rows>1</Rows>
+    <Cols>11</Cols>
+  </Grid>
+
+  <KeyGroup Name="Grey" BackgroundColor="#353737" />
+
+  <KeyGroup Name="abc" BackgroundColor="#907070" AutoScaleToOneKeyWidth="false" />
+  <KeyGroup Name="123" BackgroundColor="#7070aa" AutoScaleToOneKeyWidth="false" />
+
+  <KeyGroup Name="symbols" BackgroundColor="#709070" AutoScaleToOneKeyWidth="false" />
+  <KeyGroup Name="modifiers" AutoScaleToOneKeyWidth="false" />
+  <KeyGroup Name="functions1" BackgroundColor="#D69002" AutoScaleToOneKeyWidth="false" />
+  <KeyGroup Name="functions2" BackgroundColor="#D6AA1A" AutoScaleToOneKeyWidth="false" />
+  <KeyGroup Name="functions3" BackgroundColor="#709070" AutoScaleToOneKeyWidth="false" />
+  <KeyGroup Name="arrows" BackgroundColor="#907090" AutoScaleToOneKeyWidth="false" />
+
+  <KeyGroup Name="functions1-disabled" BackgroundColor="#D69002" ForegroundColor="white" AutoScaleToOneKeyWidth="false" />
+  <KeyGroup Name="functions2-disabled" BackgroundColor="#D6AA1A" ForegroundColor="white" AutoScaleToOneKeyWidth="false" />
+  <KeyGroup Name="arrows-disabled" BackgroundColor="#907090" ForegroundColor="white" AutoScaleToOneKeyWidth="false" />
+
+  <Content>
+
+    <DynamicKey>      
+      <Action>MouseMagnifier</Action><Label>Magnifier</Label><Symbol>MouseMagnifierIcon</Symbol>
+    </DynamicKey>
+
+   <DynamicKey><KeyGroup>functions1</KeyGroup><Action>MouseMoveAndLeftClick</Action><Action>ClearScratchpad</Action><Label>Left Click</Label><Symbol>MouseLeftClickIcon</Symbol></DynamicKey>
+
+    <DynamicKey AutoScaleToOneKeyWidth="false">
+      <Label>Word</Label>
+      <Action>MouseMoveAndLeftDoubleClick</Action>
+      <KeyDown>LeftCtrl</KeyDown>
+      <KeyDown>c</KeyDown>
+      <Wait>100</Wait>
+      <KeyUp>c</KeyUp>
+      <KeyUp>LeftCtrl</KeyUp>
+    </DynamicKey>
+   <DynamicKey Width="2" AutoScaleToOneKeyWidth="false">
+      <Label>Paragraph</Label>
+      <Action>MouseMoveAndLeftDoubleClick</Action>
+      <Wait>100</Wait>
+      <Action>MouseLeftClick</Action>
+      <KeyDown>LeftCtrl</KeyDown>
+      <KeyDown>c</KeyDown>
+      <Wait>100</Wait>
+      <KeyUp>c</KeyUp>
+      <KeyUp>LeftCtrl</KeyUp>
+    </DynamicKey>
+   
+   <DynamicKey Width="2" AutoScaleToOneKeyWidth="false">
+      <Label>Extend selection</Label>
+      <KeyDown>LeftShift</KeyDown>
+      <Action>MouseMoveAndLeftClick</Action>
+      <KeyUp>LeftShift</KeyUp>
+      <KeyDown>LeftCtrl</KeyDown>
+      <KeyDown>c</KeyDown>
+      <Wait>100</Wait>
+      <KeyUp>c</KeyUp>
+      <KeyUp>LeftCtrl</KeyUp>
+    </DynamicKey>
+
+
+
+    <DynamicKey>
+      <Label>Speak</Label>
+      <Symbol>SpeakIcon</Symbol>
+      <KeyGroup>functions1</KeyGroup>
+      <KeyDown>LeftCtrl</KeyDown>
+      <KeyDown>b</KeyDown>
+      <Wait>200</Wait>
+      <KeyUp>b</KeyUp>
+      <KeyUp>LeftCtrl</KeyUp>
+    </DynamicKey>
+
+    <DynamicKey>
+      <Label>Paste</Label>
+      <KeyGroup>functions2</KeyGroup>
+      <KeyDown>LeftCtrl</KeyDown>
+      <KeyDown>v</KeyDown>
+      <Wait>200</Wait>
+      <KeyUp>v</KeyUp>
+      <KeyUp>LeftCtrl</KeyUp>
+    </DynamicKey>
+    <DynamicKey>
+      <Symbol>BackIcon</Symbol>
+      <Action>BackFromKeyboard</Action>
+    </DynamicKey>
+    <DynamicKey>
+      <Symbol>MinimiseIcon</Symbol>
+      <ChangeKeyboard>HideUnder</ChangeKeyboard>
+    </DynamicKey>
+
+
+  </Content>
+</Keyboard>

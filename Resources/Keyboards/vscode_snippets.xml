@@ -1,0 +1,266 @@
+<Keyboard>
+  <Name>Coding</Name>
+  <WindowState>Docked</WindowState>
+  <Position>Bottom</Position>
+  <Width>100%</Width>
+  <SymbolMargin>10</SymbolMargin>
+  <BorderThickness>0,0,0,20</BorderThickness>  
+  <BackgroundColor>Transparent</BackgroundColor>
+  <HideFromKeyboardMenu>true</HideFromKeyboardMenu>
+  <BorderColor>Transparent</BorderColor>
+  <Height>35%</Height>    
+    
+    <Grid>
+        <Rows>6</Rows>
+        <Cols>16</Cols>
+    </Grid>
+    
+    <KeyGroup Name="abc" BackgroundColor="#907070" AutoScaleToOneKeyWidth="false"/>
+    <KeyGroup Name="123" BackgroundColor="#7070aa" AutoScaleToOneKeyWidth="false"/>
+    
+    <KeyGroup Name="symbols" BackgroundColor="#709070" AutoScaleToOneKeyWidth="false"/>
+    <KeyGroup Name="modifiers" AutoScaleToOneKeyWidth="false"/>
+    <KeyGroup Name="functions1" BackgroundColor="#D69002" AutoScaleToOneKeyWidth="false"/>
+    <KeyGroup Name="functions2" BackgroundColor="#D6AA1A" AutoScaleToOneKeyWidth="false"/>
+       
+    <KeyGroup Name="functions1-locked" BackgroundColor="#D69002" AutoScaleToOneKeyWidth="false" BorderColor="#aa5500" BorderThickness="5"/>
+    <KeyGroup Name="functions2-locked" BackgroundColor="#D6AA1A" AutoScaleToOneKeyWidth="false" BorderColor="#aa5500" BorderThickness="5"/>
+    <KeyGroup Name="arrows" BackgroundColor="#907090" AutoScaleToOneKeyWidth="false"/>
+    
+    <Content>    
+
+
+        <!-- first row -->
+        <DynamicKey><Label>⚙</Label><ChangeKeyboard BackReturnsHere="False">vscode_shortcuts_oneshot</ChangeKeyboard></DynamicKey>
+
+                        
+        <DynamicKey Col="14" Row="0" Height="2"><Label>next</Label>
+          <KeyGroup>functions1</KeyGroup>
+          <Action>NumPad2</Action>
+        </DynamicKey>        
+
+        <DynamicKey></DynamicKey>
+        <!-- <DynamicKey><Label>Snippet</Label>
+          <Action>NumPad1</Action><Wait>75</Wait>
+        </DynamicKey> -->
+
+        <DynamicKey><Label>class</Label>
+          <KeyGroup>functions1</KeyGroup>
+          <Action>NumPad1</Action><Wait>75</Wait>
+          <Text>snippet_class</Text>
+        </DynamicKey>
+        <DynamicKey><Label>variable</Label>
+          <KeyGroup>functions2</KeyGroup>
+          <Action>NumPad1</Action><Wait>75</Wait>                    
+          <Text>snippet_var</Text>
+        </DynamicKey>
+
+
+        <DynamicKey><Label>if</Label>
+          <KeyGroup>functions1</KeyGroup>
+          <Action>NumPad1</Action><Wait>75</Wait>
+          <Text>snippet_if</Text>
+        </DynamicKey>
+
+        <DynamicKey><Label>try</Label>
+          <KeyGroup>functions2</KeyGroup>
+          <Action>NumPad1</Action><Wait>75</Wait>
+          <Text>snippet_try</Text>
+        </DynamicKey>
+
+        <DynamicKey><Label>get/set</Label>
+          <KeyGroup>functions1</KeyGroup>
+        <Action>NumPad3</Action></DynamicKey>
+
+        <DynamicKey><Label>getValidInt</Label>
+        <KeyGroup>functions2</KeyGroup>
+          <Action>NumPad1</Action>
+          <Wait>75</Wait>
+          <Text>getValidInt</Text>
+        </DynamicKey>
+
+      <DynamicKey>
+        <KeyGroup>functions1</KeyGroup>
+        <Label>Mod</Label>
+        <Action>NumPad1</Action>
+        <Wait>75</Wait>
+        <Text>snippet_new_mod</Text>
+      </DynamicKey>
+      <DynamicKey></DynamicKey>
+        <DynamicKey>
+          <Label>Build</Label>
+           <KeyDown>LeftCtrl</KeyDown>
+          <KeyDown>LeftShift</KeyDown>
+          <KeyDown>b</KeyDown>
+          <Wait>200</Wait>
+          <KeyUp>b</KeyUp>
+          <KeyUp>LeftCtrl</KeyUp>
+          <KeyUp>LeftShift</KeyUp>
+        </DynamicKey> 
+
+        <DynamicKey></DynamicKey>
+        <DynamicKey></DynamicKey>
+      <DynamicKey></DynamicKey>
+
+        <!-- top right corner -->
+        <DynamicKey Row="0" Col="15"> 
+          <Symbol>BackIcon</Symbol>      
+          <Action>BackFromKeyboard</Action>
+        </DynamicKey>
+
+        <!-- second row -->
+        <DynamicKey></DynamicKey>
+        
+        <DynamicKey></DynamicKey>
+        <DynamicKey><Label>method</Label>
+          <KeyGroup>functions2</KeyGroup>
+          <Action>NumPad1</Action><Wait>75</Wait>
+          <Text>snippet_method</Text>
+        </DynamicKey>
+
+        
+        <DynamicKey><Label>field</Label>
+          <Action>NumPad1</Action><Wait>75</Wait>
+          <Text>snippet_field</Text>
+          <KeyGroup>functions1</KeyGroup>
+        </DynamicKey>
+
+        <DynamicKey><Label>for</Label>
+          <Action>NumPad1</Action><Wait>75</Wait>
+          <Text>snippet_for</Text>
+          <KeyGroup>functions2</KeyGroup>
+        </DynamicKey>
+        <DynamicKey><Label>switch</Label>
+          <Action>NumPad1</Action><Wait>75</Wait>
+          <Text>snippet_switch</Text>
+          <KeyGroup>functions1</KeyGroup>
+        </DynamicKey>
+        <DynamicKey><Label>print</Label>
+          <Action>NumPad1</Action><Wait>75</Wait>
+          <Text>snippet_print</Text>         
+          <KeyGroup>functions2</KeyGroup>
+        </DynamicKey>
+        <DynamicKey><Label>getString</Label>
+          <KeyGroup>functions1</KeyGroup>
+          <Action>NumPad3</Action>
+          <Text>getString</Text>
+          </DynamicKey>
+      <DynamicKey><Label>instanceof</Label>
+          <KeyGroup>functions2</KeyGroup>
+          <Action>NumPad1</Action><Wait>75</Wait>
+          <Text>snippet_instance</Text>         
+          </DynamicKey>
+
+      <DynamicKey></DynamicKey>
+        <DynamicKey>
+           <Label>Test</Label>
+           <KeyDown>LeftCtrl</KeyDown>
+          <KeyDown>LeftShift</KeyDown>
+          <KeyDown>t</KeyDown>
+          <Wait>200</Wait>
+          <KeyUp>t</KeyUp>
+          <KeyUp>LeftCtrl</KeyUp>
+          <KeyUp>LeftShift</KeyUp> 
+          
+        </DynamicKey> 
+        <DynamicKey></DynamicKey>
+        <DynamicKey AutoScaleToOneKeyWidth="false"
+
+          >
+          <Label>Vocab</Label>
+          <Action>SelectDictionaries</Action>
+        </DynamicKey>
+      <DynamicKey></DynamicKey>
+
+ 
+        <DynamicKey> 
+          <Symbol>MinimiseIcon</Symbol>      
+          <ChangeKeyboard>HideUnder</ChangeKeyboard>
+        </DynamicKey>
+
+        <!-- main keyboard, first row -->
+        <!-- main keyboard, first row -->
+        <DynamicKey><KeyGroup>functions1</KeyGroup><Action>Escape</Action><Label>Esc</Label></DynamicKey>
+        <DynamicKey><KeyGroup>123</KeyGroup><Text>1</Text><Label>1</Label><ShiftDownLabel>!</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>123</KeyGroup><Text>2</Text><Label>2</Label><ShiftDownLabel>"</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>123</KeyGroup><Text>3</Text><Label>3</Label><ShiftDownLabel>#</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>123</KeyGroup><Text>4</Text><Label>4</Label><ShiftDownLabel>$</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>123</KeyGroup><Text>5</Text><Label>5</Label><ShiftDownLabel>%</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>123</KeyGroup><Text>6</Text><Label>6</Label><ShiftDownLabel>^</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>123</KeyGroup><Text>7</Text><Label>7</Label><ShiftDownLabel>&amp;</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>123</KeyGroup><Text>8</Text><Label>8</Label><ShiftDownLabel>*</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>123</KeyGroup><Text>9</Text><Label>9</Label><ShiftDownLabel>(</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>123</KeyGroup><Text>0</Text><Label>0</Label><ShiftDownLabel>)</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>symbols</KeyGroup><Text>-</Text><Label>-</Label><ShiftDownLabel>_</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>symbols</KeyGroup><Text>+</Text><Label>+</Label></DynamicKey> <!-- +/= doesn't seem to work with Shift modifier -->
+        <DynamicKey><KeyGroup>symbols</KeyGroup><Text>=</Text><Label>=</Label></DynamicKey> <!-- +/= doesn't seem to work with Shift modifier -->
+        <DynamicKey><KeyGroup>functions1</KeyGroup><Action>BackOne</Action><Label>Backspace</Label><Symbol>BackOneIcon</Symbol></DynamicKey>
+        <DynamicKey><KeyGroup>functions1</KeyGroup>
+          <KeyDown>LeftCtrl</KeyDown>
+          <KeyDown>Back</KeyDown>
+          <Wait>50</Wait>
+          <KeyUp>Back</KeyUp>
+          <KeyUp>LeftCtrl</KeyUp>
+          <Label>Back word</Label><Symbol>BackManyIcon</Symbol></DynamicKey>        
+
+
+        <!-- new row -->
+ 
+        <DynamicKey><KeyGroup>symbols</KeyGroup><Text>&#9;</Text><Label>Tab</Label><Symbol>TabIcon</Symbol></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>q</Text><Label>q</Label><ShiftDownLabel>Q</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>w</Text><Label>w</Label><ShiftDownLabel>W</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>e</Text><Label>e</Label><ShiftDownLabel>E</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>r</Text><Label>r</Label><ShiftDownLabel>R</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>t</Text><Label>t</Label><ShiftDownLabel>T</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>y</Text><Label>y</Label><ShiftDownLabel>Y</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>u</Text><Label>u</Label><ShiftDownLabel>U</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>i</Text><Label>i</Label><ShiftDownLabel>I</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>o</Text><Label>o</Label><ShiftDownLabel>O</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>p</Text><Label>p</Label><ShiftDownLabel>P</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>symbols</KeyGroup><Text>[</Text><Label>[</Label><ShiftDownLabel>{</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>symbols</KeyGroup><Text>]</Text><Label>]</Label><ShiftDownLabel>}</ShiftDownLabel></DynamicKey>        
+        <DynamicKey Col="13" Row="3" Height="2"><KeyGroup>functions1</KeyGroup><Text>&#13;</Text><Label>Enter</Label><Symbol>EnterIcon</Symbol></DynamicKey> 
+        <DynamicKey><KeyGroup>functions1</KeyGroup><Action>Delete</Action><Label>Del</Label></DynamicKey>        
+        <DynamicKey><KeyGroup>functions1</KeyGroup><Action>MouseMagnifier</Action><Label>Magnifier</Label><Symbol>MouseMagnifierIcon</Symbol></DynamicKey>
+
+        <!-- new row -->
+
+        <DynamicKey><KeyGroup>modifiers</KeyGroup><Action>LeftShift</Action><Action>ClearScratchpad</Action><Label>Shift</Label><Symbol>ShiftIcon</Symbol></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>a</Text><Label>a</Label><ShiftDownLabel>A</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>s</Text><Label>s</Label><ShiftDownLabel>S</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>d</Text><Label>d</Label><ShiftDownLabel>D</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>f</Text><Label>f</Label><ShiftDownLabel>F</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>g</Text><Label>g</Label><ShiftDownLabel>G</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>h</Text><Label>h</Label><ShiftDownLabel>H</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>j</Text><Label>j</Label><ShiftDownLabel>J</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>k</Text><Label>k</Label><ShiftDownLabel>K</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>l</Text><Label>l</Label><ShiftDownLabel>L</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>symbols</KeyGroup><Text>;</Text><Label>;</Label><ShiftDownLabel>:</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>symbols</KeyGroup><Text>'</Text><Label>'</Label><ShiftDownLabel>@</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>symbols</KeyGroup><Text>#</Text><Label>#</Label><ShiftDownLabel>~</ShiftDownLabel></DynamicKey>
+        <!-- <DynamicKey></DynamicKey>  -->
+
+        <DynamicKey><KeyGroup>arrows</KeyGroup><Action>ArrowUp</Action><Symbol>UpArrowKeyIcon</Symbol></DynamicKey>
+        <DynamicKey><KeyGroup>functions1</KeyGroup><Action>MouseMoveAndLeftClick</Action><Action>ClearScratchpad</Action><Label>Left Click</Label><Symbol>MouseLeftClickIcon</Symbol></DynamicKey>
+
+        <!-- new row -->
+        
+        <DynamicKey><KeyGroup>modifiers</KeyGroup><Action>LeftCtrl</Action><Label>Ctrl</Label></DynamicKey>
+        <DynamicKey><KeyGroup>modifiers</KeyGroup><Action>LeftAlt</Action><Label>Alt</Label></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>z</Text><Label>z</Label><ShiftDownLabel>Z</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>x</Text><Label>x</Label><ShiftDownLabel>X</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>c</Text><Label>c</Label><ShiftDownLabel>C</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>v</Text><Label>v</Label><ShiftDownLabel>V</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>symbols</KeyGroup><Text>&#32;</Text><Action>ClearScratchpad</Action><Label>Space</Label><Symbol>SpaceIcon</Symbol></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>b</Text><Label>b</Label><ShiftDownLabel>B</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>n</Text><Label>n</Label><ShiftDownLabel>N</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>m</Text><Label>m</Label><ShiftDownLabel>M</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>symbols</KeyGroup><Text>,</Text><Label>,</Label><ShiftDownLabel>&lt;</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>symbols</KeyGroup><Text>.</Text><Label>.</Label><ShiftDownLabel>&gt;</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>symbols</KeyGroup><Text>/</Text><Label>/</Label><ShiftDownLabel>?</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>arrows</KeyGroup><Action>ArrowLeft</Action><Symbol>LeftArrowKeyIcon</Symbol></DynamicKey>
+        <DynamicKey><KeyGroup>arrows</KeyGroup><Action>ArrowDown</Action><Symbol>DownArrowKeyIcon</Symbol></DynamicKey>
+        <DynamicKey><KeyGroup>arrows</KeyGroup><Action>ArrowRight</Action><Symbol>RightArrowKeyIcon</Symbol></DynamicKey>
+
+    </Content>
+</Keyboard>

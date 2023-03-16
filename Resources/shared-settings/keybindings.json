@@ -1,0 +1,107 @@
+// Place your key bindings in this file to override the defaults
+[
+    {
+        "key": "F17",
+        "command": "javadoc-tools.jdocGenerate"
+    },
+    {
+        "key": "F18",
+        "command": "javadoc-tools.generateCommentsForMethod"
+    },
+    {
+        "key": "f13",
+        "command": "workbench.action.navigateBack"
+    },
+    {
+        "key": "f14",
+        "command": "workbench.action.navigateForward"
+    },
+    {
+        "key": "ctrl+shift+s",
+        "command": "-workbench.action.files.saveAs"
+    },
+    {
+        "key": "ctrl+shift+s",
+        "command": "workbench.action.files.saveFiles"
+    },
+    {
+        "key": "F15",
+        "command": "editor.action.reindentlines"
+    },
+    {
+        "key": "F16",
+        "command": "editor.action.smartSelect.expand",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "numpad1",
+        "command": "editor.action.insertSnippet"
+    },
+    {
+        "key": "numpad2",
+        "command": "jumpToNextSnippetPlaceholder",
+        "when": "editorTextFocus && hasNextTabstop && inSnippetMode"
+    },
+    {
+        "key": "numpad2",
+        "command": "workbench.action.focusActiveEditorGroup",
+        "when": "!inSnippetMode"
+    },
+    {
+        "key": "tab",
+        "command": "-jumpToNextSnippetPlaceholder",
+        "when": "editorTextFocus && hasNextTabstop && inSnippetMode"
+    },
+    {
+        "key": "numpad3",
+        "command": "extension.generateGettersAndSetters",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "alt+insert",
+        "command": "-extension.generateGettersAndSetters",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+t",
+        "command": "-workbench.action.reopenClosedEditor"
+    },
+    {
+        "key": "ctrl+shift+t",
+        "command": "workbench.action.tasks.test"
+    },
+    {
+        "key": "ctrl+shift+oem_2",
+        "command": "editor.action.selectToBracket"
+    },
+    {
+        "key": "ctrl+shift+f4",
+        "command": "references-view.findReferences",
+        "when": "editorHasReferenceProvider"
+    },
+    {
+        "key": "shift+alt+f12",
+        "command": "-references-view.findReferences",
+        "when": "editorHasReferenceProvider"
+    },
+    {
+        "key": "ctrl+shift+f6",
+        "command": "editor.action.moveLinesDownAction",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "alt+down",
+        "command": "-editor.action.moveLinesDownAction",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+shift+f7",
+        "command": "editor.action.moveLinesUpAction",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "alt+up",
+        "command": "-editor.action.moveLinesUpAction",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+]

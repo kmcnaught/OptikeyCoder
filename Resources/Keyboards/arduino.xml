@@ -1,0 +1,194 @@
+<Keyboard>
+  <Name>Arduino</Name>
+  <WindowState>Docked</WindowState>
+  <Position>Bottom</Position>
+  <Width>100%</Width>
+  <SymbolMargin>10</SymbolMargin>
+  <BorderThickness>0,0,0,20</BorderThickness>
+  <BackgroundColor>Transparent</BackgroundColor>
+  <HideFromKeyboardMenu>false</HideFromKeyboardMenu>
+  <BorderColor>Transparent</BorderColor>
+  <Height>18%</Height>
+  <Grid>
+    <Rows>2</Rows>
+    <Cols>9</Cols>
+  </Grid>
+
+    <KeyGroup Name="abc" BackgroundColor="#907070" AutoScaleToOneKeyWidth="false"/>
+    <KeyGroup Name="123" BackgroundColor="#7070aa" AutoScaleToOneKeyWidth="false"/>
+    
+    <KeyGroup Name="symbols" BackgroundColor="#709070" AutoScaleToOneKeyWidth="false"/>
+    <KeyGroup Name="modifiers" AutoScaleToOneKeyWidth="false"/>
+
+    <KeyGroup Name="functions1" BackgroundColor="#D69002" AutoScaleToOneKeyWidth="false"/>
+    <KeyGroup Name="functions2" BackgroundColor="#D6AA1A" AutoScaleToOneKeyWidth="false"/>
+
+    <KeyGroup Name="arrows" BackgroundColor="#907090" AutoScaleToOneKeyWidth="false"/>
+    
+  <Content>
+    <DynamicKey >
+      <Label>ESC</Label>
+      <Action>Escape</Action>
+      <KeyGroup>functions1</KeyGroup>
+    </DynamicKey>
+    
+    <DynamicKey >
+      <KeyGroup>functions2</KeyGroup>
+      <Label>Undo</Label>
+      <KeyDown>LeftCtrl</KeyDown>
+      <KeyDown>z</KeyDown>
+      <Wait>200</Wait>
+      <KeyUp>z</KeyUp>
+      <KeyUp>LeftCtrl</KeyUp>
+    </DynamicKey>
+
+    <DynamicKey>      
+      <Label>Zoom to\npoint</Label>
+      <KeyGroup>functions1</KeyGroup>
+      <Action>MouseMoveAndScrollToTop</Action>      
+      <Loop Count="10">
+        <Action>MouseScrollToTop</Action>      
+        <Wait>50</Wait>
+      </Loop>
+    </DynamicKey>
+
+
+    <DynamicKey>
+      <Label>Drag</Label>
+      <KeyGroup>symbols</KeyGroup>
+      <Action>MouseDrag</Action>      
+    </DynamicKey>
+
+
+    <DynamicKey>
+      <KeyGroup>symbols</KeyGroup>
+      <Label>Hold</Label>
+      <Action>MouseMoveTo</Action>
+      <Action>MouseLeftDownUp</Action>
+      <Wait>2000</Wait>  <!-- change this number to wait for longer -->
+      <Action>MouseLeftDownUp</Action>
+    </DynamicKey>
+
+<!-- 
+    <DynamicKey >
+      <Label>Search</Label>
+      <KeyGroup>functions2</KeyGroup>
+      <KeyDown>LeftCtrl</KeyDown>
+      <Text>f</Text>
+      <KeyUp>LeftCtrl</KeyUp>
+    </DynamicKey>
+ -->
+
+     <DynamicKey >
+    </DynamicKey>
+    
+    <DynamicKey><KeyGroup>functions1</KeyGroup><Action>Delete</Action><Label>Del</Label></DynamicKey>        
+
+
+    <DynamicKey>
+      <KeyGroup>functions2</KeyGroup>
+      <Label>Cut</Label>
+      <KeyDown>LeftCtrl</KeyDown>
+      <KeyDown>x</KeyDown>
+      <Wait>200</Wait>
+      <KeyUp>x</KeyUp>
+      <KeyUp>LeftCtrl</KeyUp>
+    </DynamicKey>
+
+    <DynamicKey >
+      <Label>Paste</Label>
+      <KeyGroup>functions1</KeyGroup>
+      <KeyDown>LeftCtrl</KeyDown>
+      <KeyDown>v</KeyDown>
+      <Wait>200</Wait>
+      <KeyUp>v</KeyUp>
+      <KeyUp>LeftCtrl</KeyUp>
+    </DynamicKey>
+
+    <DynamicKey >
+      <Label>Shift</Label>
+      <KeyToggle>LeftShift</KeyToggle>
+      <KeyGroup>123</KeyGroup>
+    </DynamicKey>
+
+    <DynamicKey >
+      <KeyGroup>functions2</KeyGroup>
+      <Label>Redo</Label>
+      <KeyDown>LeftCtrl</KeyDown>
+      <KeyDown>y</KeyDown>
+      <Wait>200</Wait>
+      <KeyUp>y</KeyUp>
+      <KeyUp>LeftCtrl</KeyUp>
+    </DynamicKey>
+
+
+
+
+    <DynamicKey >
+      <Label>Fit all</Label>
+      <KeyGroup>functions1</KeyGroup>
+      <Text>f</Text>
+    </DynamicKey>
+
+    <DynamicKey>
+      <Label>Repeat</Label>
+      <KeyGroup>symbols</KeyGroup>
+      <Action>RepeatLastMouseAction</Action>     
+      <Symbol>ReplayLastMouseActionIcon</Symbol> 
+    </DynamicKey>
+
+    <DynamicKey>
+      <KeyGroup>symbols</KeyGroup>
+      <Symbol>MouseMagnifierIcon</Symbol>
+      <Action>MouseMagnifier</Action>
+    </DynamicKey>
+  
+<!-- 
+    <DynamicKey>      
+      <Label>Zoom more</Label>
+      <KeyGroup>functions1</KeyGroup>
+      <Loop Count="5">
+        <Action>MouseScrollToTop</Action>      
+      </Loop>
+    </DynamicKey> -->
+
+    
+    
+    <DynamicKey>
+      <Label>ABC</Label>      
+      <KeyGroup>functions2</KeyGroup>    
+      <ChangeKeyboard>vscode</ChangeKeyboard>
+    </DynamicKey>
+
+    <DynamicKey>
+      <KeyGroup>functions1</KeyGroup>
+      <Symbol>MinimiseIcon</Symbol>
+      <ChangeKeyboard>HideUnder</ChangeKeyboard>
+    </DynamicKey>
+
+<!-- 
+
+     <DynamicKey>
+      <KeyGroup>functions1</KeyGroup>
+      <Action>MouseMoveAndLeftClick</Action>
+      <Symbol>MouseLeftClickIcon</Symbol>      
+    </DynamicKey>
+ -->
+
+    <DynamicKey >
+      <Label>Copy</Label>
+      <KeyGroup>functions2</KeyGroup>
+      <KeyDown>LeftCtrl</KeyDown>
+      <KeyDown>c</KeyDown>
+      <Wait>200</Wait>
+      <KeyUp>c</KeyUp>
+      <KeyUp>LeftCtrl</KeyUp>
+    </DynamicKey>
+    
+    <DynamicKey >
+      <KeyGroup>functions1</KeyGroup>
+      <Symbol>BackIcon</Symbol>      
+      <Action>BackFromKeyboard</Action>
+    </DynamicKey>
+  </Content>
+</Keyboard>

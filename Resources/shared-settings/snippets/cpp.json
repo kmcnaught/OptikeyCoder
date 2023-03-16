@@ -1,0 +1,198 @@
+{
+	// Place your snippets for cpp here. Each snippet is defined under a snippet name and has a prefix, body and 
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+	// same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	"If statement": {
+		"prefix": [
+			"if",
+			"snippet_if"
+		],
+		"body": [
+			"if ($1) {",
+			"\t$TM_SELECTED_TEXT",
+			"\t$0",
+			"}"
+		],
+		"description": "An if statement"
+	},
+	"If null statement": {
+		"prefix": [
+			"ifn",
+			"snippet_if_null"
+		],
+		"body": [
+			"if (${1:varName} == null) {",
+			"\t$TM_SELECTED_TEXT",
+			"\t$0",
+			"}"
+		],
+		"description": "An if null statement"
+	},
+	"If not null statement": {
+		"prefix": [
+			"ifnn",
+			"snippet_if_notnull"
+		],
+		"body": [
+			"if (${1:varName} != null) {",
+			"\t$TM_SELECTED_TEXT",
+			"\t$0",
+			"}"
+		],
+		"description": "An if not null statement"
+	},
+	"Else statement": {
+		"prefix": [
+			"else",
+			"snippet_else"
+		],
+		"body": [
+			"else {",
+			"\t$TM_SELECTED_TEXT",
+			"\t$0",
+			"}"
+		],
+		"description": "An else statement"
+	},
+	"If Else statement": {
+		"prefix": [
+			"snippet_if_else"
+		],
+		"body": [
+			"if ($1) {",
+			"\t$TM_SELECTED_TEXT",
+			"\t$2",
+			"}",
+			"else {",
+			"\t$0",
+			"}"
+		],
+		"description": "An else statement"
+	},
+	"Switch statement": {
+		"prefix": [
+			"sw",
+			"switch",
+			"snippet_switch"
+		],
+		"body": [
+			"switch (${1:varName}) {",
+			"\tcase ${2:value}:",
+			"\t\t$0",
+			"\t\tbreak;",
+			"\tdefault:",
+			"\t\tbreak;",
+			"}"
+		],
+		"description": "A switch statement"
+	},
+	"Variable": {
+		"prefix": [
+			"v",
+			"var",
+			"snippet_var"
+		],
+		"body": [
+			"${1|bool,int,float,double,long,short,byte,char|} ${2:varName};",
+			"$0"
+		],
+		"description": "A local variable"
+	},
+	"Variable = value": {
+		"prefix": [
+			"vv",
+			"var",
+			"varv",
+			"snippet_var_value"
+		],
+		"body": [
+			"${1|bool,int,float,double,long,short,byte,char|} ${2:varName} = ${3:defaultValue};",
+			"$0"
+		],
+		"description": "A local variable with initial value"
+	},
+	"printv": {
+		"prefix": [
+			"pv",
+			"print",
+			"snippet_print_variable"
+		],
+		"body": [
+			"Serial.println($1 + \"${1:varName} = \" + $1);$0"
+		],
+		"description": "Prints the variable value"
+	},
+	"println": {
+		"prefix": [
+			"pln",
+			"println",
+			"snippet_println"
+		],
+		"body": [
+			"Serial.println(\"$1\");$0"
+		],
+		"description": "Prints a String and then terminate the line"
+	},	
+	"For loop over sequence": {
+		"prefix": [
+			"fors",
+			"snippet_for_sequence"
+		],
+		"body": [
+			"for (int i = ${1:0}; i <= ${2:10}; i++) {",
+			"\t$0",
+			"}"
+		],
+		"description": "A for loop over sequence"
+	},
+	"While loop": {
+		"prefix": [
+			"wh",
+			"snippet_while"
+		],
+		"body": [
+			"while ($1) {",
+			"\t$0",
+			"}"
+		],
+		"description": "A while loop"
+	},
+	"Main loop": {
+		"prefix": ["snippet_loop","loop"],
+		"body": [
+			"// the loop routine runs over and over again forever:",
+			"void loop()",
+			"{",
+			"    ${1:}",
+			"}",
+			""
+		],
+		"description": "The main arduino loop function"
+	},
+	"Setup method": {
+		"prefix": [
+			"snippet_setup",
+			"setup"
+		],
+		"body": [
+			"// the setup routine runs once when you press reset:",
+			"void setup()",
+			"{",
+			"    ${1:}",
+			"}",
+			""
+		],
+		"description": "The arduino setup function"
+	}
+	
+}

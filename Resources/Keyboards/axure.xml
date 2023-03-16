@@ -1,0 +1,351 @@
+<Keyboard>
+  <Name>Axure</Name>
+  <WindowState>Docked</WindowState>
+  <Position>Bottom</Position>
+  <Width>100%</Width>
+  <SymbolMargin>10</SymbolMargin>
+  <BorderThickness>0,0,0,20</BorderThickness>
+  <BackgroundColor>Transparent</BackgroundColor>
+  <HideFromKeyboardMenu>false</HideFromKeyboardMenu>
+  <BorderColor>Transparent</BorderColor>
+  <Height>30%</Height>
+  <Grid>
+    <Rows>4</Rows>
+    <Cols>11</Cols>
+  </Grid>
+
+    <KeyGroup Name="abc" BackgroundColor="#907070" AutoScaleToOneKeyWidth="false"/>
+    <KeyGroup Name="123" BackgroundColor="#7070aa" AutoScaleToOneKeyWidth="false"/>
+    
+    <KeyGroup Name="symbols" BackgroundColor="#709070" AutoScaleToOneKeyWidth="false"/>
+    <KeyGroup Name="modifiers" AutoScaleToOneKeyWidth="false"/>
+
+    <KeyGroup Name="functions1" BackgroundColor="#D69002" AutoScaleToOneKeyWidth="false"/>
+    <KeyGroup Name="functions2" BackgroundColor="#D6AA1A" AutoScaleToOneKeyWidth="false"/>
+
+    <KeyGroup Name="arrows" BackgroundColor="#907090" AutoScaleToOneKeyWidth="false"/>
+    
+  <Content>
+    <DynamicKey >
+      <Label>ESC</Label>
+      <Action>Escape</Action>
+      <KeyGroup>functions1</KeyGroup>
+    </DynamicKey>
+    <DynamicKey >
+      <Label>Open</Label>
+      <KeyGroup>functions2</KeyGroup>
+      <KeyDown>LeftCtrl</KeyDown>
+      <KeyDown>o</KeyDown>
+      <Wait>200</Wait>
+      <KeyUp>o</KeyUp>
+      <KeyUp>LeftCtrl</KeyUp>
+    </DynamicKey>
+    <DynamicKey >
+      <Label>Toggle\nleft pane</Label>      
+      <KeyDown>LeftCtrl</KeyDown>
+      <KeyDown>LeftAlt</KeyDown>
+      <Text>[</Text>
+      <KeyUp>LeftCtrl</KeyUp>
+      <KeyUp>LeftAlt</KeyUp>
+    </DynamicKey>
+    <DynamicKey >
+      <Symbol>UpArrowKeyIcon</Symbol>
+      <KeyGroup>arrows</KeyGroup>
+      <Action>ArrowUp</Action>
+    </DynamicKey>
+    <DynamicKey >
+      <Label>Toggle\nright pane</Label>
+      <KeyDown>LeftCtrl</KeyDown>
+      <KeyDown>LeftAlt</KeyDown>
+      <Text>]</Text>
+      <KeyUp>LeftCtrl</KeyUp>
+      <KeyUp>LeftAlt</KeyUp>
+    </DynamicKey>
+    <DynamicKey >
+      <KeyGroup>symbols</KeyGroup>
+      <Label>Rect</Label>
+      <Text>r</Text>
+    </DynamicKey>
+    <DynamicKey >
+      <KeyGroup>symbols</KeyGroup>
+      <Label>Text field</Label>
+      <Text>f</Text>
+    </DynamicKey>
+    <DynamicKey >
+      <KeyGroup>functions1</KeyGroup>
+      <Label>Align\nLeft</Label>
+      <KeyDown>LeftCtrl</KeyDown>
+      <KeyDown>LeftAlt</KeyDown>
+      <Text>l</Text>
+      <KeyUp>LeftCtrl</KeyUp>
+      <KeyUp>LeftAlt</KeyUp>
+    </DynamicKey>
+    <DynamicKey >
+      <KeyGroup>functions1</KeyGroup>
+      <Label>Align\nCentre</Label>
+      <KeyDown>LeftCtrl</KeyDown>
+      <KeyDown>LeftAlt</KeyDown>
+      <Text>c</Text>
+      <KeyUp>LeftCtrl</KeyUp>
+      <KeyUp>LeftAlt</KeyUp>
+    </DynamicKey>
+    <DynamicKey >
+      <KeyGroup>functions1</KeyGroup>
+      <Label>Align\nRight</Label>
+      <KeyDown>LeftCtrl</KeyDown>
+      <KeyDown>LeftAlt</KeyDown>
+      <Text>r</Text>
+      <KeyUp>LeftCtrl</KeyUp>
+      <KeyUp>LeftAlt</KeyUp>
+    </DynamicKey>
+    <DynamicKey >
+      <KeyGroup>functions2</KeyGroup>
+      <Label>Cut</Label>
+      <KeyDown>LeftCtrl</KeyDown>
+      <KeyDown>x</KeyDown>
+      <Wait>200</Wait>
+      <KeyUp>x</KeyUp>
+      <KeyUp>LeftCtrl</KeyUp>
+    </DynamicKey>
+    <DynamicKey >
+      <Label>CTRL</Label>      
+      <KeyToggle>LeftCtrl</KeyToggle>
+      <KeyGroup>123</KeyGroup>
+    </DynamicKey>
+    <DynamicKey >
+      <Label>Save</Label>
+      <KeyGroup>functions2</KeyGroup>
+      <KeyDown>LeftCtrl</KeyDown>
+      <KeyDown>s</KeyDown>
+      <Wait>200</Wait>
+      <KeyUp>s</KeyUp>
+      <KeyUp>LeftCtrl</KeyUp>
+    </DynamicKey>
+    <DynamicKey >
+      <KeyGroup>arrows</KeyGroup>
+      <Symbol>LeftArrowKeyIcon</Symbol>
+      <Action>ArrowLeft</Action>
+    </DynamicKey>
+    <DynamicKey >
+      <Symbol>MinimiseIcon</Symbol>
+      <ChangeKeyboard>HideUnder</ChangeKeyboard>
+    </DynamicKey>
+    <DynamicKey >
+      <Symbol>RightArrowKeyIcon</Symbol>
+      <KeyGroup>arrows</KeyGroup>
+      <Action>ArrowRight</Action>
+    </DynamicKey>
+    <DynamicKey >
+      <KeyGroup>symbols</KeyGroup>
+      <Label>Line</Label>
+      <Text>l</Text>
+    </DynamicKey>
+    <DynamicKey >
+      <KeyGroup>symbols</KeyGroup>
+      <Label>Hotspot</Label>
+      <Text>h</Text>
+    </DynamicKey>
+    <DynamicKey >
+      <KeyGroup>functions2</KeyGroup>
+      <Label>Align\nTop</Label>
+      <KeyDown>LeftCtrl</KeyDown>
+      <KeyDown>LeftAlt</KeyDown>
+      <Text>t</Text>
+      <KeyUp>LeftCtrl</KeyUp>
+      <KeyUp>LeftAlt</KeyUp>
+    </DynamicKey>
+    <DynamicKey >
+      <KeyGroup>functions2</KeyGroup>
+      <Label>Align\nMiddle</Label>
+      <KeyDown>LeftCtrl</KeyDown>
+      <KeyDown>LeftAlt</KeyDown>
+      <Text>m</Text>
+      <KeyUp>LeftCtrl</KeyUp>
+      <KeyUp>LeftAlt</KeyUp>
+    </DynamicKey>
+    <DynamicKey >
+      <KeyGroup>functions2</KeyGroup>
+      <Label>Align\nBottom</Label>
+      <KeyDown>LeftCtrl</KeyDown>
+      <KeyDown>LeftAlt</KeyDown>
+      <Text>b</Text>
+      <KeyUp>LeftCtrl</KeyUp>
+      <KeyUp>LeftAlt</KeyUp>
+    </DynamicKey>    
+    <DynamicKey >
+      <Label>Copy</Label>
+      <KeyGroup>functions1</KeyGroup>
+      <KeyDown>LeftCtrl</KeyDown>
+      <KeyDown>c</KeyDown>
+      <Wait>200</Wait>
+      <KeyUp>c</KeyUp>
+      <KeyUp>LeftCtrl</KeyUp>
+    </DynamicKey>
+    <DynamicKey >
+      <Label>Shift</Label>
+      <KeyToggle>LeftShift</KeyToggle>
+      <KeyGroup>123</KeyGroup>
+    </DynamicKey>
+    <DynamicKey >
+      <KeyGroup>functions2</KeyGroup>
+      <Label>Undo</Label>
+      <KeyDown>LeftCtrl</KeyDown>
+      <KeyDown>z</KeyDown>
+      <Wait>200</Wait>
+      <KeyUp>z</KeyUp>
+      <KeyUp>LeftCtrl</KeyUp>
+    </DynamicKey>
+    <DynamicKey >
+      <Label>Zoom\nout</Label>
+      <KeyGroup>functions1</KeyGroup>
+      <KeyDown>LeftCtrl</KeyDown>
+      <Text>-</Text>
+      <KeyUp>LeftCtrl</KeyUp>
+    </DynamicKey>
+    <DynamicKey >
+      <Symbol>DownArrowKeyIcon</Symbol>
+      <KeyGroup>arrows</KeyGroup>
+      <Action>ArrowDown</Action>
+    </DynamicKey>
+    <DynamicKey >
+      <KeyGroup>functions1</KeyGroup>
+      <Label>Zoom\nin</Label>
+      <KeyDown>LeftCtrl</KeyDown>
+      <Text>+</Text>
+      <KeyUp>LeftCtrl</KeyUp>    
+    </DynamicKey>
+    <DynamicKey >
+      <KeyGroup>symbols</KeyGroup>
+      <Label>Oval</Label>
+      <Text>o</Text>
+    </DynamicKey>
+    <DynamicKey >
+      <KeyGroup>symbols</KeyGroup>
+      <Label>Dynamic panel</Label>
+      <Text>e</Text>
+    </DynamicKey>
+    <DynamicKey >
+      <KeyGroup>functions1</KeyGroup>
+      <Label>Distribute\nHorizontally</Label>
+      <KeyDown>LeftCtrl</KeyDown>
+      <KeyDown>LeftShift</KeyDown>
+      <KeyDown>h</KeyDown>
+      <Wait>200</Wait>
+      <KeyUp>h</KeyUp>
+      <KeyUp>LeftCtrl</KeyUp>
+      <KeyUp>LeftShift</KeyUp>
+    </DynamicKey>
+    <DynamicKey >
+      <KeyGroup>functions1</KeyGroup>
+      <Label>Distribute\nVertically</Label>
+      <KeyDown>LeftCtrl</KeyDown>
+      <KeyDown>LeftShift</KeyDown>
+      <KeyDown>u</KeyDown>
+      <Wait>200</Wait>
+      <KeyUp>u</KeyUp>
+      <KeyUp>LeftCtrl</KeyUp>
+      <KeyUp>LeftShift</KeyUp>
+    </DynamicKey>
+    <DynamicKey>
+      <KeyGroup>functions1</KeyGroup>
+      <Label>Group</Label>
+      <KeyDown>LeftCtrl</KeyDown>      
+      <KeyDown>g</KeyDown>
+      <Wait>200</Wait>
+      <KeyUp>g</KeyUp>
+      <KeyUp>LeftCtrl</KeyUp>      
+    </DynamicKey>    
+    <DynamicKey >
+      <Label>Paste</Label>
+      <KeyGroup>functions2</KeyGroup>
+      <KeyDown>LeftCtrl</KeyDown>
+      <KeyDown>v</KeyDown>
+      <Wait>200</Wait>
+      <KeyUp>v</KeyUp>
+      <KeyUp>LeftCtrl</KeyUp>
+    </DynamicKey>
+    <DynamicKey >
+      <KeyGroup>123</KeyGroup>
+      <Label>Space</Label>
+      <KeyToggle>Space</KeyToggle>
+    </DynamicKey>
+    <DynamicKey >
+      <KeyGroup>functions2</KeyGroup>
+      <Label>Redo</Label>
+      <KeyDown>LeftCtrl</KeyDown>
+      <KeyDown>y</KeyDown>
+      <Wait>200</Wait>
+      <KeyUp>y</KeyUp>
+      <KeyUp>LeftCtrl</KeyUp>
+    </DynamicKey>
+    <DynamicKey >
+      <KeyGroup>functions1</KeyGroup>
+      <Label>Reset\nzoom</Label>      
+      <KeyDown>LeftCtrl</KeyDown>
+      <Text>0</Text>
+      <KeyUp>LeftCtrl</KeyUp>
+    </DynamicKey>
+    <DynamicKey>      
+      <Label>Zoom to\npoint</Label>
+      <KeyGroup>functions1</KeyGroup>
+      <KeyDown>LeftCtrl</KeyDown>
+      <Action>MouseMoveAndScrollToTop</Action>      
+      <Action>MouseScrollToTop</Action>      
+      <Action>MouseScrollToTop</Action>      
+      <Action>MouseScrollToTop</Action>      
+      <KeyUp>LeftCtrl</KeyUp>
+    </DynamicKey>
+    <DynamicKey >
+      <Label>Fit all</Label>
+      <KeyGroup>functions1</KeyGroup>
+      <KeyDown>LeftCtrl</KeyDown>
+      <Text>1</Text>
+      <KeyUp>LeftCtrl</KeyUp>
+    </DynamicKey>
+    <DynamicKey AutoScaleToOneKeyWidth="false">
+      <KeyGroup>symbols</KeyGroup>
+      <Label>Sticky</Label>
+      <Text>m</Text>
+    </DynamicKey>
+    <DynamicKey >
+      <KeyGroup>symbols</KeyGroup>
+      <Label>Connecting\nlines</Label>
+      <Text>e</Text>
+    </DynamicKey>
+    <DynamicKey >
+      <KeyGroup>functions2</KeyGroup>
+      <Label>Lock</Label>
+      <KeyDown>LeftCtrl</KeyDown>
+      <KeyDown>k</KeyDown>
+      <Wait>200</Wait>
+      <KeyUp>k</KeyUp>
+      <KeyUp>LeftCtrl</KeyUp>
+    </DynamicKey>    
+    <DynamicKey >
+      <KeyGroup>functions2</KeyGroup>
+      <Label>Unlock</Label>
+      <KeyDown>LeftCtrl</KeyDown>
+      <KeyDown>LeftShift</KeyDown>
+      <KeyDown>k</KeyDown>
+      <Wait>200</Wait>
+      <KeyUp>k</KeyUp>
+      <KeyUp>LeftCtrl</KeyUp>
+      <KeyUp>LeftShift</KeyUp>    
+    </DynamicKey>
+    <DynamicKey>
+      <KeyGroup>functions2</KeyGroup>     
+      <Label>Ungroup</Label>
+      <KeyDown>LeftCtrl</KeyDown>
+      <KeyDown>LeftShift</KeyDown>
+      <KeyDown>g</KeyDown>
+      <Wait>200</Wait>
+      <KeyUp>g</KeyUp>
+      <KeyUp>LeftCtrl</KeyUp>
+      <KeyUp>LeftShift</KeyUp> 
+    </DynamicKey>
+    <DynamicKey >
+      <Symbol>BackIcon</Symbol>      
+      <Action>BackFromKeyboard</Action>
+    </DynamicKey>
+  </Content>
+</Keyboard>

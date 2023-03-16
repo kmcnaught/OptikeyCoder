@@ -1,0 +1,25 @@
+<Keyboard>
+    <Name>HideBottom</Name>
+	<HideFromKeyboardMenu>true</HideFromKeyboardMenu>
+	<WindowState>Floating</WindowState>
+    <!-- NOTE: Change Position/Width/Height to size as you want it -->
+	<Position>Bottom</Position>
+	<Width>15%</Width>
+	<Height>20%</Height>
+    <SymbolMargin>10</SymbolMargin>
+    <BorderThickness>0,0,0,0</BorderThickness>
+	<BackgroundColor>Transparent</BackgroundColor>
+	<BorderColor>Transparent</BorderColor>
+    <Grid>
+        <Rows>1</Rows>
+        <Cols>1</Cols>
+    </Grid>
+    <!-- NOTE: Change CompletionTimes below to set dwell time (or remove to use default) -->
+	<KeyGroup Name="All" CompletionTimes="2000" BackgroundColor="Transparent" Opacity=".5"/>
+    <Content>
+        <DynamicKey>
+            <Symbol>ApplicationIcon</Symbol>
+            <Action>BackFromKeyboard</Action>
+        </DynamicKey> 
+    </Content>
+</Keyboard>

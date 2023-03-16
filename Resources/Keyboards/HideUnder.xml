@@ -1,0 +1,34 @@
+<Keyboard>
+    <Name>HideUnder</Name>
+	<HideFromKeyboardMenu>true</HideFromKeyboardMenu>
+	<WindowState>Floating</WindowState>
+	<Position>BottomRight</Position>
+	<Width>20%</Width>
+	<Height>20%</Height>
+    <!-- NOTE: Change VerticalOffset to *slightly less* than Height if you want it out of sight entirely,
+    e.g. Height="20%" VerticalOffset="19.5%"
+    (it might break if offset is greater than or equal to height)-->
+    <!-- <VerticalOffset>17%</VerticalOffset>     -->
+    <!-- <HorizontalOffset>40%</HorizontalOffset>     -->
+
+    <HorizontalOffset>15%</HorizontalOffset>
+    <VerticalOffset>15%</VerticalOffset>
+
+    <SymbolMargin>10</SymbolMargin>
+    <BorderThickness>0,0,0,0</BorderThickness>
+	<BackgroundColor>Transparent</BackgroundColor>
+	<BorderColor>Transparent</BorderColor>
+    <Grid>
+        <Rows>1</Rows>
+        <Cols>1</Cols>
+    </Grid>    
+    <!-- NOTE: you may want a quicker completion time when it's out of sight, if user is unlikely to 
+         accidentally trigger it -->
+	<KeyGroup Name="All" CompletionTimes="500" BackgroundColor="Transparent" Opacity=".5"/>
+    <Content>
+        <DynamicKey>
+            <Symbol>ApplicationIcon</Symbol>
+            <Action>BackFromKeyboard</Action>
+        </DynamicKey> 
+    </Content>
+</Keyboard>

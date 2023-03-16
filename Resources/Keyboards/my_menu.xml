@@ -1,0 +1,26 @@
+<Keyboard>
+  <Name>Menu</Name>
+  <WindowState>Floating</WindowState>
+  <Position>Bottom</Position>
+  <Width>50%</Width>
+  <SymbolMargin>10</SymbolMargin>
+  <BorderThickness>0,0,0,20</BorderThickness>
+  <BackgroundColor>Transparent</BackgroundColor>
+  <HideFromKeyboardMenu>false</HideFromKeyboardMenu>
+  <BorderColor>Transparent</BorderColor>
+  <Height>35%</Height>
+
+  <Grid>
+    <Rows>3</Rows>
+    <Cols>2</Cols>
+  </Grid>
+
+  <Content>
+    <DynamicKey SharedSizeGroup="group1"><Label>VS Code</Label><ChangeKeyboard>vscode</ChangeKeyboard></DynamicKey>
+    <DynamicKey SharedSizeGroup="group1"><Label>Optikey</Label><ChangeKeyboard>Menu</ChangeKeyboard></DynamicKey>
+    <DynamicKey SharedSizeGroup="group1"><Label>Reading</Label><ChangeKeyboard>reading</ChangeKeyboard></DynamicKey>
+    <DynamicKey SharedSizeGroup="group1"><Label>Speaking</Label><ChangeKeyboard>speaking</ChangeKeyboard></DynamicKey>
+    <DynamicKey SharedSizeGroup="group1"><Symbol>MinimiseIcon</Symbol><ChangeKeyboard>HideUnder</ChangeKeyboard></DynamicKey>
+    <DynamicKey SharedSizeGroup="group1"><Symbol>QuitIcon</Symbol><Action>Quit</Action></DynamicKey>
+  </Content>
+</Keyboard>

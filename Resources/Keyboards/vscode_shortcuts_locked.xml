@@ -1,0 +1,334 @@
+<Keyboard>
+  <Name>VS Code</Name>
+  <WindowState>Docked</WindowState>
+  <Position>Bottom</Position>
+  <Width>100%</Width>
+  <SymbolMargin>10</SymbolMargin>
+  <BorderThickness>0,0,0,20</BorderThickness>  
+  <BackgroundColor>Transparent</BackgroundColor>
+  <HideFromKeyboardMenu>true</HideFromKeyboardMenu>
+  <BorderColor>Transparent</BorderColor>
+  <Height>35%</Height>    
+    
+    <Grid>
+        <Rows>6</Rows>
+        <Cols>16</Cols>
+    </Grid>
+    
+    <KeyGroup Name="Grey" BackgroundColor="#353737" />
+
+    <KeyGroup Name="abc" BackgroundColor="#907070" AutoScaleToOneKeyWidth="false"/>
+    <KeyGroup Name="123" BackgroundColor="#7070aa" AutoScaleToOneKeyWidth="false"/>
+    
+    <KeyGroup Name="symbols" BackgroundColor="#709070" AutoScaleToOneKeyWidth="false"/>
+    <KeyGroup Name="modifiers" AutoScaleToOneKeyWidth="false"/>
+    <KeyGroup Name="functions1" BackgroundColor="#D69002" AutoScaleToOneKeyWidth="false"/>
+    <KeyGroup Name="functions2" BackgroundColor="#D6AA1A" AutoScaleToOneKeyWidth="false"/>
+    <KeyGroup Name="arrows" BackgroundColor="#907090" AutoScaleToOneKeyWidth="false"/>
+    
+
+    <Content>    
+
+
+        <!-- first row -->
+        <DynamicKey><Label>⚙</Label><ChangeKeyboard BackReturnsHere="False">vscode_shortcuts_locked</ChangeKeyboard></DynamicKey>
+
+        <DynamicKey><Label>Save</Label>
+          <KeyGroup>functions1</KeyGroup>
+          <KeyDown>LeftCtrl</KeyDown>
+          <KeyDown>s</KeyDown>
+          <Wait>200</Wait>
+          <KeyUp>s</KeyUp>
+          <KeyUp>LeftCtrl</KeyUp>
+        </DynamicKey>
+        <DynamicKey><Label>Save\nall</Label>
+          <KeyGroup>functions2</KeyGroup>
+          <KeyDown>LeftCtrl</KeyDown>
+          <KeyDown>LeftShift</KeyDown>
+          <KeyDown>s</KeyDown>
+          <Wait>200</Wait>
+          <KeyUp>s</KeyUp>
+          <KeyUp>LeftCtrl</KeyUp>
+          <KeyUp>LeftShift</KeyUp>
+        </DynamicKey>
+
+        <DynamicKey><Label>Start</Label>
+          <KeyGroup>functions1</KeyGroup>
+           <Action>F5</Action>          
+        </DynamicKey>
+        <DynamicKey><Label>Stop</Label>
+          <KeyGroup>functions2</KeyGroup>                    
+          <KeyDown>LeftShift</KeyDown>
+          <Action>F5</Action>
+          <KeyUp>LeftShift</KeyUp>                    
+        </DynamicKey>
+
+
+        <DynamicKey><Label>Step\nover</Label>
+          <KeyGroup>functions1</KeyGroup>
+          <Action>F10</Action>          
+        </DynamicKey>
+
+        <DynamicKey><Label>Cut</Label>
+          <KeyGroup>functions2</KeyGroup>
+          <KeyDown>LeftCtrl</KeyDown>
+          <KeyDown>x</KeyDown>
+          <Wait>200</Wait>
+          <KeyUp>x</KeyUp>
+          <KeyUp>LeftCtrl</KeyUp>
+        </DynamicKey>
+        <DynamicKey><Label>Copy</Label>
+          <KeyGroup>functions1</KeyGroup>
+          <KeyDown>LeftCtrl</KeyDown>
+          <KeyDown>c</KeyDown>
+          <Wait>200</Wait>
+          <KeyUp>c</KeyUp>
+          <KeyUp>LeftCtrl</KeyUp>
+        </DynamicKey>
+        <DynamicKey><Label>Paste</Label>
+          <KeyGroup>functions2</KeyGroup>
+          <KeyDown>LeftCtrl</KeyDown>
+          <KeyDown>v</KeyDown>
+          <Wait>200</Wait>
+          <KeyUp>v</KeyUp>
+          <KeyUp>LeftCtrl</KeyUp>
+        </DynamicKey>
+        <DynamicKey><Label>//</Label>
+          <KeyGroup>functions1</KeyGroup>
+          <KeyDown>LeftCtrl</KeyDown>
+          <KeyDown>/</KeyDown>
+          <Wait>200</Wait>
+          <KeyUp>/</KeyUp>
+          <KeyUp>LeftCtrl</KeyUp>
+        </DynamicKey>
+        
+        <DynamicKey><Label>Javadoc</Label>
+          <KeyGroup>functions2</KeyGroup>
+          <!-- assumes you are on the line of a method declaration to start with -->
+          <Action>Home</Action>          
+          <KeyDown>Return</KeyDown>
+          <KeyUp>Return</KeyUp>          
+          <Action>ArrowUp</Action>
+          <Text>/**</Text>          
+          <Wait>700</Wait> <!-- wait for auto-jdoc suggestion to pop up -->
+          <KeyDown>Return</KeyDown>
+          <KeyUp>Return</KeyUp>          
+        </DynamicKey>
+
+        <DynamicKey>
+          <KeyGroup>functions1</KeyGroup>
+          <Label>Delete\nLine</Label>
+          <KeyDown>LeftShift</KeyDown>
+          <KeyDown>Delete</KeyDown>
+          <Wait>200</Wait>
+          <KeyUp>Delete</KeyUp>
+          <KeyUp>LeftShift</KeyUp>
+        </DynamicKey>
+
+        <DynamicKey><Label>Home</Label>
+          <KeyGroup>functions2</KeyGroup>
+          <Action>Home</Action>
+        </DynamicKey>
+        <DynamicKey><Label>Newline</Label>
+          <KeyGroup>functions1</KeyGroup>
+          <KeyDown>LeftCtrl</KeyDown>
+          <KeyDown>Return</KeyDown>
+          <Wait>200</Wait>
+          <KeyUp>Return</KeyUp>
+          <KeyUp>LeftCtrl</KeyUp>
+        </DynamicKey>
+        <DynamicKey>
+          <KeyGroup>functions2</KeyGroup>
+          <Label>Undo</Label>          
+          <KeyDown>LeftCtrl</KeyDown>
+          <KeyDown>z</KeyDown>
+          <Wait>200</Wait>
+          <KeyUp>z</KeyUp>
+          <KeyUp>LeftCtrl</KeyUp>
+        </DynamicKey>
+
+
+        <!-- top right corner -->
+        <DynamicKey Row="0" Col="15"> 
+          <Symbol>BackIcon</Symbol>      
+          <Action>BackFromKeyboard</Action>
+        </DynamicKey>
+
+        <!-- second row -->
+        <DynamicKey></DynamicKey>
+        <DynamicKey><Label>Run</Label>
+          <KeyGroup>functions1</KeyGroup>
+          <KeyDown>LeftCtrl</KeyDown>
+          <Action>F5</Action>
+          <KeyUp>LeftCtrl</KeyUp>   
+        </DynamicKey>
+        <DynamicKey><Label>Debug</Label>
+          <KeyGroup>functions2</KeyGroup>
+          <Action>F5</Action>
+        </DynamicKey>
+
+        <DynamicKey><Label>Break\npoint</Label>
+          <KeyGroup>functions1</KeyGroup>
+          <Action>F9</Action>
+        </DynamicKey>
+        <DynamicKey><Label>Step\ninto</Label>
+          <KeyGroup>functions2</KeyGroup>
+          <Action>F11</Action>                    
+        </DynamicKey>
+        <DynamicKey><Label>Step\nout</Label>
+          <KeyGroup>functions1</KeyGroup>
+         <KeyDown>LeftShift</KeyDown>
+          <Action>F11</Action>    
+          <KeyUp>LeftShift</KeyUp>
+        </DynamicKey>
+        <DynamicKey><Label>Select\nall</Label>
+          <KeyGroup>functions2</KeyGroup>
+          <KeyDown>LeftCtrl</KeyDown>
+          <KeyDown>a</KeyDown>
+          <Wait>200</Wait>
+          <KeyUp>a</KeyUp>
+          <KeyUp>LeftCtrl</KeyUp>
+        </DynamicKey>
+        <DynamicKey><Label>Select\nmore</Label>
+          <KeyGroup>functions1</KeyGroup>
+          <Action>F16</Action>
+        </DynamicKey>
+        <DynamicKey><Label>Indent</Label>
+          <KeyGroup>functions2</KeyGroup>
+          <Action>F15</Action>          
+        </DynamicKey>
+        
+        <DynamicKey><Label>Info</Label>
+          <KeyGroup>functions1</KeyGroup>          
+          <KeyDown>LeftCtrl</KeyDown>
+          <KeyDown>Space</KeyDown>
+          <Wait>200</Wait>
+          <KeyUp>Space</KeyUp>
+          <KeyUp>LeftCtrl</KeyUp>
+        </DynamicKey>
+
+        <DynamicKey>
+          <KeyGroup>functions2</KeyGroup>          
+          <Label>Cursor</Label>
+          <KeyDown>LeftCtrl</KeyDown>
+          <Wait>200</Wait>          
+          <KeyUp>LeftCtrl</KeyUp>          
+        </DynamicKey>
+
+        <DynamicKey>
+          <KeyGroup>functions1</KeyGroup>          
+        </DynamicKey>
+        
+        <DynamicKey><Label>End</Label>
+          <KeyGroup>functions2</KeyGroup>
+          <Action>End</Action>
+        </DynamicKey>
+
+        <DynamicKey><Label>Maximise</Label>
+          <KeyGroup>functions1</KeyGroup>
+          <KeyDown>LeftCtrl</KeyDown>
+          <KeyDown>m</KeyDown>
+          <Wait>200</Wait>
+          <KeyUp>m</KeyUp>
+          <KeyUp>LeftCtrl</KeyUp>
+        </DynamicKey>
+
+        <DynamicKey>
+          <KeyGroup>functions2</KeyGroup>
+          <Label>Redo</Label>
+          <KeyDown>LeftCtrl</KeyDown>
+          <KeyDown>y</KeyDown>
+          <Wait>200</Wait>
+          <KeyUp>y</KeyUp>
+          <KeyUp>LeftCtrl</KeyUp>
+        </DynamicKey>
+        
+        <DynamicKey> 
+          <Symbol>MinimiseIcon</Symbol>      
+          <ChangeKeyboard>HideUnder</ChangeKeyboard>
+        </DynamicKey>
+
+        <!-- main keyboard, first row -->
+        <DynamicKey><KeyGroup>functions1</KeyGroup><Action>Escape</Action><Label>Esc</Label></DynamicKey>
+        <DynamicKey><KeyGroup>123</KeyGroup><Text>1</Text><Label>1</Label><ShiftDownLabel>!</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>123</KeyGroup><Text>2</Text><Label>2</Label><ShiftDownLabel>"</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>123</KeyGroup><Text>3</Text><Label>3</Label><ShiftDownLabel>#</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>123</KeyGroup><Text>4</Text><Label>4</Label><ShiftDownLabel>$</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>123</KeyGroup><Text>5</Text><Label>5</Label><ShiftDownLabel>%</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>123</KeyGroup><Text>6</Text><Label>6</Label><ShiftDownLabel>^</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>123</KeyGroup><Text>7</Text><Label>7</Label><ShiftDownLabel>&amp;</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>123</KeyGroup><Text>8</Text><Label>8</Label><ShiftDownLabel>*</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>123</KeyGroup><Text>9</Text><Label>9</Label><ShiftDownLabel>(</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>123</KeyGroup><Text>0</Text><Label>0</Label><ShiftDownLabel>)</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>symbols</KeyGroup><Text>-</Text><Label>-</Label><ShiftDownLabel>_</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>symbols</KeyGroup><Text>+</Text><Label>+</Label></DynamicKey> <!-- +/= doesn't seem to work with Shift modifier -->
+        <DynamicKey><KeyGroup>symbols</KeyGroup><Text>=</Text><Label>=</Label></DynamicKey> <!-- +/= doesn't seem to work with Shift modifier -->
+        <DynamicKey><KeyGroup>functions1</KeyGroup><Action>BackOne</Action><Label>Backspace</Label><Symbol>BackOneIcon</Symbol></DynamicKey>
+        <DynamicKey><KeyGroup>functions1</KeyGroup>
+          <KeyDown>LeftCtrl</KeyDown>
+          <KeyDown>Back</KeyDown>
+          <Wait>50</Wait>
+          <KeyUp>Back</KeyUp>
+          <KeyUp>LeftCtrl</KeyUp>
+          <Label>Back word</Label><Symbol>BackManyIcon</Symbol></DynamicKey>        
+
+        <!-- new row -->
+ 
+        <DynamicKey><KeyGroup>symbols</KeyGroup><Text>&#9;</Text><Label>Tab</Label><Symbol>TabIcon</Symbol></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>q</Text><Label>q</Label><ShiftDownLabel>Q</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>w</Text><Label>w</Label><ShiftDownLabel>W</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>e</Text><Label>e</Label><ShiftDownLabel>E</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>r</Text><Label>r</Label><ShiftDownLabel>R</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>t</Text><Label>t</Label><ShiftDownLabel>T</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>y</Text><Label>y</Label><ShiftDownLabel>Y</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>u</Text><Label>u</Label><ShiftDownLabel>U</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>i</Text><Label>i</Label><ShiftDownLabel>I</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>o</Text><Label>o</Label><ShiftDownLabel>O</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>p</Text><Label>p</Label><ShiftDownLabel>P</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>symbols</KeyGroup><Text>[</Text><Label>[</Label><ShiftDownLabel>{</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>symbols</KeyGroup><Text>]</Text><Label>]</Label><ShiftDownLabel>}</ShiftDownLabel></DynamicKey>        
+        <DynamicKey Col="13" Row="3" Height="2"><KeyGroup>functions1</KeyGroup><Text>&#13;</Text><Label>Enter</Label><Symbol>EnterIcon</Symbol></DynamicKey> 
+        <DynamicKey><KeyGroup>functions1</KeyGroup><Action>Delete</Action><Label>Del</Label></DynamicKey>        
+        <DynamicKey><KeyGroup>functions1</KeyGroup><Action>MouseMagnifier</Action><Label>Magnifier</Label><Symbol>MouseMagnifierIcon</Symbol></DynamicKey>
+
+        <!-- new row -->
+
+        <DynamicKey><KeyGroup>modifiers</KeyGroup><Action>LeftShift</Action><Action>ClearScratchpad</Action><Label>Shift</Label><Symbol>ShiftIcon</Symbol></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>a</Text><Label>a</Label><ShiftDownLabel>A</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>s</Text><Label>s</Label><ShiftDownLabel>S</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>d</Text><Label>d</Label><ShiftDownLabel>D</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>f</Text><Label>f</Label><ShiftDownLabel>F</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>g</Text><Label>g</Label><ShiftDownLabel>G</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>h</Text><Label>h</Label><ShiftDownLabel>H</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>j</Text><Label>j</Label><ShiftDownLabel>J</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>k</Text><Label>k</Label><ShiftDownLabel>K</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>l</Text><Label>l</Label><ShiftDownLabel>L</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>symbols</KeyGroup><Text>;</Text><Label>;</Label><ShiftDownLabel>:</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>symbols</KeyGroup><Text>'</Text><Label>'</Label><ShiftDownLabel>@</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>symbols</KeyGroup><Text>#</Text><Label>#</Label><ShiftDownLabel>~</ShiftDownLabel></DynamicKey>
+        <!-- <DynamicKey></DynamicKey>  -->
+
+        <DynamicKey><KeyGroup>arrows</KeyGroup><Action>ArrowUp</Action><Symbol>UpArrowKeyIcon</Symbol></DynamicKey>
+        <DynamicKey><KeyGroup>functions1</KeyGroup><Action>MouseMoveAndLeftClick</Action><Action>ClearScratchpad</Action><Label>Left Click</Label><Symbol>MouseLeftClickIcon</Symbol></DynamicKey>
+
+        <!-- new row -->
+        
+        <DynamicKey><KeyGroup>modifiers</KeyGroup><Action>LeftCtrl</Action><Label>Ctrl</Label></DynamicKey>
+        <DynamicKey><KeyGroup>modifiers</KeyGroup><Action>LeftAlt</Action><Label>Alt</Label></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>z</Text><Label>z</Label><ShiftDownLabel>Z</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>x</Text><Label>x</Label><ShiftDownLabel>X</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>c</Text><Label>c</Label><ShiftDownLabel>C</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>v</Text><Label>v</Label><ShiftDownLabel>V</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>symbols</KeyGroup><Text>&#32;</Text><Action>ClearScratchpad</Action><Label>Space</Label><Symbol>SpaceIcon</Symbol></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>b</Text><Label>b</Label><ShiftDownLabel>B</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>n</Text><Label>n</Label><ShiftDownLabel>N</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>abc</KeyGroup><Text>m</Text><Label>m</Label><ShiftDownLabel>M</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>symbols</KeyGroup><Text>,</Text><Label>,</Label><ShiftDownLabel>&lt;</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>symbols</KeyGroup><Text>.</Text><Label>.</Label><ShiftDownLabel>&gt;</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>symbols</KeyGroup><Text>/</Text><Label>/</Label><ShiftDownLabel>?</ShiftDownLabel></DynamicKey>
+        <DynamicKey><KeyGroup>arrows</KeyGroup><Action>ArrowLeft</Action><Symbol>LeftArrowKeyIcon</Symbol></DynamicKey>
+        <DynamicKey><KeyGroup>arrows</KeyGroup><Action>ArrowDown</Action><Symbol>DownArrowKeyIcon</Symbol></DynamicKey>
+        <DynamicKey><KeyGroup>arrows</KeyGroup><Action>ArrowRight</Action><Symbol>RightArrowKeyIcon</Symbol></DynamicKey>
+
+    </Content>
+</Keyboard>
