@@ -18,6 +18,18 @@ Keyboard features:
 - Specific keyboard for VS Code, including lockable shortcut bar, snippets, navigation and more
 - Colour styling of keyboard to help find symbols
 
+## How to use our keyboards/settings
+The full deployment relies on setting up a few different resources:
+
+### Keyboards
+In `Resources\Keyboards` you will find the current XML keyboards. Set this as your starting folder in (Right click ->) Management Console -> Visuals -> Startup Keyboard and "Folder containing dynamic keyboards"
+
+### VS Code key bindings & snippets.
+Several keys are hooked up to bespoke key bindings. You can find our keybindings in `Resources\shared-settings\keybindings.json`
+
+The snippets references are in the `snippets` subfolder.
+
+For these settings you can either copy-paste into your own respective files (e.g. `Configure User Snippets` and find the corresponding file) or you can set up a [symbolic link(https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/mklink) via windows command line to the appropriate location in %APPDATA%\Code\User
 
 ## Main VS Code keyboard interface
 ![Screenshot of Optikey Coder with main VS Code keyboard loaded](https://user-images.githubusercontent.com/12151404/219380689-17925bfa-0005-44d5-907c-651d08702dc9.PNG)
