@@ -9,7 +9,7 @@ Core features we have experimented with so far:
 - Swap between small language-specific dictionaries for syntax word prediction
 - Add words to dictionary temporarily (for this session) or permanently
 - Add words from clipboard to train Presage
-- Allow trigger gamebutton button to be held down for repeat presses
+- Allow trigger gamepad button to be held down for repeat presses
 - A plugin to copy text to clipboard via a regex filter
 - Add larger SuggestionGrid for situations in which you want more suggestions visible
 
