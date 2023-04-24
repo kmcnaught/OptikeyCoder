@@ -2437,6 +2437,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     break;
 
                 case FunctionKeys.SuggestionsUseBasic:
+                    SelectLanguage(Languages.EnglishUK, true);
                     dictionaryService.ChangeSuggestionMethod(SuggestionMethods.Basic);
                     inputService.RequestSuspend();
                     RaiseToastNotification(Resources.SUCCESS, "Suggestions changed to BASIC", NotificationTypes.Normal, () => inputService.RequestResume());                    
