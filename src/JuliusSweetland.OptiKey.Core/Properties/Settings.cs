@@ -146,15 +146,15 @@ namespace JuliusSweetland.OptiKey.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("false")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public bool KeySelectionTriggerGamepadAllowRepeats
+        public bool GamepadTriggerHoldToRepeat
         {
             get
             {
-                return ((bool)(this["KeySelectionTriggerGamepadAllowRepeats"]));
+                return ((bool)(this["GamepadTriggerHoldToRepeat"]));
             }
             set
             {
-                this["KeySelectionTriggerGamepadAllowRepeats"] = value;
+                this["GamepadTriggerHoldToRepeat"] = value;
             }
         }
 
@@ -162,15 +162,15 @@ namespace JuliusSweetland.OptiKey.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("400")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public int KeySelectionTriggerGamepadFirstRepeatMilliseconds
+        public int GamepadTriggerFirstRepeatMilliseconds
         {
             get
             {
-                return ((int)(this["KeySelectionTriggerGamepadFirstRepeatMilliseconds"]));
+                return ((int)(this["GamepadTriggerFirstRepeatMilliseconds"]));
             }
             set
             {
-                this["KeySelectionTriggerGamepadFirstRepeatMilliseconds"] = value;
+                this["GamepadTriggerFirstRepeatMilliseconds"] = value;
             }
         }
 
@@ -178,63 +178,15 @@ namespace JuliusSweetland.OptiKey.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("200")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public int KeySelectionTriggerGamepadNextRepeatMilliseconds
+        public int GamepadTriggerNextRepeatMilliseconds
         {
             get
             {
-                return ((int)(this["KeySelectionTriggerGamepadNextRepeatMilliseconds"]));
+                return ((int)(this["GamepadTriggerNextRepeatMilliseconds"]));
             }
             set
             {
-                this["KeySelectionTriggerGamepadNextRepeatMilliseconds"] = value;
-            }
-        }
-
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("false")]
-        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public bool PointSelectionTriggerGamepadAllowRepeats
-        {
-            get
-            {
-                return ((bool)(this["PointSelectionTriggerGamepadAllowRepeats"]));
-            }
-            set
-            {
-                this["PointSelectionTriggerGamepadAllowRepeats"] = value;
-            }
-        }
-
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("400")]
-        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public int PointSelectionTriggerGamepadFirstRepeatMilliseconds
-        {
-            get
-            {
-                return ((int)(this["PointSelectionTriggerGamepadFirstRepeatMilliseconds"]));
-            }
-            set
-            {
-                this["PointSelectionTriggerGamepadFirstRepeatMilliseconds"] = value;
-            }
-        }
-
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("200")]
-        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public int PointSelectionTriggerGamepadNextRepeatMilliseconds
-        {
-            get
-            {
-                return ((int)(this["PointSelectionTriggerGamepadNextRepeatMilliseconds"]));
-            }
-            set
-            {
-                this["PointSelectionTriggerGamepadNextRepeatMilliseconds"] = value;
+                this["GamepadTriggerNextRepeatMilliseconds"] = value;
             }
         }
 

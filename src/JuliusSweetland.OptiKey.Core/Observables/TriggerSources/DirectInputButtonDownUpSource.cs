@@ -40,7 +40,6 @@ namespace JuliusSweetland.OptiKey.Observables.TriggerSources
             this.controllerGuid = controllerGuid;
 
             directInputListener = DirectInputListener.Instance;
-            // BUG: this prevents us from having a different repeat rule for point selection vs key selection
             directInputListener.AllowRepeats(allowRepeats, firstRepeatMs, nextRepeatMs);
         }
 

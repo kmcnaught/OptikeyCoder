@@ -2479,6 +2479,12 @@ Magyar
   <data name="CONTROLLER_NEXT_REPEAT_TIME" xml:space="preserve">
     <value>Time delay for subsequent repeats (ms)</value>
   </data>
+  <data name="ALLOW_REPEATS_LABEL" xml:space="preserve">
+    <value>Allow key actions to be repeated when pressing trigger away from keyboard</value>
+  </data>
+  <data name="REPEAT_SOUND_LABEL" xml:space="preserve">
+    <value>Repeat last key:</value>
+  </data>
   <data name="LIMIT_BACKONE" xml:space="preserve">
     <value>Limit "BackOne" deletion to a single character</value>
   </data>

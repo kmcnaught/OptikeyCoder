@@ -808,9 +808,9 @@ namespace JuliusSweetland.OptiKey
                     keySelectionTriggerSource = new XInputButtonDownUpSource(
                         Settings.Default.KeySelectionTriggerGamepadXInputController,
                         Settings.Default.KeySelectionTriggerGamepadXInputButtonDownUpButton,
-                        Settings.Default.KeySelectionTriggerGamepadAllowRepeats,
-                        Settings.Default.KeySelectionTriggerGamepadFirstRepeatMilliseconds,
-                        Settings.Default.KeySelectionTriggerGamepadNextRepeatMilliseconds,
+                        Settings.Default.GamepadTriggerHoldToRepeat,
+                        Settings.Default.GamepadTriggerFirstRepeatMilliseconds,
+                        Settings.Default.GamepadTriggerNextRepeatMilliseconds,
                         pointSource);
                     break;
 
@@ -818,9 +818,9 @@ namespace JuliusSweetland.OptiKey
                     keySelectionTriggerSource = new DirectInputButtonDownUpSource(
                         Settings.Default.KeySelectionTriggerGamepadDirectInputController,
                         Settings.Default.KeySelectionTriggerGamepadDirectInputButtonDownUpButton,
-                        Settings.Default.KeySelectionTriggerGamepadAllowRepeats,
-                        Settings.Default.KeySelectionTriggerGamepadFirstRepeatMilliseconds,
-                        Settings.Default.KeySelectionTriggerGamepadNextRepeatMilliseconds,
+                        Settings.Default.GamepadTriggerHoldToRepeat,
+                        Settings.Default.GamepadTriggerFirstRepeatMilliseconds,
+                        Settings.Default.GamepadTriggerNextRepeatMilliseconds,
                         pointSource);
                     break;
 
@@ -858,9 +858,9 @@ namespace JuliusSweetland.OptiKey
                     pointSelectionTriggerSource = new XInputButtonDownUpSource(
                         Settings.Default.PointSelectionTriggerGamepadXInputController,
                         Settings.Default.PointSelectionTriggerGamepadXInputButtonDownUpButton,
-                        Settings.Default.PointSelectionTriggerGamepadAllowRepeats,
-                        Settings.Default.PointSelectionTriggerGamepadFirstRepeatMilliseconds,
-                        Settings.Default.PointSelectionTriggerGamepadNextRepeatMilliseconds,
+                        Settings.Default.GamepadTriggerHoldToRepeat,
+                        Settings.Default.GamepadTriggerFirstRepeatMilliseconds,
+                        Settings.Default.GamepadTriggerNextRepeatMilliseconds,
                         pointSource);
                     break;
 
@@ -868,9 +868,9 @@ namespace JuliusSweetland.OptiKey
                     pointSelectionTriggerSource = new DirectInputButtonDownUpSource(
                         Settings.Default.PointSelectionTriggerGamepadDirectInputController,
                         Settings.Default.PointSelectionTriggerGamepadDirectInputButtonDownUpButton,
-                        Settings.Default.PointSelectionTriggerGamepadAllowRepeats,
-                        Settings.Default.PointSelectionTriggerGamepadFirstRepeatMilliseconds,
-                        Settings.Default.PointSelectionTriggerGamepadNextRepeatMilliseconds,
+                        Settings.Default.GamepadTriggerHoldToRepeat,
+                        Settings.Default.GamepadTriggerFirstRepeatMilliseconds,
+                        Settings.Default.GamepadTriggerNextRepeatMilliseconds,
                         pointSource);
                     break;
 
