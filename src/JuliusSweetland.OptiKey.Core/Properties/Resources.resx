@@ -2488,4 +2488,7 @@ Magyar
   <data name="LIMIT_BACKONE" xml:space="preserve">
     <value>Limit "BackOne" deletion to a single character</value>
   </data>
+  <data name="CUSTOM_DICTIONARIES_LOCATION_LABEL" xml:space="preserve">
+    <value>Folder containing custom vocab lists</value>
+  </data>
 </root>
