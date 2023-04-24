@@ -238,6 +238,17 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
             }
         }
 
+	// FIXME: variable naming collision: this is for translating a held down
+	// button into a repeating click. The other variables are for allowing a 
+	// click outside a key to repeat the last key that was clicked.
+        // Need to think about how these interact
+        private bool allowRepeats;
+        public bool AllowRepeats
+        {
+            get { return allowRepeats; }
+            set { SetProperty(ref allowRepeats, value); }
+        }
+
         private bool pointSelectionTriggerGamepadAllowRepeats;
         public bool PointSelectionTriggerGamepadAllowRepeats
         {
@@ -614,6 +625,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
 
         private void Load()
         {
+            AllowRepeats = Settings.Default.AllowRepeatKeyActionsAwayFromKey;
             PointsSource = Settings.Default.PointsSource;
             TobiiEyeXProcessingLevel = Settings.Default.TobiiEyeXProcessingLevel;
             IrisbondProcessingLevel = Settings.Default.IrisbondProcessingLevel;
@@ -660,10 +672,12 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
             MultiKeySelectionTriggerStopSignal = Settings.Default.MultiKeySelectionTriggerStopSignal;
             MultiKeySelectionFixationMinDwellTimeInMs = Settings.Default.MultiKeySelectionFixationMinDwellTime.TotalMilliseconds;
             MultiKeySelectionMaxDurationInMs = Settings.Default.MultiKeySelectionMaxDuration.TotalMilliseconds;
+            
         }
 
         public void ApplyChanges()
         {
+            Settings.Default.AllowRepeatKeyActionsAwayFromKey = AllowRepeats;
             Settings.Default.PointsSource = PointsSource;
             Settings.Default.TobiiEyeXProcessingLevel = TobiiEyeXProcessingLevel;
             Settings.Default.IrisbondProcessingLevel = IrisbondProcessingLevel;

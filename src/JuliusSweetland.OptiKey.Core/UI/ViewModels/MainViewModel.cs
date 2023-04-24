@@ -47,9 +47,9 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
 
         private EventHandler<int> inputServicePointsPerSecondHandler;
         private EventHandler<Tuple<Point, KeyValue>> inputServiceCurrentPositionHandler;
-        private EventHandler<Tuple<PointAndKeyValue, double>> inputServiceSelectionProgressHandler;
-        private EventHandler<PointAndKeyValue> inputServiceSelectionHandler;
-        private EventHandler<Tuple<List<Point>, KeyValue, List<string>>> inputServiceSelectionResultHandler;
+        private EventHandler<Tuple<TriggerTypes, PointAndKeyValue, double>> inputServiceSelectionProgressHandler;
+        private EventHandler<Tuple<TriggerTypes, PointAndKeyValue>> inputServiceSelectionHandler;
+        private EventHandler<Tuple<TriggerTypes, List<Point>, KeyValue, List<string>>> inputServiceSelectionResultHandler;
         private SelectionModes selectionMode;
         private Point currentPositionPoint;
         private KeyValue currentPositionKey;
@@ -64,6 +64,9 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
         private Action<Point> nextPointSelectionAction;
         private Point? magnifyAtPoint;
         private Action<Point?> magnifiedPointSelectionAction;
+        private KeyValue keyValueForCurrentPointAction;
+        private KeyValue lastKeyValueExecuted;
+        Dictionary<KeyValue, KeyDownStates> lastKeyDownStates = new Dictionary<KeyValue, KeyDownStates>();
 
         #endregion
 
@@ -98,7 +101,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             this.errorNotifyingServices = errorNotifyingServices;
 
             calibrateRequest = new InteractionRequest<NotificationWithCalibrationResult>();
-            SelectionMode = SelectionModes.Key;
+            SelectionMode = SelectionModes.Keys;
 
             this.translationService = new TranslationService(new HttpClient());
 

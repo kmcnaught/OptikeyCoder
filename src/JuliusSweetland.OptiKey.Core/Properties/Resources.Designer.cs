@@ -179,6 +179,15 @@ namespace JuliusSweetland.OptiKey.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Allow key actions to be repeated when pressing trigger away from keyboard.
+        /// </summary>
+        public static string ALLOW_REPEATS_LABEL {
+            get {
+                return ResourceManager.GetString("ALLOW_REPEATS_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to LETTERS.
         /// </summary>
         public static string ALPHA {
@@ -1621,6 +1630,15 @@ namespace JuliusSweetland.OptiKey.Properties {
         public static string ENTRY_ADDED_TO_DICTIONARY {
             get {
                 return ResourceManager.GetString("ENTRY_ADDED_TO_DICTIONARY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Clipboard could not be cleared. This typically occurs when the Clipboard is being used by another process..
+        /// </summary>
+        public static string ERROR_ACCESSING_CLIPBOARD {
+            get {
+                return ResourceManager.GetString("ERROR_ACCESSING_CLIPBOARD", resourceCulture);
             }
         }
         
@@ -5065,6 +5083,15 @@ namespace JuliusSweetland.OptiKey.Properties {
         public static string REPEAT_LAST_SPLIT_WITH_NEWLINE {
             get {
                 return ResourceManager.GetString("REPEAT_LAST_SPLIT_WITH_NEWLINE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Repeat last key:.
+        /// </summary>
+        public static string REPEAT_SOUND_LABEL {
+            get {
+                return ResourceManager.GetString("REPEAT_SOUND_LABEL", resourceCulture);
             }
         }
         

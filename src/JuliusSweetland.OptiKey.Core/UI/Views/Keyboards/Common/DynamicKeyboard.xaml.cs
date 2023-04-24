@@ -318,15 +318,26 @@ namespace JuliusSweetland.OptiKey.UI.Views.Keyboards.Common
             AddRowsToGrid(4);
             AddColsToGrid(4);
 
+            // We hardcode black-on-white text for full visibility
+
             // Top middle two cells are main error message
             {
-                var newKey = new Key {Text = heading};
-                PlaceKeyInPosition(newKey, 0, 1, 1, 2);
-            }
+                var newKey = new Key {
+                    Text = heading,
+                    DisabledForegroundColourOverride = Brushes.Black,
+                    DisabledBackgroundColourOverride = Brushes.White
+                };
 
+                PlaceKeyInPosition(newKey, 0, 1, 1, 2);                
+            }
             // Middle row is detailed error message
             {
-                var newKey = new Key {Text = content};
+                var newKey = new Key {
+                    Text = content,
+                    DisabledForegroundColourOverride = Brushes.Black,
+                    DisabledBackgroundColourOverride = Brushes.White
+                };
+
                 PlaceKeyInPosition(newKey, 1, 0, 2, 4);
             }
 
@@ -336,28 +347,48 @@ namespace JuliusSweetland.OptiKey.UI.Views.Keyboards.Common
                 {
                     SymbolGeometry = (Geometry)Application.Current.Resources["BackIcon"],
                     Text = Properties.Resources.BACK,
-                    Value = KeyValues.BackFromKeyboardKey
+                    Value = KeyValues.BackFromKeyboardKey,
+                    ForegroundColourOverride = Brushes.Black,
+                    BackgroundColourOverride = Brushes.White
                 };
                 PlaceKeyInPosition(newKey, 3, 3);
             }
 
             // Fill in empty keys
             {
-                var newKey = new Key();
+                var newKey = new Key {
+                    DisabledForegroundColourOverride = Brushes.Black,
+                    DisabledBackgroundColourOverride = Brushes.White
+                };
                 PlaceKeyInPosition(newKey, 0, 0, 1, 1);
             }
             {
-                var newKey = new Key();
+                var newKey = new Key { 
+                    DisabledForegroundColourOverride = Brushes.Black,
+                    DisabledBackgroundColourOverride = Brushes.White
+                };
                 PlaceKeyInPosition(newKey, 0, 3, 1, 1);
             }
             {
-                var newKey = new Key();
+                var newKey = new Key {
+                    DisabledForegroundColourOverride = Brushes.Black,
+                    DisabledBackgroundColourOverride = Brushes.White
+                };
                 PlaceKeyInPosition(newKey, 3, 0, 1, 1);
             }
             {
-                var newKey = new Key();
+                var newKey = new Key {
+                    DisabledForegroundColourOverride = Brushes.Black,
+                    DisabledBackgroundColourOverride = Brushes.White
+                };
                 PlaceKeyInPosition(newKey, 3, 1, 1, 2);
             }
+
+            // Set as default floating window size, i.e. pretty large
+            // This ensures the error message and keys are a reasonable size!            
+            windowManipulationService.OverridePersistedState(false, "Floating",
+                    "Top", "", "60%", "60%", "0", "0"); // Empty strings will allow defaults to be used instead
+            
         }
 
         private bool SetupDynamicItems()
@@ -553,17 +584,6 @@ namespace JuliusSweetland.OptiKey.UI.Views.Keyboards.Common
             }
             else
             {
-                if (dynamicItem is XmlDynamicSuggestionGrid grid)
-                {
-                    var suggestionGrid = new XmlSuggestionGrid(grid.NumRows, grid.NumCols);
-                    suggestionGrid.DataContext = this.DataContext;
-                    MainGrid.Children.Add(suggestionGrid);
-                    Grid.SetColumn(suggestionGrid, dynamicItem.Col);
-                    Grid.SetRow(suggestionGrid, dynamicItem.Row);
-                    Grid.SetColumnSpan(suggestionGrid, dynamicItem.Width);
-                    Grid.SetRowSpan(suggestionGrid, dynamicItem.Height);
-                }
-
                 if (dynamicItem is XmlDynamicSuggestionRow)
                 {
                     var suggestionRow = new XmlSuggestionRow();
