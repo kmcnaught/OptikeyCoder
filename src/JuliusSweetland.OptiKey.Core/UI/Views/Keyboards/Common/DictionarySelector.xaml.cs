@@ -46,7 +46,6 @@ namespace JuliusSweetland.OptiKey.UI.Views.Keyboards.Common
             if (Directory.Exists(filePath))
             {
                 string[] fileArray = Directory.GetFiles(filePath, "*.txt");
-                fileArray = new string[0];
 
                 Log.InfoFormat("Found {0} dictionary files", fileArray.Length);
 
