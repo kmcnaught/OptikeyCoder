@@ -64,6 +64,17 @@ namespace JuliusSweetland.OptiKey.Services
                 {
                     Log.Info("Checking the state of the Tobii service...");
 
+                    // Catch an exception present if DLL completely absent, before querying availability
+                    try
+                    {
+                        var tmp = EyeXHost.EyeXAvailability;
+                    }
+                    catch (System.DllNotFoundException ex)
+                    {
+                        PublishError(this, new ApplicationException(Resources.TOBII_EYEX_ENGINE_NOT_FOUND));
+                        return;
+                    }
+
                     switch (EyeXHost.EyeXAvailability)
                     {
                         case EyeXAvailability.NotAvailable:
