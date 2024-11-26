@@ -166,7 +166,7 @@ namespace JuliusSweetland.OptiKey.Observables.TriggerSources
                         ex =>
                         {
                             observer.OnError(ex);
-                            disposeAllSubscriptions();
+                            disposeAllSubscriptions?.Invoke();
                         });
 
                         disposeAllSubscriptions = () =>
