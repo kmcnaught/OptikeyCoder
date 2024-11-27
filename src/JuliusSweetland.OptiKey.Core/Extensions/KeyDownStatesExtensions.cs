@@ -8,6 +8,6 @@ namespace JuliusSweetland.OptiKey.Extensions
         public static bool IsDownOrLockedDown(this KeyDownStates value)
         {
             return value == KeyDownStates.Down || value == KeyDownStates.LockedDown;
-        }
+        }                
     }
 }

@@ -286,6 +286,7 @@ namespace JuliusSweetland.OptiKey.Models
         public static readonly KeyValue SlovakSlovakiaKey = new KeyValue(FunctionKeys.SlovakSlovakia);
         public static readonly KeyValue SlovenianSloveniaKey = new KeyValue(FunctionKeys.SlovenianSlovenia);
         public static readonly KeyValue SpeakKey = new KeyValue(FunctionKeys.Speak);
+        public static readonly KeyValue SpeakSuggestionKey = new KeyValue(FunctionKeys.SpeakSuggestion);
         public static readonly KeyValue SpanishSpainKey = new KeyValue(FunctionKeys.SpanishSpain);
         public static readonly KeyValue Suggestion1Key = new KeyValue(FunctionKeys.Suggestion1);
         public static readonly KeyValue Suggestion2Key = new KeyValue(FunctionKeys.Suggestion2);
@@ -474,7 +475,8 @@ namespace JuliusSweetland.OptiKey.Models
                     LeftShiftKey,
                     LeftWinKey,
                     MouseMagnifierKey,
-                    MultiKeySelectionIsOnKey
+                    MultiKeySelectionIsOnKey,
+                    SpeakSuggestionKey
                 };
 
                 keys = keys.Concat(MutuallyExclusiveMouseActionKeys).ToList();
@@ -519,7 +521,8 @@ namespace JuliusSweetland.OptiKey.Models
                     MouseMiddleDownUpKey,
                     MouseRightDownUpKey,
                     MultiKeySelectionIsOnKey,                            
-                    SleepKey
+                    SleepKey,
+                    SpeakSuggestionKey
                 };
 
                 keys = keys.Concat(MutuallyExclusiveMouseActionKeys).ToList();

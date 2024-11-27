@@ -483,6 +483,9 @@ namespace JuliusSweetland.OptiKey.Services
                         }
                     }
                     break;
+                case FunctionKeys.SpeakSuggestion:
+                    // No-op, but don't treat it as a keyprress
+                    break;
 
                 default:
                     if (functionKey.ToVirtualKeyCode() != null)

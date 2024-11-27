@@ -810,7 +810,38 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     break;
 
                 case FunctionKeys.SuggestionN:
-                    keyboardOutputService.ProcessKeyValueWithString(FunctionKeys.SuggestionN, singleKeyValue.String);
+                    int index;
+                    bool speak = keyStateService.KeyDownStates[KeyValues.SpeakSuggestionKey].Value.IsDownOrLockedDown();
+                    if (int.TryParse(singleKeyValue.String, out index))
+                    {
+                        // If asked to speak suggestion, do so here before passing onto keyboard service to process
+                        if (speak)
+                        {
+                            var suggestionIndex = (suggestionService.SuggestionsPage * suggestionService.SuggestionsPerPage) + index;
+                            if (suggestionService.Suggestions.Count > suggestionIndex)
+                            {
+                                var suggestion = suggestionService.Suggestions[suggestionIndex];
+                                var speechStarted = audioService.SpeakNewOrInterruptCurrentSpeech(
+                                    suggestion,
+                                    () => { KeyStateService.KeyDownStates[KeyValues.SpeakKey].Value = KeyDownStates.Up; },
+                                    Settings.Default.SpeechVolume,
+                                    Settings.Default.SpeechRate,
+                                    Settings.Default.SpeechVoice);
+                                KeyStateService.KeyDownStates[KeyValues.SpeakKey].Value = speechStarted ? KeyDownStates.Down : KeyDownStates.Up;
+                            }
+                            
+                            // Release if not locked
+                            if (keyStateService.KeyDownStates[KeyValues.SpeakSuggestionKey].Value == KeyDownStates.Down)
+                                keyStateService.KeyDownStates[KeyValues.SpeakSuggestionKey].Value = KeyDownStates.Up;
+                        }
+                    }
+
+                    // Pass onto keyboard output, unless we are previewing only with "speak" functionality
+                    if (!speak)
+                    {
+                        keyboardOutputService.ProcessKeyValueWithString(FunctionKeys.SuggestionN, singleKeyValue.String);
+                    }
+                    
                     break;
 
                 case FunctionKeys.AddWordsFromFile:
@@ -2547,6 +2578,30 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
 
                 case FunctionKeys.SpanishSpain:
                     SelectLanguage(Languages.SpanishSpain);
+                    break;
+
+                case FunctionKeys.Suggestion1:
+                    HandleStringAndFunctionKeySelectionResult(new KeyValue(FunctionKeys.SuggestionN, "0"));
+                    break;
+
+                case FunctionKeys.Suggestion2:
+                    HandleStringAndFunctionKeySelectionResult(new KeyValue(FunctionKeys.SuggestionN, "1"));
+                    break;
+
+                case FunctionKeys.Suggestion3:
+                    HandleStringAndFunctionKeySelectionResult(new KeyValue(FunctionKeys.SuggestionN, "2"));
+                    break;
+
+                case FunctionKeys.Suggestion4:
+                    HandleStringAndFunctionKeySelectionResult(new KeyValue(FunctionKeys.SuggestionN, "3"));
+                    break;
+
+                case FunctionKeys.Suggestion5:
+                    HandleStringAndFunctionKeySelectionResult(new KeyValue(FunctionKeys.SuggestionN, "4"));
+                    break;
+
+                case FunctionKeys.Suggestion6:
+                    HandleStringAndFunctionKeySelectionResult(new KeyValue(FunctionKeys.SuggestionN, "5"));
                     break;
 
                 case FunctionKeys.Pronounce:
