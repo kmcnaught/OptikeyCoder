@@ -1279,17 +1279,19 @@ namespace JuliusSweetland.OptiKey.Services
         private void SwapLastTextChangeForSuggestion(int index)
         {
             Log.DebugFormat("SwapLastTextChangeForSuggestion called with index {0}", index);
-
+            
             var suggestionIndex = (suggestionService.SuggestionsPage * suggestionService.SuggestionsPerPage) + index;
             if (suggestionService.Suggestions.Count > suggestionIndex)
             {
+                var suggestion = suggestionService.Suggestions[suggestionIndex];
+                
                 if (!string.IsNullOrEmpty(lastProcessedText)
                     && lastProcessedText.Length > 1
                     && lastProcessedTextWasMultiKey)
                 {
                     //We are swapping out a multi-key capture
                     var replacedText = lastProcessedText;
-                    SwapText(lastProcessedText, suggestionService.Suggestions[suggestionIndex]);
+                    SwapText(lastProcessedText, suggestion);
                     var newSuggestions = suggestionService.Suggestions.ToList();
                     newSuggestions[suggestionIndex] = replacedText;
                     StoreSuggestions(newSuggestions);
@@ -1300,13 +1302,13 @@ namespace JuliusSweetland.OptiKey.Services
                     if (!Settings.Default.SuggestNextWords || !lastProcessedTextWasSuggestion && !string.IsNullOrEmpty(inProgressWord) && Char.IsLetterOrDigit(inProgressWord.Last()))
                     {
                         //We are auto-completing a word with a suggestion
-                        SwapText(inProgressWord, suggestionService.Suggestions[suggestionIndex]);
+                        SwapText(inProgressWord, suggestion);
                         GenerateSuggestions(true);
                     }
                     else
                     {
                         //We are writing the first word or adding a whole word
-                        ProcessText(suggestionService.Suggestions[suggestionIndex], false);
+                        ProcessText(suggestion, false);
                         GenerateSuggestions(true);
                     }
                 }
