@@ -412,16 +412,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             try
             {
                 keyboard = XmlKeyboard.ReadFromFile(filename);
-                XmlKeyStates states = keyboard.InitialKeyStates;
-
-                XmlKeys onEnter = keyboard.OnEnter;
-                XmlKeys onExit = keyboard.OnExit;
-
-                if ((onEnter != null && onEnter.Count > 0) ||
-                     (onExit != null && onExit.Count > 0))
-                {
-                    int a = 23;
-                }
+                XmlKeyStates states = keyboard.InitialKeyStates;                
 
                 if (states != null)
                 {
