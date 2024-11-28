@@ -87,12 +87,15 @@ namespace JuliusSweetland.OptiKey.Models
                 string[] folderArray = Directory.GetDirectories(filePath);
                 foreach (string fullPath in folderArray)
                 {
-                    KeyboardInfo info = GetKeyboardInfo(fullPath);
                     string folderName = new DirectoryInfo(fullPath).Name;
-                    if (null != info.fullPath && !folderName.StartsWith("."))
+                    if (!folderName.StartsWith(".") && Directory.GetFiles(fullPath, "*.xml", SearchOption.AllDirectories).Any())
                     {
-                        keyboards.Add(info);
-                        Log.InfoFormat("Found keyboard folder: {0}", info.fullPath);
+                        KeyboardInfo info = GetKeyboardInfo(fullPath);
+                        if (null != info.fullPath)
+                        {
+                            keyboards.Add(info);
+                            Log.InfoFormat("Found keyboard folder with XML files: {0}", info.fullPath);
+                        }
                     }
                 }
             }
