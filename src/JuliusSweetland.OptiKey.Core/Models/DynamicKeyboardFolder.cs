@@ -8,6 +8,7 @@ using System.Xml.Serialization;
 using JuliusSweetland.OptiKey.Extensions;
 using JuliusSweetland.OptiKey.Properties;
 using JuliusSweetland.OptiKey.UI.Views.Keyboards.Common;
+using System.Linq;
 
 namespace JuliusSweetland.OptiKey.Models
 {
@@ -17,6 +18,7 @@ namespace JuliusSweetland.OptiKey.Models
         public string keyboardName;
         public string symbolString;
         public bool isHidden; // default false
+        public bool isDirectory; // default false
 
         public override string ToString()
         {
@@ -37,6 +39,14 @@ namespace JuliusSweetland.OptiKey.Models
         #endregion
 
         public List<KeyboardInfo> keyboards;
+        
+        public List<KeyboardInfo> VisibleKeyboards
+        {
+            get
+            {
+                return keyboards.FindAll(keyb => !keyb.isHidden);
+            }
+        }
 
         public DynamicKeyboardFolder(String filePath)
         {
@@ -47,6 +57,7 @@ namespace JuliusSweetland.OptiKey.Models
 
             keyboards = new List<KeyboardInfo>();
 
+            // Find all possible xml files
             if (Directory.Exists(filePath))
             {
                 string[] fileArray = Directory.GetFiles(filePath, "*.xml");
@@ -55,10 +66,9 @@ namespace JuliusSweetland.OptiKey.Models
 
                 // Read in keyboard name, symbol, hidden state from each file
                 // Note that ordering is currently undefined
-                foreach (string fileName in fileArray)
+                foreach (string fullName in fileArray)
                 {
-                    string keyboardPath = Path.Combine(filePath, fileName);
-                    KeyboardInfo info = GetKeyboardInfo(keyboardPath);
+                    KeyboardInfo info = GetKeyboardInfo(fullName);
                     if (null != info.fullPath)
                     {
                         if (!info.isHidden)
@@ -72,6 +82,19 @@ namespace JuliusSweetland.OptiKey.Models
                         }
                     }
                 }
+
+                // Look for any subdirs 
+                string[] folderArray = Directory.GetDirectories(filePath);
+                foreach (string fullPath in folderArray)
+                {
+                    KeyboardInfo info = GetKeyboardInfo(fullPath);
+                    string folderName = new DirectoryInfo(fullPath).Name;
+                    if (null != info.fullPath && !folderName.StartsWith("."))
+                    {
+                        keyboards.Add(info);
+                        Log.InfoFormat("Found keyboard folder: {0}", info.fullPath);
+                    }
+                }
             }
         }
 
@@ -82,6 +105,12 @@ namespace JuliusSweetland.OptiKey.Models
         {
             KeyboardInfo info = new KeyboardInfo();
             info.fullPath = keyboardPath;
+
+            if (Directory.Exists(keyboardPath) && !keyboardPath.StartsWith("."))
+            {
+                info.isDirectory = true;
+                return info;
+            }
             
             try
             {
@@ -99,9 +128,14 @@ namespace JuliusSweetland.OptiKey.Models
             }
             catch (Exception e)
             {
-                // replace info with default (no contents)
-                info = new KeyboardInfo();
                 Log.Error(e.ToString());
+
+                // replace info with default (based on filename only - didn't manage to read contents)
+                // We keep these available so you can load a "broken" file and get an error message
+                info = new KeyboardInfo();
+                info.fullPath = keyboardPath;
+                info.keyboardName = Path.GetFileName(keyboardPath);
+                
             }
 
             return info;
