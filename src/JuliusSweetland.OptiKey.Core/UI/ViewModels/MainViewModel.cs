@@ -439,7 +439,8 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
 
             // Clear the scratchpad when launching a dynamic keyboard.
             // (scratchpad only supported on single dynamic keyboard currently)
-            keyboardOutputService.ProcessFunctionKey(FunctionKeys.ClearScratchpad);
+            // TODO: how do we clear scratchpad for typing in main keyboards?
+            // keyboardOutputService.ProcessFunctionKey(FunctionKeys.ClearScratchpad);
         }
 
         private void SetKeyboardFromEnum(Enums.Keyboards keyboardEnum,
