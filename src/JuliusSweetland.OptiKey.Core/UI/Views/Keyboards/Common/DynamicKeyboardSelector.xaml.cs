@@ -116,7 +116,7 @@ namespace JuliusSweetland.OptiKey.UI.Views.Keyboards.Common
             int firstKB = maxKeyboardsPerPage * pageIndex;
 
             // Look for quiz/spelling tests to append
-            string quizzesFolderPath = Path.Combine(keyboardsPath, "quizzes");
+            string quizzesFolderPath = Path.Combine(keyboardsPath, ".quizzes");
             string quizFile = null;
             string spellingFile = null;
             if (Directory.Exists(quizzesFolderPath)) {
