@@ -1994,65 +1994,16 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     }
                     break;
 
-                case FunctionKeys.MouseMoveAndScrollToBottom:
+                case FunctionKeys.MouseMoveAndScrollToBottom: //fixme remove this hackery!!!!
 
-                    string s = "ˈflæbɚˌɡɑːstəd";
-                    foreach (char c in s)
-                    {
-                        if (c.IsAscii())
+                    Log.Info("Mouse move and scroll to bottom selected.");
+                    ToggleLockableMouseActionKey(KeyValues.MouseMoveAndScrollToBottomKey,
+                        (fp) =>
                         {
-                            Console.WriteLine($"'{c}' is an ASCII character.");
-                        }
-                        else
-                        {
-                            Console.WriteLine($"'{c}' is a Unicode character.");
-                        }
-                    }
-                    Console.WriteLine("---");
-                    string s2 = "ˈflæbɚˌɡæstɪd";
-                    foreach (char c in s)
-                    {
-                        if (c.IsAscii())
-                        {
-                            Console.WriteLine($"'{c}' is an ASCII character.");
-                        }
-                        else
-                        {
-                            Console.WriteLine($"'{c}' is a Unicode character.");
-                        }
-                    }
-                    
-                    SpeechSynthesizer synth = new SpeechSynthesizer();
-                    string str = "<speak version=\"1.0\" xmlns=\"http://www.w3.org/2001/10/synthesis\" xml:lang=\"en-US\">";
-                    str += "    <voice name=\"en - US - JennyNeural\">";
-                    //str += "        <phoneme alphabet=\"ipa\" ph=\"oʊ\"> tomato </phoneme>";
-                    //str += "        <phoneme alphabet=\"ipa\" ph=\"flæbɚˌɡæstɪd\"> flabbergasted </phoneme>";
-                    str += "        <phoneme alphabet = \"ipa\" ph = \"fɑːrt\"> flabbergasted </phoneme>";
-                    str += "    </voice>";
-                    str += "</speak>";
-
-
-                    //"<speak version=\"1.0\" xmlns=\"http://www.w3.org/2001/10/synthesis\" xml:lang=\"en-US\">    <voice name=\"en - US - JennyNeural\">        <phoneme alphabet=\"ipa\" ph=\"fɑːrt\"> </phoneme>    </voice></speak>"
-
-                    //str = "<speak>This is spoken with a phoneme: <phoneme alphabet = \"ipa\" ph = \"flæbɚˌɡæstɪd\"> flabbergasted </ phoneme >.</ speak >";
-
-                    try
-                    {
-                        synth.SpeakSsml(str);
-                    }
-                    catch(Exception e)
-                    {
-
-                    }
-
-                    //Log.Info("Mouse move and scroll to bottom selected.");
-                    //ToggleLockableMouseActionKey(KeyValues.MouseMoveAndScrollToBottomKey, 
-                    //    (fp) =>
-                    //    {
-                    //        audioService.PlaySound(Settings.Default.MouseScrollSoundFile, Settings.Default.MouseScrollSoundVolume);
-                    //        mouseOutputService.MoveAndScrollWheelDown(fp, Settings.Default.MouseScrollAmountInClicks, true);
-                    //    },
-                    //    suppressMagnification: true);
+                            audioService.PlaySound(Settings.Default.MouseScrollSoundFile, Settings.Default.MouseScrollSoundVolume);
+                            mouseOutputService.MoveAndScrollWheelDown(fp, Settings.Default.MouseScrollAmountInClicks, true);
+                        },
+                        suppressMagnification: true);
                     break;
 
                 case FunctionKeys.MouseMoveAndScrollToLeft:
