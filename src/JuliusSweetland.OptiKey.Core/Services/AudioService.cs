@@ -17,6 +17,7 @@ using log4net;
 using Microsoft.Win32.SafeHandles;
 using Un4seen.Bass;
 using SpeechLib;
+using System.Windows.Controls;
 
 namespace JuliusSweetland.OptiKey.Services
 {
@@ -224,16 +225,7 @@ namespace JuliusSweetland.OptiKey.Services
 
             if (isIPA)
             {
-                PronouncePhonemesWithMicrosoftSpeechLibrary(textToSpeak, onComplete, volume, rate, voice, slowerIPA);
-                //PronouncePhonemesWithMicrosoftSpeechLibrary("ʃip", onComplete, volume, rate, voice);                
-                //PronouncePhonemesWithMicrosoftSpeechLibrary("ʃiːp", onComplete, volume, rate, voice);
-                //PronouncePhonemesWithMicrosoftSpeechLibrary("fuːd/", onComplete, volume, rate, voice);
-                
-                //PronouncePhonemesWithMicrosoftSpeechLibrary("fʊd", onComplete, volume, rate, voice);
-                //PronouncePhonemesWithMicrosoftSpeechLibrary("f", onComplete, volume, rate, voice);
-                //PronouncePhonemesWithMicrosoftSpeechLibrary("", onComplete, volume, rate, voice);
-                //PronouncePhonemesWithMicrosoftSpeechLibrary("", onComplete, volume, rate, voice);
-
+                PronouncePhonemesWithMicrosoftSpeechLibrary(textToSpeak, onComplete, volume, rate, voice, slowerIPA);             
             }
             else if (Settings.Default.MaryTTSEnabled)
             {
@@ -245,20 +237,22 @@ namespace JuliusSweetland.OptiKey.Services
             }
         }
 
-        private void PronouncePhonemesWithMicrosoftSpeechLibrary(string textToSpeak, Action onComplete, int? volume, int? rate, string voice, bool slower = false)
+        private SpeechSynthesizer synthesiserForIPA;
+        private void SetupIPASynth(string voice)
         {
-            textToSpeak = textToSpeak.Replace(" ", "");
-
-            //FIXME: don't do this every time!
-            using (SpeechSynthesizer synth = new SpeechSynthesizer()) { 
+            // TODO: how do we reconcile this with the standard synth's voice?
+            if (synthesiserForIPA == null)
+            {
+                synthesiserForIPA = new SpeechSynthesizer();
 
                 var voiceToUse = voice ?? Settings.Default.SpeechVoice;
 
-                if (String.IsNullOrEmpty(voiceToUse)) {
+                if (String.IsNullOrEmpty(voiceToUse))
+                {
                     VoiceInfo preferredVoice;
 
                     // Get best fit voice                
-                    var voices = synth.GetInstalledVoices().Select(v => v.VoiceInfo).ToList();
+                    var voices = synthesiserForIPA.GetInstalledVoices().Select(v => v.VoiceInfo).ToList();
 
                     // Try to find an en-GB female voice first
                     preferredVoice = voices.FirstOrDefault(v => v.Culture.Name == "en-GB" && v.Gender == VoiceGender.Female);
@@ -275,7 +269,8 @@ namespace JuliusSweetland.OptiKey.Services
                     if (preferredVoice == null)
                         preferredVoice = voices.FirstOrDefault(v => v.Culture.Name.StartsWith("en"));
 
-                    if (preferredVoice == null) {
+                    if (preferredVoice == null)
+                    {
                         Log.Error("No suitable voice found for phonemes");
                         return;
                     }
@@ -286,30 +281,64 @@ namespace JuliusSweetland.OptiKey.Services
 
                 }
 
-                synth.SelectVoice(voiceToUse);
-
-                string str = "<speak version=\"1.0\" xmlns=\"http://www.w3.org/2001/10/synthesis\" xml:lang=\"en-GB\">";
-
-                if (slower)
-                    str += "<prosody rate=\"slow\">";
-
-                str += $"        <phoneme alphabet=\"ipa\" ph=\"{textToSpeak}\">phonemes</phoneme>";
-
-                if (slower)
-                    str += "</prosody>";
-
-                str += "</speak>";
-
-                try
-                {
-                    synth.SpeakSsml(str); // HACK: should be async
-                }
-                catch (Exception e)
-                {
-                    Log.Error(e);
-                }
+                synthesiserForIPA.SelectVoice(voiceToUse);
             }
+        }
+
+        private string GetIPAString(string ipaString, bool slower, string lang)
+        {
+            string str = "<speak version=\"1.0\" xmlns=\"http://www.w3.org/2001/10/synthesis\" xml:lang=\"" + lang + "\">";
+
+            if (slower)
+                str += "<prosody rate=\"slow\">";
+
             
+            foreach (string word in ipaString.Split(' '))
+            {
+                str += $"        <phoneme alphabet=\"ipa\" ph=\"{word}\">phonemes</phoneme>"; // ugh hack with content not matching                                                                                                  
+                str += "<break time=\"300ms\"/>";
+            }
+
+            if (slower)
+                str += "</prosody>";
+
+            str += "</speak>";
+
+            return str; 
+        }
+
+        private void PronouncePhonemesWithMicrosoftSpeechLibrary(string textToSpeak, Action onComplete, int? volume, int? rate, string voice, bool slower = false)
+        {
+            SetupIPASynth(voice);
+
+            // TODO: language: should we support e.g. US english?? could look at selected voice?
+            string str = GetIPAString(textToSpeak, slower, "en-GB");
+
+            try
+            {
+                onSpeakCompleted = (sender, args) =>
+                {
+                    lock (speakCompletedLock)
+                    {
+                        if (onSpeakCompleted != null)
+                        {
+                            synthesiserForIPA.SpeakCompleted -= onSpeakCompleted;
+                            onSpeakCompleted = null;
+                        }
+
+                        if (onComplete != null)
+                        {
+                            onComplete();
+                        }
+                    }
+                };
+                synthesiserForIPA.SpeakCompleted += onSpeakCompleted;
+                synthesiserForIPA.SpeakSsmlAsync(str);
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
+            }                        
         }
 
         private void SpeakWithMicrosoftSpeechLibrary(string textToSpeak, Action onComplete, int? volume, int? rate, string voice)
