@@ -902,7 +902,9 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     }
 
                     break;
-
+                case FunctionKeys.TypePhoneme:
+                    keyboardOutputService.ProcessSingleKeyPhoneme(singleKeyValue.String);
+                    break;
                 default:
                     //Process single key text, THEN function key. The use case might be to output text and then change keyboard, for example.
                     //N.B. Combining text and a function key changes the KeyValue, which will impact whether the KeyValue can be used to detect
@@ -2584,7 +2586,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 case FunctionKeys.TypeLastPhoneme:
                     if (!String.IsNullOrEmpty(lastPhonemePronounced))
                     {
-                        KeySelectionResult(new KeyValue(lastPhonemePronounced), new List<string>());
+                        KeySelectionResult(new KeyValue(FunctionKeys.TypePhoneme, lastPhonemePronounced), null);
                     }
                     break;
 
@@ -3193,7 +3195,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                         // hack: this should probably be separate logic
                         // it currently relies on use having turned off auto whitespace and auto capitals etc
                         Log.InfoFormat("CommandList: Text of [{0}]", keyCommand.Value);
-                        KeySelectionResult(new KeyValue(keyCommand.Value), multiKeySelection);
+                        KeySelectionResult(new KeyValue(FunctionKeys.TypePhoneme, keyCommand.Value), multiKeySelection);
                     }
                     else if (keyCommand.Name == KeyCommands.Wait)
                     {

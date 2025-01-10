@@ -278,5 +278,6 @@ namespace JuliusSweetland.OptiKey.Enums
         SpellingQuizSubmit,
         SpellingQuizPlayWord,
         SpellingQuizPlaySentence,
+        TypePhoneme,
     }
 }

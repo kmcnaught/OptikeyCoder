@@ -510,8 +510,8 @@ namespace JuliusSweetland.OptiKey.Services
 
         public void ProcessSingleKeyPhoneme(string capturedText)
         {
-            lastPhoneme = capturedText;
-            rimePreedit += capturedText;            
+            suppressNextAutoSpace = true;
+            ProcessSingleKeyText(capturedText);
             // for now we just append to the text without any special logic
         }
 
